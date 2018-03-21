@@ -1,0 +1,18 @@
+﻿<form  class="container" ng-controller="EditPredmetiController" ng-init="find()" name="PEditForm">
+    <h4 style="margin-top:20px">Predmeti</h4>
+    <hr />
+
+    <div class="form-group">
+        <label class="control-label col-md-2" for="Ime_predmeta">Ime predmeta</label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line" id="Ime_predmeta" ng-model="Ime_predmeta" type="text" /> {{data.Ime_predmeta}}
+        </div><br /><br />
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Promijeni" class="btn btn-default" ng-click="update()" />
+        </div>
+    </div>
+</form>
+

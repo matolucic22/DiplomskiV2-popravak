@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - eNastavnik</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/angularjs")
+    @Scripts.Render("~/bundles/aplikacijaApp")
+    
+</head>
+<body ng-app="app">
+    <div ng-controller="navbarController">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand">eNastavnik</a>
+
+                </div>
+                <div class="navbar-collapse collapse" ng-if="upitnik()">
+                    <ul class="nav navbar-nav">
+                        <li><a ui-sref="home">Početna</a></li>
+                        <li><a ui-sref="oAplikaciji">O aplikaciji</a></li>
+                        <li><a ui-sref="kontakt">Kontakt</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a ng-click="LogOut()" ui-sref="login"><span class="glyphicon glyphicon-log-in"></span>Odjavi se</a></li>
+                    </ul>
+                </div>
+
+                <div class="navbar-collapse collapse" ng-if="ucitelj()">
+                    <ul class="nav navbar-nav">
+                        <li><a ui-sref="home">Početna</a></li>
+                        <li><a ui-sref="potvrdaKorisnika">Upravljanje korisnicima</a></li>
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropbtn">
+                                    Predmeti
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a ui-sref="showPredmeti">Pregled predmet</a>
+                                    <a ui-sref="predmetiIndex">Upravljanje predmetima</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropbtn">
+                                    Kvizovi
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a ui-sref="dohvatiPredmete">Dodaj kviz</a>
+                                    <a ui-sref="dohvatiPredmeteZaPregled">Pregled i upravljanje kvizovima</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="dropdown">
+                                <button class="dropbtn">
+                                    Ocjene
+                                    <i class="fa fa-caret-down"></i>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a ui-sref="unosOcjena">Dodaj ocjenu uceniku</a>
+                                    <a ui-sref="pregledOcjena">Pregled ocjena</a>
+                                    <a ui-sref="brisanjeOcjena">Obriši unos</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li><a ui-sref="oAplikaciji">O aplikaciji</a></li>
+                        <li><a ui-sref="kontakt">Kontakt</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li @*ng-show="isLogged" class="ng-hide"*@><a ng-click="LogOut()" ui-sref="login"><span class="glyphicon glyphicon-log-in"></span>Odjavi se</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="navbar-collapse collapse" ng-if="ucenik()">
+                    <ul class="nav navbar-nav">
+                        <li><a ui-sref="home">Početna</a></li>
+                        <li><a ui-sref="dohvatiPredmeteUcenikaU">Pregled ocjena</a></li>
+                        <li><a ui-sref="dohvatiPredmeteZaRijesavanje">Kvizovi</a></li>
+                        <li><a ui-sref="oAplikaciji">O aplikaciji</a></li>
+                        <li><a ui-sref="kontakt">Kontakt</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a ng-click="LogOut()" ui-sref="login"><span class="glyphicon glyphicon-log-in"></span>Odjavi se</a></li>
+                    </ul>
+                </div>
+
+
+                <div class="navbar-collapse collapse" ng-if="roditelj()">
+                    <ul class="nav navbar-nav">
+                        <li><a ui-sref="home">Početna</a></li>
+                        <li><a ui-sref="dohvatiUcenikeR">Pregled ocjena učenika</a></li>
+                        <li><a ui-sref="oAplikaciji">O aplikaciji</a></li>
+                        <li><a ui-sref="kontakt">Kontakt</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a ng-click="LogOut()" ui-sref="login"><span class="glyphicon glyphicon-log-in"></span>Odjavi se</a></li>                    </ul>
+                </div>
+
+            </div>
+            </div>
+        <div class="container body-content" ui-view="root">
+            @RenderBody()
+
+        </div>
+        <div class="container body-content">
+
+            <hr />
+            <footer>
+                <p>&copy; @DateTime.Now.Year - Diplomski rad Mato Lučić</p>
+            </footer>
+        </div>
+        </div>
+
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/bootstrap")
+        @RenderSection("scripts", required: false)
+</body>
+</html>

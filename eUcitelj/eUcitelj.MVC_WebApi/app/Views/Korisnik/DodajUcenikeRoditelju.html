@@ -1,0 +1,35 @@
+﻿<div class="container" ng-controller="DodajUcenikeRoditeljuController" style="padding-top:20px">
+    <h1>Učenici u sustavu</h1>
+    <br />
+    <p>Odaberite učenika u sustavu. Ponavljanje odabira nije moguće bez ponovnog odobravanja administratora. Budite pažljivi prilikom odabira.</p>
+    <hr />
+    <table class="table table-striped table-bordered" style="padding-top:5px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>IME KORISNIKA</th>
+                <th>PREZIME KORISNIKA</th>
+                <th>KORISNIČKO IME</th>
+                <th>ROLE</th>
+                <th>OZNAČI</th>
+
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="korisnik in korisnici" ng-if="korisnik.Role=='ucenik'">
+                <td>{{korisnik.KorisnikId}}</td>
+                <td>{{korisnik.Ime_korisnika}}</td>
+                <td>{{korisnik.Prezime_korisnika}}</td>
+                <td>{{korisnik.Korisnicko_ime}}</td>
+                <td>{{korisnik.Role}}</td>
+                <td><input type="checkbox" value="{{korisnik.KorisnikId}}" class="check"></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Snimi" class="btn btn-default" ng-click="Snimi()" id="button" />
+        </div>
+    </div>
+</div>

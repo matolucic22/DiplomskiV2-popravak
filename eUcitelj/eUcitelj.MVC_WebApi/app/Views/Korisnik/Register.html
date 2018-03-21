@@ -1,0 +1,90 @@
+﻿<div class="container" ng-controller="RegisterController" style="padding-top:20px">
+    <div class="col-md-10 col-offset-1">
+        <div class="well">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <td colspan="2">
+                            <b>Registracija novog korisnika</b>
+                            <a class="btn btn-success pull-right" href="#!/korisnik/login">Prijavi se</a>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Ime korisnika
+                        </td>
+                        <td>
+                            <input type="text" id="Ime_korisnika" placeholder="Ime korisnika" ng-model="Ime_korisnika"/> <!--style="text-transform:capitalize"--> 
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Prezime korisnika
+                        </td>
+                        <td>
+                            <input type="text" id="Prezime_korisnika" placeholder="Prezime korisnika" ng-model="Prezime_korisnika"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Korisničko ime
+                        </td>
+                        <td>
+                            <input type="text" id="Korisnicko_ime" placeholder="Korisničko ime" ng-model="Korisnicko_ime" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Lozinka
+                        </td>
+                        <td>
+                            <input type="password" id="Password" placeholder="Lozinka" ng-model="Password" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Potvrdi lozinku
+                        </td>
+                        <td>
+                            <input type="password" id="ConfirmPassword" placeholder="Potvrdi lozinku" ng-model="ConfirmPassword" />
+                        </td>
+                    </tr>
+                    <tr class="success">
+                        <td colspan="2">
+                            <input id="btnRegister" class="btn btn-success" type="button" value="Registriraj se" ng-click="doStuff()" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="modal" tabindex="-1" id="successModal" data-keyboard="false" data-backdrop="static">
+                <!-- tab - kad koristis tab --poredak. data - keyboard-nemos izac sa esc. static- mozes izac sa ecs i nije osjencano u pozadini -->
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" ng-click="close($event)">
+                                &times;
+                            </button>
+                            <h4>Registracija</h4>
+                        </div>
+                        <div class="modal-body">
+                            <h2>Registracija je uspješna</h2>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" data-dismiss="modal" class="btn btn-success" ng-click="close($event)">
+                                Close
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <!--<div id="divError" class="alert alert-danger collapse">
+                <a id="linkClose" class="close" href="#">&times;</a>
+                <div id="divErrorText" ng-click="closeErrorMsg($event)"></div> !!!!!---Prozor ispod textboksova sa error messageom----!!!!
+            </div>-->
+        </div>
+    </div>
+</div>
