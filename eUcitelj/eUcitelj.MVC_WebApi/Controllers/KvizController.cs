@@ -81,18 +81,13 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Nije pronađen trazeni kviz.");
                 }
-                if (updateK.Odg1 == null || updateK.Odg2 == null || updateK.Odg3 == null || updateK.Pitanje == null || updateK.Tocan_odgovor == null)
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greska u unosu!");
-                }
-                else
+                else 
                 {
                     toBeUpdated.Odg1 = updateK.Odg1;
                     toBeUpdated.Odg2 = updateK.Odg2;
                     toBeUpdated.Odg3 = updateK.Odg3;
                     toBeUpdated.Pitanje = updateK.Pitanje;
-                    toBeUpdated.Tocan_odgovor = updateK.Tocan_odgovor;
-                    
+                    toBeUpdated.Tocan_odgovor = updateK.Tocan_odgovor;              
                 }
                 var response = await KvizService.Update(Mapper.Map<IKvizDomainModel>(toBeUpdated));
                 return Request.CreateResponse(HttpStatusCode.OK, response);

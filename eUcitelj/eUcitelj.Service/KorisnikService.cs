@@ -3,6 +3,7 @@ using eUcitelj.Reporsitory.Common;
 using eUcitelj.Service.Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,13 @@ namespace eUcitelj.Service
 {
     public class KorisnikService : IKorisnikService
     {
+        /* VAŠE PITANJE: jel potrebno u servisu da sve metode bugu async i da se nešto awaita?
+         *  Npr Get metoda, ili GetAll metoda? dovoljno da vraća task */
+
+        //ODGOVOR: Await je marker koji označi da se zaustavi izvršavanje kooda dok se funkcija ispred koje je on ne provede do kraja. Kad funkcija završi, kood će se nastaviti.
+        //         Generalno u ovoj aplikaciji unutar Service nije potrebno koristiti asinkrone metode zato što se samo proslijedi podatak iz KorisnikRepositorija u KorisnikController. 
+        //         Asinkrone metode se koriste ako se mora čekati rezultat neke akcije(radnje) nad podatkom ili je važno neku funkciju obaviti prije neke druge što ovdje nije slučaj.
+        //         Async sam obrisao sa Get i GetAll metoda kako ste rekli i aplikacija funkcionira normalno. 
         protected IKorisnikGenericReporsitory KorisnikGenericReporsitory { set; get; }
         public KorisnikService(IKorisnikGenericReporsitory korisnikGenericReporsitory)
         {
@@ -26,14 +34,14 @@ namespace eUcitelj.Service
             return await KorisnikGenericReporsitory.DeleteAsync(Id);
         }
 
-        public async Task<IKorisnikDomainModel> Get(Guid Id)
+        public Task<IKorisnikDomainModel> Get(Guid Id)//nije async
         {
-            return await KorisnikGenericReporsitory.GetAsync(Id);
+            return KorisnikGenericReporsitory.GetAsync(Id);
         }
 
-        public async Task<IEnumerable<IKorisnikDomainModel>> GetAll()
+        public Task<IEnumerable<IKorisnikDomainModel>> GetAll()
         {
-            return await KorisnikGenericReporsitory.GetAllAsync();
+            return KorisnikGenericReporsitory.GetAllAsync();   
         }
 
         public async Task<int> Update(IKorisnikDomainModel updated)

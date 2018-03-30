@@ -1,5 +1,4 @@
-﻿using eUcitelj.DAL.Common;
-using eUcitelj.DAL.Models;
+﻿using eUcitelj.DAL.Models;
 using eUcitelj.Model;
 using eUcitelj.Model.Common;
 using System;
@@ -21,9 +20,9 @@ namespace eUcitelj.Model
 
         public int Bodovi_kvizova { get; set; }
 
-        public virtual ICollection<IOcjeneDomainModel> Ocjene { get; set; }//1 predmet moze imati vise ocijena
+        public virtual ICollection<IOcjeneDomainModel> Ocjene { get; set; }//1 predmet moze imati vise ocjena
 
-        public virtual ICollection<IKvizDomainModel> Kviz { get; set; }//1 predmet moze imati vise ocijena
+        public virtual ICollection<IKvizDomainModel> Kviz { get; set; }//1 predmet moze imati vise kvizova
     }
 }
 

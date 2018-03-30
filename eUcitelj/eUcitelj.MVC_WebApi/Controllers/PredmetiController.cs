@@ -65,8 +65,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         public async Task<HttpResponseMessage> AddPredmet(PredmetiViewModel addObj)
         {
             try
-            {
-                
+            {             
                 addObj.PredmetiId = Guid.NewGuid();
                 var response= await PredmetiService.Add(Mapper.Map<IPredmetiDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
@@ -88,10 +87,6 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 if(toBeUpdated==null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nije pronađen traženi predmet.");
-                }
-                if(updateP.Ime_predmeta==null||updateP.PredmetiId==null)
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greška u unosu!");
                 }
                 else
                 {

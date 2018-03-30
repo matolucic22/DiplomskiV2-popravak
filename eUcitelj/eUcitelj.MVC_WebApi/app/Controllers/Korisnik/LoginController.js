@@ -1,4 +1,4 @@
-﻿app.controller('LoginController', function ($scope, $http, $stateParams, $window, $state, $location, AuthenticationService, md5) {
+﻿app.controller('LoginController', function ($scope, $http, $stateParams, $window, $state, $location, AuthenticationService, md5) {//singin
     
     $scope.loginData = {
         Korisnicko_ime: undefined,

@@ -72,7 +72,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
 
         [HttpPut]
         [Route("updateO")]
-        public async Task<HttpResponseMessage> UpdateOcjene(OcjeneViewModel updateO)
+        public async Task<HttpResponseMessage> UpdateOcjene(OcjeneViewModel updateO)//Nepotrebna metoda
         {
             try
             {
@@ -82,10 +82,6 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 if (toBeUpdated == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Nije moguće završiti radnju.");
-                }
-                if (updateO.OcjeneId==null||updateO.PredmetiId==null)
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greska u unosu!");
                 }
                 else
                 {

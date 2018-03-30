@@ -20,12 +20,27 @@ namespace eUcitelj.Reporsitory
 
         public async Task<int> AddAsync(IPredmetiDomainModel addObj)
         {
-            return await Reporsitory.AddAsync(Mapper.Map<Predmeti>(addObj));
+            try
+            {
+                return await Reporsitory.AddAsync(Mapper.Map<Predmeti>(addObj));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
-            return await Reporsitory.DeleteAsync<Predmeti>(Id);
+            try
+            {
+                return await Reporsitory.DeleteAsync<Predmeti>(Id);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public async Task<IEnumerable<IPredmetiDomainModel>> GetAllAsync()
@@ -33,7 +48,6 @@ namespace eUcitelj.Reporsitory
             try
             {
                 return Mapper.Map<IEnumerable<IPredmetiDomainModel>>(await Reporsitory.GetAllAsync<Predmeti>());
-
             }catch(Exception e)
             {
                 throw e;

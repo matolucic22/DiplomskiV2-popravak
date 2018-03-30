@@ -7,8 +7,8 @@ namespace eUcitelj.MVC_WebApi.AutoMapperConf
         public static void Init()
         {
             Mapper.Initialize(cfg => cfg.AddProfiles(new[] {
-                typeof(eUcitelj.MVC_WebApi.AutoMapperConf.MappingProfile),
-                typeof(eUcitelj.DResolver.MappingConfig.MappingProfile)
+                typeof(MappingProfile),
+                typeof(eUcitelj.Reporsitory.MappingProfile)
                })
            );
         }

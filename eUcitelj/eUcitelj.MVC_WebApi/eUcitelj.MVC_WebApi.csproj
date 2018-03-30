@@ -1112,17 +1112,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUcitelj.DAL.Common\eUcitelj.DAL.Common.csproj">
-      <Project>{61FB2348-4F47-4705-9DD2-0D453B670028}</Project>
-      <Name>eUcitelj.DAL.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\eUcitelj.DAL\eUcitelj.DAL.csproj">
       <Project>{882A72A0-778C-439D-B70A-C4C0257C59A3}</Project>
       <Name>eUcitelj.DAL</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\eUcitelj.DResolver\eUcitelj.DResolver.csproj">
-      <Project>{2609316b-3cf1-4d32-b74f-589944c59896}</Project>
-      <Name>eUcitelj.DResolver</Name>
     </ProjectReference>
     <ProjectReference Include="..\eUcitelj.Model.Common\eUcitelj.Model.Common.csproj">
       <Project>{EF4CA9BF-D2D7-4259-964B-6C48B590A344}</Project>
@@ -1132,9 +1124,17 @@
       <Project>{DB263ED4-896D-47C1-B10F-7DD87CF4B35E}</Project>
       <Name>eUcitelj.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\eUcitelj.Reporsitory\eUcitelj.Reporsitory.csproj">
+      <Project>{c2a13ce9-3138-4340-9c58-89894aa645ee}</Project>
+      <Name>eUcitelj.Reporsitory</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eUcitelj.Service.Common\eUcitelj.Service.Common.csproj">
       <Project>{BB0B8ECE-0F0F-4F61-9079-BF481CA32DC2}</Project>
       <Name>eUcitelj.Service.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eUcitelj.Service\eUcitelj.Service.csproj">
+      <Project>{92070A72-C7B8-445E-A03F-41275585A0F3}</Project>
+      <Name>eUcitelj.Service</Name>
     </ProjectReference>
     <ProjectReference Include="..\eUcitelj.Token\eUcitelj.Token.csproj">
       <Project>{C342E9B9-FB0B-477D-94B0-8533B08A25D6}</Project>

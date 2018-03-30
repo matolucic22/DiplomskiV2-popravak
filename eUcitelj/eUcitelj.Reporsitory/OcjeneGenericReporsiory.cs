@@ -19,27 +19,62 @@ namespace eUcitelj.Reporsitory
         }
         public async Task<int> AddAsync(IOcjeneDomainModel addObj)
         {
-            return await Reporsitory.AddAsync(Mapper.Map<Ocjene>(addObj));
+            try
+            {
+                return await Reporsitory.AddAsync(Mapper.Map<Ocjene>(addObj));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }           
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
-            return await Reporsitory.DeleteAsync<Ocjene>(Id);
+            try
+            {
+                return await Reporsitory.DeleteAsync<Ocjene>(Id);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }      
         }
 
         public async Task<IEnumerable<IOcjeneDomainModel>> GetAllAsync()
         {
-            return Mapper.Map<IEnumerable<IOcjeneDomainModel>>(await Reporsitory.GetAllAsync<Ocjene>());
+            try
+            {
+                return Mapper.Map<IEnumerable<IOcjeneDomainModel>>(await Reporsitory.GetAllAsync<Ocjene>());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }        
         }
 
         public async Task<IOcjeneDomainModel> GetAsync(Guid Id)
         {
-            return Mapper.Map<IOcjeneDomainModel>(await Reporsitory.GetAsync<Ocjene>(Id));
+            try
+            {
+                return Mapper.Map<IOcjeneDomainModel>(await Reporsitory.GetAsync<Ocjene>(Id));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }          
         }
 
         public async Task<int> UpdateAsync(IOcjeneDomainModel updated)
         {
-            return await Reporsitory.UpdateAsync(Mapper.Map<Ocjene>(updated));
+            try
+            {
+                return await Reporsitory.UpdateAsync(Mapper.Map<Ocjene>(updated));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
     }
 }

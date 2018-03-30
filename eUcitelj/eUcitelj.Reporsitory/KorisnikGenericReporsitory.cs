@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using eUcitelj.DAL;
-using eUcitelj.DAL.Common;
 using eUcitelj.DAL.Models;
 using eUcitelj.Model;
 using eUcitelj.Model.Common;
@@ -23,13 +22,30 @@ namespace eUcitelj.Reporsitory
         }
         public async Task<int> AddAsync(IKorisnikDomainModel addObj)
         {
-            await Reporsitory.GetQueryable<Korisnik>().Where(i => i.Korisnicko_ime == addObj.Korisnicko_ime).FirstOrDefaultAsync();
-            return await Reporsitory.AddAsync(Mapper.Map<Korisnik>(addObj));
+            try
+            {
+                //await Reporsitory.GetQueryable<Korisnik>().Where(i => i.Korisnicko_ime == addObj.Korisnicko_ime).FirstOrDefaultAsync(); --> nije potrebno u aplikaciji. Zaboravio sam obrisati, koristio sam za neko testiranje koje mi kasnije nije bilo potrebno. Provjera dali vec postoji korisnik sa tim korisnickim imenom u bazi se odvija u AngularJS-u.
+                return await Reporsitory.AddAsync(Mapper.Map<Korisnik>(addObj));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
-            return await Reporsitory.DeleteAsync<Korisnik>(Id);
+            try
+            {
+                return await Reporsitory.DeleteAsync<Korisnik>(Id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+
         }
 
         public async Task<IEnumerable<IKorisnikDomainModel>> GetAllAsync()

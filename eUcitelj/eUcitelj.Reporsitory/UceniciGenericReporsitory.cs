@@ -20,12 +20,26 @@ namespace eUcitelj.Reporsitory
 
         public async Task<int> AddAsync(IUceniciDomainModel addObj)
         {
-            return await Reporsitory.AddAsync(Mapper.Map<Ucenici>(addObj));
+            try
+            {
+                return await Reporsitory.AddAsync(Mapper.Map<Ucenici>(addObj));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }         
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
-            return await Reporsitory.DeleteAsync<Ucenici>(Id);
+            try
+            {
+                return await Reporsitory.DeleteAsync<Ucenici>(Id);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }          
         }
 
         public async Task<IEnumerable<IUceniciDomainModel>> GetAllAsync()

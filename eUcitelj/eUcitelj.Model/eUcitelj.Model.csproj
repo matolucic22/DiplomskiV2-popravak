@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -41,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DIModule.cs" />
     <Compile Include="KorisnikDomainModel.cs" />
     <Compile Include="KvizDomainModel.cs" />
     <Compile Include="OcjeneDomanModel.cs" />
@@ -49,10 +54,6 @@
     <Compile Include="UceniciDomainModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUcitelj.DAL.Common\eUcitelj.DAL.Common.csproj">
-      <Project>{61FB2348-4F47-4705-9DD2-0D453B670028}</Project>
-      <Name>eUcitelj.DAL.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\eUcitelj.DAL\eUcitelj.DAL.csproj">
       <Project>{882A72A0-778C-439D-B70A-C4C0257C59A3}</Project>
       <Name>eUcitelj.DAL</Name>
@@ -64,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

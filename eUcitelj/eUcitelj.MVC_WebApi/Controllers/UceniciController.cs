@@ -29,9 +29,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             try
             {
                 var response = Mapper.Map<IEnumerable<UceniciViewModel>>(await UceniciService.GetAll());
-
                 return Request.CreateResponse(HttpStatusCode.OK, response);
-
 
             }
             catch (Exception e)

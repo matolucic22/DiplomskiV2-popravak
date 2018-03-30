@@ -12,7 +12,6 @@ namespace eUcitelj.MVC_WebApi.ViewModels
         public Guid KorisnikId { get; set; }
 
         public Guid PredmetiId { get; set; }
-       // public int Bodovi_kvizova { get; set; }
 
         public virtual ICollection<OcjeneViewModel> Ocjene { get; set; }//1 predmet moze imati vise ocjena
 

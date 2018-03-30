@@ -1,5 +1,4 @@
-﻿using eUcitelj.DAL.Common;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +10,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace eUcitelj.DAL
 {
-    public class eUciteljContext : DbContext, IeUciteljContext
+    public class eUciteljContext : DbContext
     {
         public eUciteljContext() : base("eUciteljContext")
         {

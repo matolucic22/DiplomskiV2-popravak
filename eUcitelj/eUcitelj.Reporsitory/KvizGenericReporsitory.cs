@@ -19,27 +19,67 @@ namespace eUcitelj.Reporsitory
         }
         public async Task<int> AddAsync(IKvizDomainModel addObj)
         {
-            return await Reporsitory.AddAsync(Mapper.Map<Kviz>(addObj));
+            try
+            {
+                return await Reporsitory.AddAsync(Mapper.Map<Kviz>(addObj));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
-            return await Reporsitory.DeleteAsync<Kviz>(Id);
+            try
+            {
+                return await Reporsitory.DeleteAsync<Kviz>(Id);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
         }
 
         public async Task<IEnumerable<IKvizDomainModel>> GetAllAsync()
         {
-            return Mapper.Map<IEnumerable<IKvizDomainModel>>(await Reporsitory.GetAllAsync<Kviz>());
+            try
+            {
+                return Mapper.Map<IEnumerable<IKvizDomainModel>>(await Reporsitory.GetAllAsync<Kviz>());
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
         }
 
         public async Task<IKvizDomainModel> GetAsync(Guid Id)
         {
-            return Mapper.Map<IKvizDomainModel>(await Reporsitory.GetAsync<Kviz>(Id));
+            try
+            {
+                return Mapper.Map<IKvizDomainModel>(await Reporsitory.GetAsync<Kviz>(Id));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
         }
 
         public async Task<int> UpdateAsync(IKvizDomainModel updated)
         {
-            return await Reporsitory.UpdateAsync<Kviz>(Mapper.Map<Kviz>(updated));
+            try
+            {
+                return await Reporsitory.UpdateAsync<Kviz>(Mapper.Map<Kviz>(updated));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            
         }
     }
 }

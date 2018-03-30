@@ -27,21 +27,17 @@
 
         for (var i = 0; i < provjeraKI.length; i++) {
             if (provjeraKI[i].Korisnicko_ime == addObj.Korisnicko_ime) {
-               counter++;
+               //counter++;
                 
                 return window.alert("Unešeno korisničko ime već postoji u bazi.");
             }
         }
-
-        if (addObj.Ime_korisnika == null || addObj.Prezime_korisnika == null || addObj.Korisnicko_ime == null || addObj.Password == null) {
-            window.alert("Niste upisali sve tražene podatke.");
-        }
-        else if (counter != 0) {
+        //if (counter != 0) {//nepotrebna provjera. Ako postoji korisnicko ime u bazi returna se poruka iz gornje funkcije.
             
-            window.alert("Unešeno korisničko ime već postoji.");
-            counter = 0;
-        }
-        else if (addObj.Password != addObj.ConfirmPassword) {
+        //    window.alert("Unešeno korisničko ime već postoji.");
+        //    counter = 0;
+        //}
+       if (addObj.Password != addObj.ConfirmPassword) {
             window.alert("Potvrđena lozinka se ne podudara sa glavnom lozinkom.");
         }
         else {
@@ -55,7 +51,7 @@
                 }
             , function (jqXHR) {
 
-                window.alert("Unešeno korisničko ime već postoji.");
+                window.alert("Sve rubrike moraju biti popunjene.");
 
             });
         }
