@@ -21,15 +21,15 @@ namespace eUcitelj.DAL.Models
         public string Korisnicko_ime { get; set; }
 
         [Required(ErrorMessage = "Lozinka je obavezno polje za unos")]
-        public string Password { get; set; }
+        public string Lozinka { get; set; }
 
         [Required(ErrorMessage = "Potvrda je obavezno polje za unos")]
         public string Potvrda { get; set; }
 
-        [Required(ErrorMessage = "Greška u sustavu (Role)")]
-        public string Role { get; set; }
+        [Required(ErrorMessage = "Greška u sustavu (Uloga)")]
+        public string Uloga { get; set; }
 
-        public virtual ICollection<Predmeti> Predmeti { get; set; }//1 korisnik moze biti upisan na vise predmeta
-        public virtual ICollection<Ucenici> Ucenici { get; set; }//1 korisnik logiran kao roditelj moze imati vise ucenika
+        public virtual ICollection<Predmet> Predmeti { get; set; }//1 korisnik moze biti upisan na vise predmeta
+        public virtual ICollection<Ucenik> Ucenici { get; set; }//1 korisnik logiran kao roditelj moze imati vise ucenika
     }
 }

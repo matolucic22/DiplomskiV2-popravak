@@ -11,9 +11,9 @@ namespace eUcitelj.Service
 {
     public class KvizService:IKvizService
     {
-        protected IKvizGenericReporsitory KvizGenericReporsitory { get; set; }
+        protected IKvizRepository KvizGenericReporsitory { get; set; }
 
-        public KvizService(IKvizGenericReporsitory kvizGenericReporsitory)
+        public KvizService(IKvizRepository kvizGenericReporsitory)
         {
             this.KvizGenericReporsitory = kvizGenericReporsitory;
         }

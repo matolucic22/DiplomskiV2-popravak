@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Model
 {
-    public class UceniciDomainModel:IUceniciDomainModel
+    public class UcenikDomainModel:IUceniciDomainModel
     {
-       public Guid UceniciId { get; set; }
+       public Guid UcenikId { get; set; }
        public Guid KorisnikId { get; set; }
        public Guid IdKorisnikaU { get; set; }
        public String Ime_korisnika { get; set; }

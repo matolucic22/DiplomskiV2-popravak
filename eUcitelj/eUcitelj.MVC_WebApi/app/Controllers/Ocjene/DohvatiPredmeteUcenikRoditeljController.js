@@ -1,7 +1,7 @@
 ﻿app.controller('DohvatiPredmeteUcenikRoditeljController', function ($scope, $http, $stateParams, $window) {
     $scope.korisnikP = [];
     id=angular.fromJson($window.localStorage['ngStorage-currentUser']).KorisnikId;//ucitelj kad pregledava ocijene mora vidjeti sve-zato odvajanje
-    $http.get('api/Korisnik/getK?id=' + id)
+    $http.get('api/Korisnik?id=' + id)
         .then(function (response) {
             korisnik = response.data;
             $scope.korisnikP = korisnik.Predmeti;

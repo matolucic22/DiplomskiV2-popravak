@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             <tr dir-paginate="pr in Predmeti | itemsPerPage:5 | filter:search | orderBy:sortKey:reverse">
-                <td><a ui-sref="pregledajKviz({UcPrId: pr.PredmetiId})">{{pr.Ime_predmeta}}</a></td>
+                <td><a ui-sref="pregledajKviz({UcPrId: pr.PredmetId})">{{pr.Ime_predmeta}}</a></td>
             </tr>
         </tbody>
     </table>

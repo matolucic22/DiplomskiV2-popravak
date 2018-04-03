@@ -57,9 +57,9 @@
     <Compile Include="eUciteljContext.cs" />
     <Compile Include="Models\Korisnik.cs" />
     <Compile Include="Models\Kviz.cs" />
-    <Compile Include="Models\Ocjene.cs" />
-    <Compile Include="Models\Predmeti.cs" />
-    <Compile Include="Models\Ucenici.cs" />
+    <Compile Include="Models\Ocjena.cs" />
+    <Compile Include="Models\Predmet.cs" />
+    <Compile Include="Models\Ucenik.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

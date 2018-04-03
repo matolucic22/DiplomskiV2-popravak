@@ -12,20 +12,20 @@ function Service($http, $localStorage, localStorageService) {
     service.GetId = GetId;
     return service;
 
-    function Login(korisnicko_ime, password, callback) {
+    function Login(korisnicko_ime, lozinka, callback) {
         var obj = {
             Korisnicko_ime: korisnicko_ime,
-            Password: password
+            Lozinka: lozinka
         };//funkcija login 
 
         $http.post('api/Korisnik/logintoken', obj)//dodaj korisnika
             .then(function successCallback(response) {
-                if (response.data.KorisnikId && response.data.Korisnicko_ime && response.data.Token && response.data.Role) {
+                if (response.data.KorisnikId && response.data.Korisnicko_ime && response.data.Token && response.data.Uloga) {
                     $localStorage.currentUser = {
                         KorisnikId: response.data.KorisnikId,
                         Korisnicko_ime: response.data.Korisnicko_ime,
                         Token: response.data.Token,
-                        Role: response.data.Role
+                        Uloga: response.data.Uloga
                     };
 
                     

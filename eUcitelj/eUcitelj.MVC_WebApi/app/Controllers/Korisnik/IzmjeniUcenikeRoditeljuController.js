@@ -2,19 +2,19 @@
     id = $stateParams.KorId;
     var korisnici = [];
 
-    $http.get('api/Korisnik/getK?id=' + id)
+    $http.get('api/Korisnik?id=' + id)
         .then(function (response) {
-            korisnici = response.data;
-            $scope.Ucenici = korisnici.Ucenici;
+            korisnik = response.data;
+            $scope.Ucenici = korisnik.Ucenici;
        }, function () {
            console.log("Nemoguće dohvatiti korsnika pod tim ID-om.");
        });
 
     $scope.DeleteK = function (UceniciId) {
 
-        $http.delete('/api/Ucenici/deleteU?Id=' + UceniciId).then(function (response) {
+        $http.delete('/api/Ucenici?Id=' + UceniciId).then(function (response) {
             $window.alert("Korisnik uklonjen.");
-            $http.get('api/Korisnik/getK?id=' + id)
+            $http.get('api/Korisnik/get?id=' + id)
                .then(function (response) {
                    korisnici = response.data;
                    $scope.Ucenici = korisnici.Ucenici;

@@ -57,9 +57,9 @@
       <Project>{EF4CA9BF-D2D7-4259-964B-6C48B590A344}</Project>
       <Name>eUcitelj.Model.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eUcitelj.Reporsitory.Common\eUcitelj.Reporsitory.Common.csproj">
+    <ProjectReference Include="..\eUcitelj.Repository.Common\eUcitelj.Repository.Common.csproj">
       <Project>{FD3B09E3-85D3-4990-8ACC-3AB06EECBE80}</Project>
-      <Name>eUcitelj.Reporsitory.Common</Name>
+      <Name>eUcitelj.Repository.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\eUcitelj.Service.Common\eUcitelj.Service.Common.csproj">
       <Project>{BB0B8ECE-0F0F-4F61-9079-BF481CA32DC2}</Project>

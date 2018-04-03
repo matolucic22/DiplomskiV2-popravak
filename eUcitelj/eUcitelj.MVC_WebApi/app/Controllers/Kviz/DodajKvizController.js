@@ -6,7 +6,7 @@
     Predmeti = [];
 
     //dohvati ime predmeta 
-    $http.get('/api/Predmeti/getP?id='+id).then(function (response) {
+    $http.get('/api/Predmeti?id='+id).then(function (response) {
         $scope.Predmeti = response.data;
         imePredmeta=$scope.Predmeti.Ime_predmeta;
     }
@@ -15,7 +15,7 @@
         });
 
     //dohvati sve predmete
-    $http.get('/api/Predmeti/getAllP').then(function (response) {
+    $http.get('/api/Predmeti').then(function (response) {
         Predmeti = response.data;
     }
         , function (jqXHR) {
@@ -26,7 +26,7 @@
         for (i = 0; i < Predmeti.length; i++) {
             if (Predmeti[i].Ime_predmeta==imePredmeta) {
                 var obj = {
-                    PredmetiId: Predmeti[i].PredmetiId,
+                    PredmetId: Predmeti[i].PredmetId,
                     Pitanje: $scope.Pitanje,
                     Odg1: $scope.Odg1,
                     Odg2: $scope.Odg2,
@@ -34,7 +34,7 @@
                     Tocan_odgovor: $scope.Tocan_odgovor
                 };
 
-                $http.post('api/Kviz/addK', obj).then(function (response) {
+                $http.post('api/Kviz', obj).then(function (response) {
                     $scope.response = response.data;
                     document.getElementById('id_Odg2').value = '';
                     document.getElementById('id_Odg3').value = '';

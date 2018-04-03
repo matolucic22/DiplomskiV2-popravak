@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Model
 {
-    public class OcjeneDomanModel:IOcjeneDomainModel
+    public class OcjenaDomanModel:IOcjeneDomainModel
     {
-        public Guid OcjeneId { get; set; }       
-        public Guid PredmetiId { get; set; }
-        public int Ocjena { get; set; }
+        public Guid OcjenaId { get; set; }       
+        public Guid PredmetId { get; set; }
+        public int Ocj { get; set; }
         public string Opis { get; set; }
         [Column(TypeName = "date")]
         public DateTime DatumOcjene { get; set; }

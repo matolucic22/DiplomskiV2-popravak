@@ -12,7 +12,7 @@ using System.Web.Http;
 
 namespace eUcitelj.MVC_WebApi.Controllers
 {
-    [RoutePrefix("api/Ocjene")]
+    [RoutePrefix("api")]
     public class OcjeneController : ApiController
     {
         protected IOcjeneService OcjeneService { get; set; }
@@ -23,12 +23,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getAllO")]
+        [Route("Ocjene")]
         public async Task<HttpResponseMessage> GetAllOcjene()
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<OcjeneViewModel>>(await OcjeneService.GetAll());
+                var response = Mapper.Map<IEnumerable<OcjenaViewModel>>(await OcjeneService.GetAll());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -38,12 +38,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getO")]
+        [Route("Ocjene")]
         public async Task<HttpResponseMessage> GetOcjene(Guid Id)
         {
             try
             {
-                var response = Mapper.Map<OcjeneViewModel>(await OcjeneService.Get(Id));
+                var response = Mapper.Map<OcjenaViewModel>(await OcjeneService.Get(Id));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -53,12 +53,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("addO")]
-        public async Task<HttpResponseMessage> AddOcjene(OcjeneViewModel addObj)//httpresponsemessage - convert to HTTP convert message
+        [Route("Ocjene")]
+        public async Task<HttpResponseMessage> AddOcjene(OcjenaViewModel addObj)//httpresponsemessage - convert to HTTP convert message
         {
             try
             {
-                addObj.OcjeneId = Guid.NewGuid();
+                addObj.OcjenaId = Guid.NewGuid();
                 addObj.DatumUpisa = DateTime.Now.Date;
                 var response = await OcjeneService.Add(Mapper.Map<IOcjeneDomainModel>((addObj)));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
@@ -71,13 +71,13 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPut]
-        [Route("updateO")]
-        public async Task<HttpResponseMessage> UpdateOcjene(OcjeneViewModel updateO)//Nepotrebna metoda
+        [Route("Ocjene")]
+        public async Task<HttpResponseMessage> UpdateOcjene(OcjenaViewModel updateO)//Nepotrebna metoda
         {
             try
             {
 
-                OcjeneViewModel toBeUpdated = Mapper.Map<OcjeneViewModel>(await OcjeneService.Get(updateO.OcjeneId));
+                OcjenaViewModel toBeUpdated = Mapper.Map<OcjenaViewModel>(await OcjeneService.Get(updateO.OcjenaId));
 
                 if (toBeUpdated == null)
                 {
@@ -85,7 +85,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 }
                 else
                 {
-                    toBeUpdated.Ocjena = updateO.Ocjena;
+                    toBeUpdated.Ocj = updateO.Ocj;
                 }
                 var response = await OcjeneService.Update(Mapper.Map<IOcjeneDomainModel>(toBeUpdated));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
@@ -98,7 +98,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("deleteO")]
+        [Route("Ocjene")]
         public async Task<HttpResponseMessage> DeleteOcjene(Guid Id)
         {
             try

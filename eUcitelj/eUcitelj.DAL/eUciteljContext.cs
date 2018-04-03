@@ -17,15 +17,15 @@ namespace eUcitelj.DAL
 
         }
 
-        public DbSet<Korisnik> Korisniks { get; set; }
-        public DbSet<Kviz> Kvizs { get; set; }
-        public DbSet<Ocjene> Ocjenes { get; set; }
-        public DbSet<Predmeti> Predmetis { get; set; }
-        public DbSet<Ucenici> Ucenicis { get; set; }
+        public DbSet<Korisnik> Korisnici { get; set; }//check naming
+        public DbSet<Kviz> Kvizovi { get; set; }
+        public DbSet<Ocjena> Ocjene { get; set; }//make table
+        public DbSet<Predmet> Predmeti { get; set; }
+        public DbSet<Ucenik> Ucenici { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)//code first
         {
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();//Instead, the table names will be Korisniks, Kvizs. Developers disagree about whether table names should be pluralized or not. Method prevents table name of being puralized.
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();//Instead, the table names will be Korisnici, Kvizovi. Developers disagree about whether table names should be pluralized or not. Method prevents table name of being puralized.
         }
 
         public new DbSet<T> Set<T>() where T : class//Nešto kao instanca za svaku bazu koju smo kreirali

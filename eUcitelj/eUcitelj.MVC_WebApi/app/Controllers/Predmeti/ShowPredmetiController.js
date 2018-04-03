@@ -1,7 +1,7 @@
 ﻿app.controller("ShowPredmetiController", function ($scope, $http) {
     $scope.predmeti = [];
     
-    $http.get('api/Predmeti/getAllP')
+    $http.get('api/Predmeti')
         .then(function (response) {
             $scope.predmeti = response.data;
         }, function () {

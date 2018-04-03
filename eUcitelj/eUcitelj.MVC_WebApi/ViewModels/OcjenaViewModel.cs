@@ -6,11 +6,11 @@ using System.Web;
 
 namespace eUcitelj.MVC_WebApi.ViewModels
 {
-    public class OcjeneViewModel
+    public class OcjenaViewModel
     {
-        public Guid OcjeneId { get; set; }
-        public Guid PredmetiId { get; set; }
-        public int Ocjena { get; set; }
+        public Guid OcjenaId { get; set; }
+        public Guid PredmetId { get; set; }
+        public int Ocj { get; set; }
         public string Opis { get; set; }
         [Column(TypeName = "date")]
         public DateTime DatumOcjene { get; set; }

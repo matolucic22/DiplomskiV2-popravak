@@ -19,8 +19,8 @@ namespace eUcitelj.Service
         //         Generalno u ovoj aplikaciji unutar Service nije potrebno koristiti asinkrone metode zato što se samo proslijedi podatak iz KorisnikRepositorija u KorisnikController. 
         //         Asinkrone metode se koriste ako se mora čekati rezultat neke akcije(radnje) nad podatkom ili je važno neku funkciju obaviti prije neke druge što ovdje nije slučaj.
         //         Async sam obrisao sa Get i GetAll metoda kako ste rekli i aplikacija funkcionira normalno. 
-        protected IKorisnikGenericReporsitory KorisnikGenericReporsitory { set; get; }
-        public KorisnikService(IKorisnikGenericReporsitory korisnikGenericReporsitory)
+        protected IKorisnikRepository KorisnikGenericReporsitory { set; get; }
+        public KorisnikService(IKorisnikRepository korisnikGenericReporsitory)
         {
             this.KorisnikGenericReporsitory = korisnikGenericReporsitory;
         }
@@ -39,7 +39,7 @@ namespace eUcitelj.Service
             return KorisnikGenericReporsitory.GetAsync(Id);
         }
 
-        public Task<IEnumerable<IKorisnikDomainModel>> GetAll()
+        public Task<IEnumerable<IKorisnikDomainModel>> GetAll()//nije async
         {
             return KorisnikGenericReporsitory.GetAllAsync();   
         }

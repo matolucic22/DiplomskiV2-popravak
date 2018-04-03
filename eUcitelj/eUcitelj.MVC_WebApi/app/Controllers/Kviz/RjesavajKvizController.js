@@ -2,7 +2,7 @@
     idPredmet = $stateParams.UcPrId;
     var Predmet = [];
     
-    $http.get('api/Predmeti/getP?id=' + idPredmet).then(function (response) {
+    $http.get('api/Predmeti?id=' + idPredmet).then(function (response) {
         Predmet = response.data;
         $scope.Pitanja = Predmet.Kviz;
         if($scope.Pitanja.length == 0)

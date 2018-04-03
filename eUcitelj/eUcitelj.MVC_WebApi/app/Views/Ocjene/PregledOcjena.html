@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             <tr dir-paginate="kor in korisnici | itemsPerPage:40 | filter:search | orderBy:sortKey:reverse">
-                <td ng-if="kor.Role=='Ucenik'||kor.Role=='ucenik'"><a ui-sref="pregledOcjenaUcenik({KoId: kor.KorisnikId})">{{kor.Ime_korisnika}} {{kor.Prezime_korisnika}}</a></td>
+                <td ng-if="kor.Uloga=='Ucenik'||kor.Uloga=='ucenik'"><a ui-sref="pregledOcjenaUcenik({KoId: kor.KorisnikId})">{{kor.Ime_korisnika}} {{kor.Prezime_korisnika}}</a></td>
             </tr>
         </tbody>
     </table>

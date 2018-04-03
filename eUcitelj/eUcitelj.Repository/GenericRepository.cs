@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Reporsitory
 {
-    public class Reporsitory : IReporsitory
+    public class GenericRepository : IGenericRepository
     {
         protected eUciteljContext Context { get; set; }
 
-        public Reporsitory(eUciteljContext context)//konstruktor da svakim pokretanjem stvori objekt od contexta
+        public GenericRepository(eUciteljContext context)//konstruktor da svakim pokretanjem stvori objekt od contexta
         {
             this.Context = context;
         }      

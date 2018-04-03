@@ -8,7 +8,7 @@ namespace eUcitelj.Model.Common
 {
     public interface IUceniciDomainModel
     {
-        Guid UceniciId { get; set; }
+        Guid UcenikId { get; set; }
         Guid KorisnikId { get; set; }
         Guid IdKorisnikaU { get; set; }
         String Ime_korisnika { get; set; }

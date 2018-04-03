@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Reporsitory
 {
-    public class PredmetiGenericReporsitory : IPredmetiGenericReporsitory
+    public class PredmetiRepository : IPredmetiRepository
     {
-       protected IReporsitory Reporsitory{ get; set;}
-       public PredmetiGenericReporsitory(IReporsitory reporsitory)
+       protected IGenericRepository Reporsitory{ get; set;}
+       public PredmetiRepository(IGenericRepository reporsitory)
         {
             this.Reporsitory = reporsitory;
         }
@@ -22,7 +22,7 @@ namespace eUcitelj.Reporsitory
         {
             try
             {
-                return await Reporsitory.AddAsync(Mapper.Map<Predmeti>(addObj));
+                return await Reporsitory.AddAsync(Mapper.Map<Predmet>(addObj));
             }
             catch (Exception e)
             {
@@ -35,7 +35,7 @@ namespace eUcitelj.Reporsitory
         {
             try
             {
-                return await Reporsitory.DeleteAsync<Predmeti>(Id);
+                return await Reporsitory.DeleteAsync<Predmet>(Id);
             }
             catch (Exception e)
             {
@@ -47,7 +47,7 @@ namespace eUcitelj.Reporsitory
         {
             try
             {
-                return Mapper.Map<IEnumerable<IPredmetiDomainModel>>(await Reporsitory.GetAllAsync<Predmeti>());
+                return Mapper.Map<IEnumerable<IPredmetiDomainModel>>(await Reporsitory.GetAllAsync<Predmet>());
             }catch(Exception e)
             {
                 throw e;
@@ -58,7 +58,7 @@ namespace eUcitelj.Reporsitory
         {
             try
             {
-                return Mapper.Map<IPredmetiDomainModel>(await Reporsitory.GetAsync<Predmeti>(Id));
+                return Mapper.Map<IPredmetiDomainModel>(await Reporsitory.GetAsync<Predmet>(Id));
 
             }catch(Exception e)
             {
@@ -70,7 +70,7 @@ namespace eUcitelj.Reporsitory
         {
             try
             {
-                return await Reporsitory.UpdateAsync(Mapper.Map<Predmeti>(updated));
+                return await Reporsitory.UpdateAsync(Mapper.Map<Predmet>(updated));
             }catch(Exception e)
             {
                 throw e;

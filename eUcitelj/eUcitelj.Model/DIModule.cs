@@ -13,9 +13,9 @@ namespace eUcitelj.Model
         public override void Load()
         {
             Bind<IKorisnikDomainModel>().To<KorisnikDomainModel>();
-            Bind<IUceniciDomainModel>().To<UceniciDomainModel>();
-            Bind<IPredmetiDomainModel>().To<PredmetiDomainModel>();
-            Bind<IOcjeneDomainModel>().To<OcjeneDomanModel>();
+            Bind<IUceniciDomainModel>().To<UcenikDomainModel>();
+            Bind<IPredmetiDomainModel>().To<PredmetDomainModel>();
+            Bind<IOcjeneDomainModel>().To<OcjenaDomanModel>();
             Bind<IKvizDomainModel>().To<KvizDomainModel>();
         }
     }

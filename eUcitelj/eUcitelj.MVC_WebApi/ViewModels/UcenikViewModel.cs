@@ -5,9 +5,9 @@ using System.Web;
 
 namespace eUcitelj.MVC_WebApi.ViewModels
 {
-    public class UceniciViewModel
+    public class UcenikViewModel
     {
-        public Guid UceniciId { get; set; }
+        public Guid UcenikId { get; set; }
         public Guid KorisnikId { get; set; }
         public Guid IdKorisnikaU { get; set; }
         public String Ime_korisnika { get; set; }

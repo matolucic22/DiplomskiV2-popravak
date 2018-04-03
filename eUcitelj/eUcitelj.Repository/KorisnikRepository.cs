@@ -13,10 +13,10 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Reporsitory
 {
-    public class KorisnikGenericReporsitory : IKorisnikGenericReporsitory
+    public class KorisnikRepository : IKorisnikRepository
     {
-        protected IReporsitory Reporsitory { get; set; }
-        public KorisnikGenericReporsitory(IReporsitory reporsitory)
+        protected IGenericRepository Reporsitory { get; set; }
+        public KorisnikRepository(IGenericRepository reporsitory)
         {
             this.Reporsitory = reporsitory;
         }
@@ -50,6 +50,8 @@ namespace eUcitelj.Reporsitory
 
         public async Task<IEnumerable<IKorisnikDomainModel>> GetAllAsync()
         {
+            //PITANJE: -nema paging, sorting, filtering - GetAllAsync metoda - nikad se neće svi podaci dohvaćati odjednom
+            //ODGOVOR: Paging, filtering, sorting su prema potrebama aplikacije odrađeni u AngularJS-u. GetAllAsync metodu sam koristio da bi dohvatio sve elemente iz jedne tablice npr. za prikaz svih korisnika u sustavu prilikom odredivanja uloga (rola).
             try
             {
                 return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(await Reporsitory.GetAllAsync<Korisnik>());
@@ -111,14 +113,13 @@ namespace eUcitelj.Reporsitory
             }
         }
 
-        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikId()
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikId()//Ova metoda dohvaca sve korisnike kojima je uloga (Rola) u sustavu "ucenik". Korištena je prilikom odobravanje uloge "roditelj", da bi se roditelju dodijelio ID ucenika kojem je roditelj i na taj nacin je omogucen pristup ocjenama samo onog ucenika kojem je roditelj.
         {
             try
             {
                 var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
-                var Ids = response.Select(a => new Korisnik { KorisnikId = a.KorisnikId, Role = a.Role }).Where(a => a.Role == "ucenik").ToList();
+                var Ids = response.Select(a => new Korisnik { KorisnikId = a.KorisnikId, Uloga = a.Uloga }).Where(a => a.Uloga == "ucenik").ToList();
                 return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(Ids);
-                
             }
             catch (Exception ex)
             {

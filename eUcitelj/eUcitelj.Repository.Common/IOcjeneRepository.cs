@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Reporsitory.Common
 {
-   public interface IOcjeneGenericReporsitory
+   public interface IOcjeneRepository
     {
         Task<IEnumerable<IOcjeneDomainModel>> GetAllAsync();//vraća IEnimerable polje podataka
         Task<IOcjeneDomainModel> GetAsync(Guid Id);

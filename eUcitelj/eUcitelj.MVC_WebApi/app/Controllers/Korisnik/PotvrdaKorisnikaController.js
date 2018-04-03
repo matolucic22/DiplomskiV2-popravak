@@ -3,7 +3,7 @@
     $scope.myVal = [];
    
 
-    $http.get('/api/Korisnik/getAllK').then(function (response) {
+    $http.get('/api/Korisnik').then(function (response) {
 
         $scope.korisnici = response.data;       
 
@@ -22,21 +22,21 @@
         if (rolaLower == "ucitelj" || rolaLower == "ucenik" || rolaLower == "roditelj") {
             if (rolaLower == "roditelj") {
                 $location.path('/korisnik/dodajUcenikeRoditelju');
-                $http.get('/api/Korisnik/getK?id=' + KorisnikId).then(function (response) {
+                $http.get('/api/Korisnik?id=' + KorisnikId).then(function (response) {
                     var Korisnik = response.data;
                     Korisnik2 = {
                         KorisnikId: Korisnik.KorisnikId,
                         Ime_korisnika: Korisnik.Ime_korisnika,
                         Prezime_korisnika: Korisnik.Prezime_korisnika,
                         Korisnicko_ime: Korisnik.Korisnicko_ime,
-                        Password: Korisnik.Password,
+                        Lozinka: Korisnik.Lozinka,
                         Potvrda: "Da",
-                        Role: rola
+                        Uloga: rola
                     };
 
-                    $http.put('api/Korisnik/updateK', Korisnik2).then(function (data) {
+                    $http.put('api/Korisnik', Korisnik2).then(function (data) {
                         $window.alert("Promijenjeno");
-                        $http.get('/api/Korisnik/getAllK').then(function (response) {
+                        $http.get('/api/Korisnik').then(function (response) {
                             $scope.korisnici = response.data;
                         }, function () {
                             console.log("Greška prilikom preuzimanja korisnika iz baze.");
@@ -51,21 +51,21 @@
                 });
 
             } else {
-                $http.get('/api/Korisnik/getK?id=' + KorisnikId).then(function (response) {
+                $http.get('/api/Korisnik?id=' + KorisnikId).then(function (response) {
                     var Korisnik = response.data;
                     Korisnik2 = {
                         KorisnikId: Korisnik.KorisnikId,
                         Ime_korisnika: Korisnik.Ime_korisnika,
                         Prezime_korisnika: Korisnik.Prezime_korisnika,
                         Korisnicko_ime: Korisnik.Korisnicko_ime,
-                        Password: Korisnik.Password,
+                        Lozinka: Korisnik.Lozinka,
                         Potvrda: "Da",
-                        Role: rola
+                        Uloga: rola
                     };
 
-                    $http.put('api/Korisnik/updateK', Korisnik2).then(function (data) {
+                    $http.put('api/Korisnik', Korisnik2).then(function (data) {
                         $window.alert("Promijenjeno");
-                        $http.get('/api/Korisnik/getAllK').then(function (response) {
+                        $http.get('/api/Korisnik/getAll').then(function (response) {
                             $scope.korisnici = response.data;
                         }, function () {
                             console.log("Greška prilikom preuzimanja korisnika iz baze.");
@@ -88,12 +88,12 @@
         if(rolaLower=="ucenik")
         {
             
-            $http.get('/api/Korisnik/getAllKorId').then(function (response) {
+            $http.get('/api/Korisnik/getAllKorisnikId').then(function (response) {
 
                 korisniciId = response.data;       
                 
                     ////dohvati sve predmete zbog imena.
-                    $http.get('/api/Predmeti/getAllP')
+                    $http.get('/api/Predmeti')
                        .then(function (response) {
                            predmeti = response.data;
 
@@ -107,7 +107,7 @@
                                        KorisnikId: KorisnikId,
                                        Ime_predmeta: predmeti[i].Ime_predmeta
                                    };
-                                   $http.post('api/Predmeti/addP', objAddPr).then(function (data) {
+                                   $http.post('api/Predmeti', objAddPr).then(function (data) {
                                        $scope.response = data;
                                    });
                                }
@@ -128,7 +128,7 @@
 
     $scope.Ne = function (KorisnikId) {
 
-        $http.get('/api/Korisnik/getK?id=' + KorisnikId).then(function (response) {
+        $http.get('/api/Korisnik?id=' + KorisnikId).then(function (response) {
             var Korisnik = response.data;
             if (Korisnik.Ime_korisnika == 'ucitelj')
             {
@@ -140,14 +140,14 @@
                     Ime_korisnika: Korisnik.Ime_korisnika,
                     Prezime_korisnika: Korisnik.Prezime_korisnika,
                     Korisnicko_ime: Korisnik.Korisnicko_ime,
-                    Password: Korisnik.Password,
+                    Lozinka: Korisnik.Lozinka,
                     Potvrda: "Ne",
-                    Role: "???"
+                    Uloga: "???"
                 };
 
-                $http.put('api/Korisnik/updateK', Korisnik2).then(function (data) {
+                $http.put('api/Korisnik', Korisnik2).then(function (data) {
                     $window.alert("Promijenjeno");
-                    $http.get('/api/Korisnik/getAllK').then(function (response) {
+                    $http.get('/api/Korisnik').then(function (response) {
                         $scope.korisnici = response.data;
                     }, function () {
                         console.log("Greška prilikom preuzimanja korisnika iz baze.");
@@ -167,10 +167,10 @@
     $scope.DeleteK = function (KorisnikId)
     {
         
-        $http.delete('/api/Korisnik/deleteK?Id=' + KorisnikId).then(function (response) {
+        $http.delete('/api/Korisnik?Id=' + KorisnikId).then(function (response) {
             $window.alert("Korisnik uklonjen.");
 
-                $http.get('/api/Korisnik/getAllK').then(function (response) {
+                $http.get('/api/Korisnik').then(function (response) {
                     $scope.korisnici = response.data;
                 }, function () {
                     console.log("Greška prilikom preuzimanja korisnika iz baze.");

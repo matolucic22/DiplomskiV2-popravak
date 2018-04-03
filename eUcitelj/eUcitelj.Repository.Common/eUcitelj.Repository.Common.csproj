@@ -41,12 +41,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IKorisnikGenericReporsitory.cs" />
-    <Compile Include="IKvizGenericReporsitory.cs" />
-    <Compile Include="IOcjeneGenericReporsitory.cs" />
-    <Compile Include="IPredmetiGenericReporsitory.cs" />
-    <Compile Include="IReporsitory.cs" />
-    <Compile Include="IUceniciGenericReporsitory.cs" />
+    <Compile Include="IKorisnikRepository.cs" />
+    <Compile Include="IKvizRepository.cs" />
+    <Compile Include="IOcjeneRepository.cs" />
+    <Compile Include="IPredmetiRepository.cs" />
+    <Compile Include="IGenericRepository.cs" />
+    <Compile Include="IUceniciRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

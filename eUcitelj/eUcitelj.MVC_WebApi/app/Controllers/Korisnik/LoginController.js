@@ -2,7 +2,7 @@
     
     $scope.loginData = {
         Korisnicko_ime: undefined,
-        Password: undefined
+        Lozinka: undefined
     };
     
         initController();
@@ -14,12 +14,12 @@
         $scope.doStuff = function () {
             var userToLogin = {
                 Korisnicko_ime: $scope.Korisnicko_ime,
-                Password: undefined
+                Lozinka: undefined
             };
 
-            userToLogin.Password = md5.createHash($scope.Password || '');
+            userToLogin.Lozinka = md5.createHash($scope.Lozinka || '');
            
-            AuthenticationService.Login(userToLogin.Korisnicko_ime, userToLogin.Password, function (result) {
+            AuthenticationService.Login(userToLogin.Korisnicko_ime, userToLogin.Lozinka, function (result) {
                 if (result == true) {
                    $location.path('/korisnik/home');//reload stranice
                    $window.location.reload();

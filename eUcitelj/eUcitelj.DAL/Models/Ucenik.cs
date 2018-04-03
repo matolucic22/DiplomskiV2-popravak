@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.DAL.Models
 {
-    public class Ucenici
+    public class Ucenik
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Required(ErrorMessage = "Greška u sustavu (ID korisnika nije stvoren)")]
-        public Guid UceniciId { get; set; }
+        [Required(ErrorMessage = "Greška u sustavu (ID ucenika nije stvoren)")]
+        public Guid UcenikId { get; set; }
 
         [Required(ErrorMessage = "Greška u sustavu (ID korisnika nije poznat)")]
-        public Guid KorisnikId { get; set; }
+        public Guid KorisnikId { get; set; }//ID roditelja
 
         [Required(ErrorMessage = "Greška u sustavu (ID korisnika nije poznat)")]
-        public Guid IdKorisnikaU { get; set; }
+        public Guid IdKorisnikaU { get; set; }//ID ucenika
 
         [Required(ErrorMessage = "Ime korisnika je obavezno polje za unos")]
         public String Ime_korisnika { get; set; }

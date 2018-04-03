@@ -11,8 +11,12 @@ namespace eUcitelj.Service
 {
     public class OcjeneService:IOcjeneService
     {
-        protected IOcjeneGenericReporsitory OcjeneGenericReporsitory;
-        public OcjeneService(IOcjeneGenericReporsitory ocjeneGenericReporsitory)
+        /* VAŠE PITANJE: 
+         * public async Task<int> Add(IOcjeneDomainModel addObj) - ako je async metoda, sufix Async dodavati na svaku metodu(servisi)
+         
+           ODG.: Ja se ispričavam, ali nisam razumio što želite reći. Sve metode su u servisima asinkrone (osim onih što ste rekli da su nepotrebne u prijašnjim pitanjima). */
+        protected IOcjeneRepository OcjeneGenericReporsitory;
+        public OcjeneService(IOcjeneRepository ocjeneGenericReporsitory)
         {
             this.OcjeneGenericReporsitory = ocjeneGenericReporsitory;
         }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Reporsitory.Common
 {
-    public interface IKvizGenericReporsitory
+    public interface IKvizRepository
     {
         Task<IEnumerable<IKvizDomainModel>> GetAllAsync();//vraća IEnimerable polje podataka
         Task<IKvizDomainModel> GetAsync(Guid Id);

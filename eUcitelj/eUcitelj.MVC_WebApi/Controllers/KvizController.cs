@@ -12,7 +12,7 @@ using System.Web.Http;
 
 namespace eUcitelj.MVC_WebApi.Controllers
 {
-    [RoutePrefix("api/Kviz")]
+    [RoutePrefix("api")]
     public class KvizController : ApiController
     {
         protected IKvizService KvizService { get; set; }
@@ -22,7 +22,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getAllK")]
+        [Route("Kviz")]
         public async Task<HttpResponseMessage> GetAllKviz()
         {
             try
@@ -37,7 +37,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getK")]
+        [Route("Kviz")]
         public async Task<HttpResponseMessage> GetKviz(Guid Id)
         {
             try
@@ -52,7 +52,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("addK")]
+        [Route("Kviz")]
         public async Task<HttpResponseMessage> AddKviz(KvizViewModel addObj)//httpresponsemessage - convert to HTTP convert message
         {
             try
@@ -69,7 +69,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPut]
-        [Route("updateK")]
+        [Route("Kviz")]
         public async Task<HttpResponseMessage> UpdateKviz(KvizViewModel updateK)
         {
             try
@@ -100,7 +100,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("deleteK")]
+        [Route("Kviz")]
         public async Task<HttpResponseMessage> DeleteKviz(Guid Id)
         {
             try

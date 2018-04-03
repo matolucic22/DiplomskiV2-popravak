@@ -12,7 +12,7 @@ using System.Web.Http;
 
 namespace eUcitelj.MVC_WebApi.Controllers
 {
-    [RoutePrefix("api/Predmeti")]
+    [RoutePrefix("api")]
     public class PredmetiController : ApiController
     {
         protected IPredmetiService PredmetiService { get; set; }
@@ -22,12 +22,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
         
         [HttpGet]
-        [Route("getAllP")]
+        [Route("Predmeti")]
         public async Task<HttpResponseMessage> GetAllPredmeti()
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<PredmetiViewModel>>(await PredmetiService.GetAll());
+                var response = Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.GetAll());
                 
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
@@ -39,12 +39,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getP")]
+        [Route("Predmeti")]
         public async Task<HttpResponseMessage> GetPredmeti(Guid Id)
         {
             try
             {
-                var response = Mapper.Map<PredmetiViewModel>(await PredmetiService.Get(Id));
+                var response = Mapper.Map<PredmetViewModel>(await PredmetiService.Get(Id));
                 
                 if(response==null)
                 {
@@ -61,12 +61,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("addP")]
-        public async Task<HttpResponseMessage> AddPredmet(PredmetiViewModel addObj)
+        [Route("Predmeti")]
+        public async Task<HttpResponseMessage> AddPredmet(PredmetViewModel addObj)
         {
             try
             {             
-                addObj.PredmetiId = Guid.NewGuid();
+                addObj.PredmetId = Guid.NewGuid();
                 var response= await PredmetiService.Add(Mapper.Map<IPredmetiDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
@@ -77,12 +77,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPut]
-        [Route("updateP")]
-        public async Task<HttpResponseMessage> UpdatePredmet(PredmetiViewModel updateP)
+        [Route("Predmeti")]
+        public async Task<HttpResponseMessage> UpdatePredmet(PredmetViewModel updateP)
         {
             try
             {
-                PredmetiViewModel toBeUpdated = Mapper.Map<PredmetiViewModel>(await PredmetiService.Get(updateP.PredmetiId));
+                PredmetViewModel toBeUpdated = Mapper.Map<PredmetViewModel>(await PredmetiService.Get(updateP.PredmetId));
 
                 if(toBeUpdated==null)
                 {
@@ -102,7 +102,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("deleteP")]
+        [Route("Predmeti")]
         public async Task<HttpResponseMessage> DeletePredmeti(Guid Id)
         {
             try

@@ -2,7 +2,7 @@
 
     var KvizPromjenjeno;
     var id = $stateParams.KvizId;
-    $http.get('/api/Kviz/getK?Id=' + id).then(function (response) {
+    $http.get('/api/Kviz?Id=' + id).then(function (response) {
         $scope.kPitanje = response.data;
         txtPitanje = $scope.kPitanje.Pitanje;
     }, function () {
@@ -10,12 +10,12 @@
     });
 
 
-    $http.get('/api/Kviz/getAllK').then(function (response) {
+    $http.get('/api/Kviz').then(function (response) {
         Kvizovi = response.data;
 
         for (i = 0; i < Kvizovi.length; i++) {
             if (Kvizovi[i].Pitanje == txtPitanje) {
-                $http.delete('api/Kviz/deleteK?id=' + Kvizovi[i].KvizId).then(function (response) {
+                $http.delete('api/Kviz?id=' + Kvizovi[i].KvizId).then(function (response) {
                     KvizPromjenjeno = response.data;
                 }, function () {
                     $window.alert("Greška prilikom promjene");

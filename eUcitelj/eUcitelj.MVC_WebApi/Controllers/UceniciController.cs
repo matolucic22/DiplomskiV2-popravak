@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace eUcitelj.MVC_WebApi.Controllers
 {
-    [RoutePrefix("api/Ucenici")]
+    [RoutePrefix("api")]
     public class UceniciController:ApiController
     {
         protected IUceniciService UceniciService { get; set; }
@@ -23,12 +23,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getAllU")]
+        [Route("Ucenici")]
         public async Task<HttpResponseMessage> GetAllUcenici()
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<UceniciViewModel>>(await UceniciService.GetAll());
+                var response = Mapper.Map<IEnumerable<UcenikViewModel>>(await UceniciService.GetAll());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }
@@ -39,12 +39,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getU")]
+        [Route("Ucenici")]
         public async Task<HttpResponseMessage> GetUcenici(Guid Id)
         {
             try
             {
-                var response = Mapper.Map<UceniciViewModel>(await UceniciService.Get(Id));
+                var response = Mapper.Map<UcenikViewModel>(await UceniciService.Get(Id));
 
                 if (response == null)
                 {
@@ -61,13 +61,13 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("addU")]
-        public async Task<HttpResponseMessage> AddUcenici(UceniciViewModel addObj)
+        [Route("Ucenici")]
+        public async Task<HttpResponseMessage> AddUcenici(UcenikViewModel addObj)
         {
             try
             {
 
-                addObj.UceniciId = Guid.NewGuid();
+                addObj.UcenikId = Guid.NewGuid();
                 var response = await UceniciService.Add(Mapper.Map<IUceniciDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
@@ -79,7 +79,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("deleteU")]
+        [Route("Ucenici")]
         public async Task<HttpResponseMessage> DeleteUcenici(Guid Id)
         {
             try

@@ -205,9 +205,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\KorisnikViewModel.cs" />
     <Compile Include="ViewModels\KvizViewModel.cs" />
-    <Compile Include="ViewModels\OcjeneViewModel.cs" />
-    <Compile Include="ViewModels\PredmetiViewModel.cs" />
-    <Compile Include="ViewModels\UceniciViewModel.cs" />
+    <Compile Include="ViewModels\OcjenaViewModel.cs" />
+    <Compile Include="ViewModels\PredmetViewModel.cs" />
+    <Compile Include="ViewModels\UcenikViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
@@ -1084,7 +1084,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1124,9 +1126,9 @@
       <Project>{DB263ED4-896D-47C1-B10F-7DD87CF4B35E}</Project>
       <Name>eUcitelj.Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\eUcitelj.Reporsitory\eUcitelj.Reporsitory.csproj">
+    <ProjectReference Include="..\eUcitelj.Repository\eUcitelj.Repository.csproj">
       <Project>{c2a13ce9-3138-4340-9c58-89894aa645ee}</Project>
-      <Name>eUcitelj.Reporsitory</Name>
+      <Name>eUcitelj.Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\eUcitelj.Service.Common\eUcitelj.Service.Common.csproj">
       <Project>{BB0B8ECE-0F0F-4F61-9079-BF481CA32DC2}</Project>

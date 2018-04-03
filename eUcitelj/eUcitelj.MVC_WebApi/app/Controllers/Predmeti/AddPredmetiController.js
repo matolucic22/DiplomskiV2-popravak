@@ -8,20 +8,20 @@
 
     var PredmetiI = [];
 
-    $http.get('/api/Korisnik/getAllKorId').then(function (response) {
-        KorisnikIds = response.data;
+    $http.get('/api/Korisnik/getAllKorisnikId').then(function (response) {
+        KorisnikIdovi = response.data;
 
-        if (KorisnikIds.length == 0) {
+        if (KorisnikIdovi.length == 0) {
             var addK = {
                 Ime_korisnika: 'Test',
                 Prezime_korisnika: 'Test',
                 Korisnicko_ime: 'Test',
-                Password: 'Test',
-                ConfirmPassword: 'Test',
+                Lozinka: 'Test',
+                PotvrdaLozinke: 'Test',
                 Potvrda: "Da",
-                Role: "ucenik"
+                Uloga: "ucenik"
             };
-            $http.post('/api/Korisnik/addK', addK)
+            $http.post('/api/Korisnik', addK)
         .then(function (data) {
             $scope.response = data;
             $window.alert("Učenika trenutno nemate u bazi. Kako bi ste mogli dodati predmete kreiran je testni učenik. Predmeti se obavezno moraju pridružiti učenicima. Kada se registrira barem jedan učenik, slobodno možete obrisati testnog. Predmeti će ostati pohranjeni. Vratite se nazad i ponovno upišite predmet.");
@@ -37,7 +37,7 @@
 
     $scope.addPredmeti = function () {
 
-        $http.get('api/Predmeti/getAllP').then(function (response) {
+        $http.get('api/Predmeti').then(function (response) {
             Predmeti = response.data;
             for (i = 0; i < Predmeti.length; i++)
             {
@@ -45,13 +45,13 @@
             }
                         
             if (PredmetiI.indexOf($scope.Ime_predmeta) == -1) {
-                for (i = 0; i < KorisnikIds.length; i++) {
+                for (i = 0; i < KorisnikIdovi.length; i++) {
                     var objAdd = {
-                        KorisnikId: KorisnikIds[i].KorisnikId,
+                        KorisnikId: KorisnikIdovi[i].KorisnikId,
                         Ime_predmeta: $scope.Ime_predmeta
                     };
 
-                    $http.post('api/Predmeti/addP', objAdd).then(function (data) {
+                    $http.post('api/Predmeti', objAdd).then(function (data) {
                         $scope.response = data;
                         $location.path('/predmeti/predmetiIndex');
                     });

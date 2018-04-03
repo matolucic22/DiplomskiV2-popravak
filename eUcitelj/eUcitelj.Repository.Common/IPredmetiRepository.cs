@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Reporsitory.Common
 {
-   public interface IPredmetiGenericReporsitory
+   public interface IPredmetiRepository
     {
         Task<IEnumerable<IPredmetiDomainModel>> GetAllAsync();//vraća IEnumerable polje podataka
         Task<IPredmetiDomainModel> GetAsync(Guid Id);

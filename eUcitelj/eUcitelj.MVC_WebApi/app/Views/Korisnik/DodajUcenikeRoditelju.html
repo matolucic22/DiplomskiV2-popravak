@@ -17,12 +17,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="korisnik in korisnici" ng-if="korisnik.Role=='ucenik'">
+            <tr ng-repeat="korisnik in korisnici" ng-if="korisnik.Uloga=='ucenik'">
                 <td>{{korisnik.KorisnikId}}</td>
                 <td>{{korisnik.Ime_korisnika}}</td>
                 <td>{{korisnik.Prezime_korisnika}}</td>
                 <td>{{korisnik.Korisnicko_ime}}</td>
-                <td>{{korisnik.Role}}</td>
+                <td>{{korisnik.Uloga}}</td>
                 <td><input type="checkbox" value="{{korisnik.KorisnikId}}" class="check"></td>
             </tr>
         </tbody>

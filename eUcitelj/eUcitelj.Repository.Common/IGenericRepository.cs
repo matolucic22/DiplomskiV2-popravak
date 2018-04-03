@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Reporsitory.Common
 {
-    public interface IReporsitory
+    public interface IGenericRepository
     {
         Task<IEnumerable<T>> GetAllAsync<T>() where T : class;
         Task<T> GetAsync<T>(Guid Id) where T : class;

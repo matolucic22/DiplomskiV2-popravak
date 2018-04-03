@@ -2,13 +2,13 @@
     id = $stateParams.UcPrId;
 
     //PRIKAZ IMENA KORISNIKA//
-    $http.get('api/Predmeti/getP?id=' + id)
+    $http.get('api/Predmeti?id=' + id)
         .then(function (response) {
             $scope.predmet = response.data;
             $scope.Ocjene = $scope.predmet.Ocjene;
             id2 = $scope.predmet.KorisnikId;
 
-            $http.get('api/Korisnik/getK?id=' + id2)
+            $http.get('api/Korisnik?id=' + id2)
        .then(function (response) {
            $scope.TrKorisnik = response.data;
 
@@ -21,10 +21,10 @@
         });
 
     $scope.Obrisi = function (OcjeneId) {
-        $http.delete('api/Ocjene/deleteO?id=' + OcjeneId)
+        $http.delete('api/Ocjene?id=' + OcjeneId)
                .then(function (data) {
                    $window.alert("Obrisano");
-                   $http.get('api/Predmeti/getP?id=' + id)
+                   $http.get('api/Predmeti?id=' + id)
                        .then(function (response) {
                            $scope.predmet = response.data;
                            $scope.Ocjene = $scope.predmet.Ocjene;

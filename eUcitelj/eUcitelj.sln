@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUcitelj.Model.Common", "eU
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUcitelj.Model", "eUcitelj.Model\eUcitelj.Model.csproj", "{DB263ED4-896D-47C1-B10F-7DD87CF4B35E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUcitelj.Reporsitory.Common", "eUcitelj.Reporsitory.Common\eUcitelj.Reporsitory.Common.csproj", "{FD3B09E3-85D3-4990-8ACC-3AB06EECBE80}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUcitelj.Repository.Common", "eUcitelj.Repository.Common\eUcitelj.Repository.Common.csproj", "{FD3B09E3-85D3-4990-8ACC-3AB06EECBE80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUcitelj.Reporsitory", "eUcitelj.Reporsitory\eUcitelj.Reporsitory.csproj", "{C2A13CE9-3138-4340-9C58-89894AA645EE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUcitelj.Repository", "eUcitelj.Repository\eUcitelj.Repository.csproj", "{C2A13CE9-3138-4340-9C58-89894AA645EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eUcitelj.Service.Common", "eUcitelj.Service.Common\eUcitelj.Service.Common.csproj", "{BB0B8ECE-0F0F-4F61-9079-BF481CA32DC2}"
 EndProject

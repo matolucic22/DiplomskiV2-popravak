@@ -1,13 +1,13 @@
 ﻿app.controller('PregledOcjenaUcenikPredmetiController', function ($scope, $stateParams, $http, $window, $location) {//unos ocjena uceniku
     id = $stateParams.UcPrId;
     //PRIKAZ IMENA KORISNIKA//
-    $http.get('api/Predmeti/getP?id=' + id)
+    $http.get('api/Predmeti?id=' + id)
         .then(function (response) {
-            predmeti = response.data;
+            predmet = response.data;
 
-            id2 = predmeti.KorisnikId;
+            id2 = predmet.KorisnikId;
 
-            $http.get('api/Korisnik/getK?id=' + id2)
+            $http.get('api/Korisnik?id=' + id2)
        .then(function (response) {
            $scope.TrKorisnik = response.data;
 
@@ -20,7 +20,7 @@
         });
 
     //DOHVAĆANJE OCJENA//
-    $http.get('api/Predmeti/getP?id='+id)
+    $http.get('api/Predmeti?id='+id)
         .then(function (response) {
             $scope.Predmet = response.data;
             $scope.Ocjene = $scope.Predmet.Ocjene;

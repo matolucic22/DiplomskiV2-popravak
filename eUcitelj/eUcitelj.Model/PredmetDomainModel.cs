@@ -10,15 +10,13 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Model
 {
-    public class PredmetiDomainModel:IPredmetiDomainModel
+    public class PredmetDomainModel:IPredmetiDomainModel
     {
         public string Ime_predmeta { get; set; }
 
         public Guid KorisnikId { get; set; }
         
-        public Guid PredmetiId { get; set; }
-
-        public int Bodovi_kvizova { get; set; }
+        public Guid PredmetId { get; set; }
 
         public virtual ICollection<IOcjeneDomainModel> Ocjene { get; set; }//1 predmet moze imati vise ocjena
 

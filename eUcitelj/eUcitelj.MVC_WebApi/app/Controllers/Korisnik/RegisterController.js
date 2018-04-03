@@ -5,7 +5,7 @@
         Korisnicko_ime: undefined
     };
 
-    $http.get('/api/Korisnik/getKI').then(function (response) {
+    $http.get('/api/Korisnik/getKorisnickoIme').then(function (response) {
 
         provjeraKI = response.data;
 
@@ -19,10 +19,10 @@
             Ime_korisnika: $scope.Ime_korisnika,
             Prezime_korisnika: $scope.Prezime_korisnika,
             Korisnicko_ime: $scope.Korisnicko_ime,
-            Password: $scope.Password,
-            ConfirmPassword: $scope.ConfirmPassword,
+            Lozinka: $scope.Lozinka,
+            PotvrdaLozinke: $scope.PotvrdaLozinke,
             Potvrda: "???",
-            Role: "???"
+            Uloga: "???"
         };      
 
         for (var i = 0; i < provjeraKI.length; i++) {
@@ -37,14 +37,14 @@
         //    window.alert("Unešeno korisničko ime već postoji.");
         //    counter = 0;
         //}
-       if (addObj.Password != addObj.ConfirmPassword) {
+       if (addObj.Lozinka != addObj.PotvrdaLozinke) {
             window.alert("Potvrđena lozinka se ne podudara sa glavnom lozinkom.");
         }
         else {
-            addObj.Password = md5.createHash($scope.Password || '');
+            addObj.Lozinka = md5.createHash($scope.Lozinka || '');
 
             //upis korisnika u bazu
-            $http.post('/api/Korisnik/addK', addObj)
+            $http.post('/api/Korisnik', addObj)
                 .then(function (data) {
                     $scope.response = data;
                     modal.style.display = "block";                   

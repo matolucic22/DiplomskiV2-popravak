@@ -3,7 +3,7 @@
     var KvizPromjenjeno;
     var id = $stateParams.KvizId;
     var Kvizovi = [];
-        $http.get('/api/Kviz/getK?Id=' + id).then(function (response) {
+        $http.get('/api/Kviz?Id=' + id).then(function (response) {
             $scope.K = response.data;
         }, function () {
             alert("Greška prilikom dohvaćanja korisnika.");
@@ -13,7 +13,7 @@
         var id = $stateParams.KvizId;
       // if ($scope.Pitanje != null && $scope.Odg1 != null && $scope.Odg2 != null && $scope.Odg3 != null && $scope.Tocan_odgovor != null) {
                   
-            $http.get('api/Kviz/getAllK').then(function (response) {
+            $http.get('api/Kviz').then(function (response) {
                 Kvizovi = response.data;
 
                 for (i = 0; i < Kvizovi.length; i++) {
@@ -26,7 +26,7 @@
                             Odg3: $scope.Odg3,
                             Tocan_odgovor: $scope.Tocan_odgovor
                         };
-                        $http.put('api/Kviz/updateK', Kviz).then(function (response) {
+                        $http.put('api/Kviz', Kviz).then(function (response) {
                             KvizPromjenjeno = response.data;
                             $window.alert("Promijenjeno");
                         }, function () {

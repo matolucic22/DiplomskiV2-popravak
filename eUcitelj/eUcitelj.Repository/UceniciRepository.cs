@@ -10,54 +10,31 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Reporsitory
 {
-    public class OcjeneGenericReporsiory : IOcjeneGenericReporsitory
+   public class UceniciRepository:IUceniciRepository
     {
-        protected IReporsitory Reporsitory { get; set; }
-        public OcjeneGenericReporsiory(IReporsitory reporsitory)
+        protected IGenericRepository Reporsitory { get; set; }
+        public UceniciRepository(IGenericRepository reporsitory)
         {
             this.Reporsitory = reporsitory;
         }
-        public async Task<int> AddAsync(IOcjeneDomainModel addObj)
+
+        public async Task<int> AddAsync(IUceniciDomainModel addObj)
         {
             try
             {
-                return await Reporsitory.AddAsync(Mapper.Map<Ocjene>(addObj));
+                return await Reporsitory.AddAsync(Mapper.Map<Ucenik>(addObj));
             }
             catch (Exception e)
             {
                 throw e;
-            }           
+            }         
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
             try
             {
-                return await Reporsitory.DeleteAsync<Ocjene>(Id);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }      
-        }
-
-        public async Task<IEnumerable<IOcjeneDomainModel>> GetAllAsync()
-        {
-            try
-            {
-                return Mapper.Map<IEnumerable<IOcjeneDomainModel>>(await Reporsitory.GetAllAsync<Ocjene>());
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }        
-        }
-
-        public async Task<IOcjeneDomainModel> GetAsync(Guid Id)
-        {
-            try
-            {
-                return Mapper.Map<IOcjeneDomainModel>(await Reporsitory.GetAsync<Ocjene>(Id));
+                return await Reporsitory.DeleteAsync<Ucenik>(Id);
             }
             catch (Exception e)
             {
@@ -65,11 +42,37 @@ namespace eUcitelj.Reporsitory
             }          
         }
 
-        public async Task<int> UpdateAsync(IOcjeneDomainModel updated)
+        public async Task<IEnumerable<IUceniciDomainModel>> GetAllAsync()
         {
             try
             {
-                return await Reporsitory.UpdateAsync(Mapper.Map<Ocjene>(updated));
+                return Mapper.Map<IEnumerable<IUceniciDomainModel>>(await Reporsitory.GetAllAsync<Ucenik>());
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<IUceniciDomainModel> GetAsync(Guid Id)
+        {
+            try
+            {
+                return Mapper.Map<IUceniciDomainModel>(await Reporsitory.GetAsync<Ucenik>(Id));
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<int> UpdateAsync(IUceniciDomainModel updated)
+        {
+            try
+            {
+                return await Reporsitory.UpdateAsync(Mapper.Map<Ucenik>(updated));
             }
             catch (Exception e)
             {

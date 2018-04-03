@@ -17,14 +17,14 @@ namespace eUcitelj.MVC_WebApi.ViewModels
 
         public string Korisnicko_ime { get; set; }
 
-        public string Password { get; set; }
+        public string Lozinka { get; set; }
 
         public string Potvrda { get; set; }
 
-        public string Role { get; set; }
+        public string Uloga { get; set; }
 
-        public virtual ICollection<PredmetiViewModel> Predmeti { get; set; }//1 korisnik moze biti upisan na vise predmeta
-        public virtual ICollection<UceniciViewModel> Ucenici { get; set; }//jedan korsinik role roditelj moze pristupiti vise ucenika ili jednom uceniku
+        public virtual ICollection<PredmetViewModel> Predmeti { get; set; }//1 korisnik moze biti upisan na vise predmeta
+        public virtual ICollection<UcenikViewModel> Ucenici { get; set; }//jedan korsinik role roditelj moze pristupiti vise ucenika ili jednom uceniku
 
     }
 }

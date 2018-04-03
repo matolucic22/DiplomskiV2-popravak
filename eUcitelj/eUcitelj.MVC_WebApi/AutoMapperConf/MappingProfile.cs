@@ -19,11 +19,11 @@ namespace eUcitelj.MVC_WebApi.AutoMapperConf
 
 
             //Interface(Domain)-View
-            CreateMap<IPredmetiDomainModel, PredmetiViewModel>().PreserveReferences().ReverseMap().PreserveReferences();
+            CreateMap<IPredmetiDomainModel, PredmetViewModel>().PreserveReferences().ReverseMap().PreserveReferences();
 
             
             //Interface(Domain)-View
-            CreateMap<IOcjeneDomainModel, OcjeneViewModel>().PreserveReferences().ReverseMap().PreserveReferences();
+            CreateMap<IOcjeneDomainModel, OcjenaViewModel>().PreserveReferences().ReverseMap().PreserveReferences();
 
             
             //Interface(Domain)-View
@@ -31,7 +31,7 @@ namespace eUcitelj.MVC_WebApi.AutoMapperConf
 
             
             //Interface(Domain)-View
-            CreateMap<IUceniciDomainModel, UceniciViewModel>().PreserveReferences().ReverseMap().PreserveReferences();
+            CreateMap<IUceniciDomainModel, UcenikViewModel>().PreserveReferences().ReverseMap().PreserveReferences();
         }
     }
 }

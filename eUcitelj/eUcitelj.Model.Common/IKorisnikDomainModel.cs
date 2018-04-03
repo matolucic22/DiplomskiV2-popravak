@@ -13,8 +13,8 @@ namespace eUcitelj.Model.Common
         String Ime_korisnika { get; set; }
         String Prezime_korisnika { get; set; }
         String Korisnicko_ime { get; set; }
-        String Password { get; set; }
-        String Role { get; set; }
+        String Lozinka { get; set; }
+        String Uloga { get; set; }
         String Potvrda { get; set; }
         ICollection<IPredmetiDomainModel> Predmeti { get; set; }
         ICollection<IUceniciDomainModel> Ucenici { get; set; }

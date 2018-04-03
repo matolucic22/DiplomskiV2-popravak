@@ -6,28 +6,28 @@
     };
 
     $scope.upitnik = function () {
-        var korisnik = angular.fromJson($window.localStorage['ngStorage-currentUser']).Role;
+        var korisnik = angular.fromJson($window.localStorage['ngStorage-currentUser']).Uloga;
         if (korisnik == '???') {
             return true;
         }
     };
 
     $scope.ucitelj = function () {
-        var korisnik = angular.fromJson($window.localStorage['ngStorage-currentUser']).Role;
+        var korisnik = angular.fromJson($window.localStorage['ngStorage-currentUser']).Uloga;
         if (korisnik == 'ucitelj') {
             return true;
         }
     };
 
     $scope.roditelj = function () {
-        var korisnik = angular.fromJson($window.localStorage['ngStorage-currentUser']).Role;
+        var korisnik = angular.fromJson($window.localStorage['ngStorage-currentUser']).Uloga;
         if (korisnik == 'roditelj') {
             return true;
         }
     };
 
     $scope.ucenik = function () {
-        var korisnik = angular.fromJson($window.localStorage['ngStorage-currentUser']).Role;
+        var korisnik = angular.fromJson($window.localStorage['ngStorage-currentUser']).Uloga;
         if (korisnik == 'ucenik') {
             return true;
         }

@@ -5,7 +5,7 @@
     var i = 0;
 
     $scope.find = function () {
-        $http.get('api/Predmeti/getAllP')
+        $http.get('api/Predmeti')
              .then(function (response) {
                  predmeti = response.data;
              }, function () {
@@ -16,7 +16,7 @@
     $scope.Da = function () {
         for (i = 0; i < predmeti.length; i++) {
             if (predmeti[i].Ime_predmeta == ime) {
-                $http.delete('/api/Predmeti/deleteP?Id=' + predmeti[i].PredmetiId).then(function (data) {
+                $http.delete('/api/Predmeti?Id=' + predmeti[i].PredmetId).then(function (data) {
                     $location.path('/predmeti/predmetiIndex');
                         });
                     }

@@ -1,6 +1,6 @@
 ﻿app.controller('UnosOcjenaController', function ($scope, $http) {
     $scope.korisnici = [];
-    $http.get('/api/Korisnik/getAllK').then(function (response) {
+    $http.get('/api/Korisnik').then(function (response) {
         $scope.korisnici = response.data;
 
     }, function () {

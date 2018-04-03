@@ -4,10 +4,10 @@
     };
     $scope.Korisnik = [];
 
-    $http.get('/api/Korisnik/getAllKorId').then(function (response) {
+    $http.get('/api/Korisnik/getAllKorisnikId').then(function (response) {
         KorisnikIds = response.data;
         id=KorisnikIds[0].KorisnikId
-        $http.get('/api/Korisnik/getK?id='+id)
+        $http.get('/api/Korisnik?id='+id)
     .then(function (response) {
         $scope.Korisnik = response.data;
         $scope.Predmeti = $scope.Korisnik.Predmeti;

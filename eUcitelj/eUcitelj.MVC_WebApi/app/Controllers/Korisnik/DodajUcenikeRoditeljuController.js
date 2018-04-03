@@ -1,6 +1,6 @@
 ﻿app.controller('DodajUcenikeRoditeljuController', function ($scope, $http, $stateParams, $window, $location, $rootScope) {
   
-    $http.get('/api/Korisnik/getAllK').then(function (response) {
+    $http.get('/api/Korisnik').then(function (response) {
 
         $scope.korisnici = response.data;
 
@@ -24,7 +24,7 @@
 
         for (i = 0; i < Ids.length; i++)
         {
-            $http.get('/api/Korisnik/getK?Id=' + Ids[i]).then(function (response) {
+            $http.get('/api/Korisnik?Id=' + Ids[i]).then(function (response) {
                 Ucenik = response.data;
 
                 obj[i] = {
@@ -34,7 +34,7 @@
                     IdKorisnikaU: Ucenik.KorisnikId
                 };
 
-                $http.post('api/Ucenici/addU', obj[i]).then(function (response) {
+                $http.post('api/Ucenici', obj[i]).then(function (response) {
                     $scope.response = response.data;
 
                 }, function () {

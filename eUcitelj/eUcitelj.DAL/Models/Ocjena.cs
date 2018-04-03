@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.DAL.Models
 {
-    public class Ocjene
+    public class Ocjena
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [Required(ErrorMessage = "Greška u sustavu (ID korisnika nije stvoren)")]
-        public Guid OcjeneId { get; set; }
+        public Guid OcjenaId { get; set; }
 
         [Required(ErrorMessage = "Ocjena je obavezno polje za unos")]
-        public int Ocjena { get; set; }
+        public int Ocj { get; set; }
 
         [Required(ErrorMessage = "Opis je obavezno polje za unos")]
         public string Opis { get; set; }
@@ -29,8 +29,8 @@ namespace eUcitelj.DAL.Models
         public DateTime DatumUpisa { get; set; }
 
         [Required(ErrorMessage = "Greška u sustavu (ID predmeta nije poznat)")]
-        public Guid PredmetiId { get; set; }
-        [ForeignKey("PredmetiId")]
-        public Predmeti Predmeti { get; set; }
+        public Guid PredmetId { get; set; }
+        [ForeignKey("PredmetId")]
+        public Predmet Predmeti { get; set; }
     }
 }

@@ -18,16 +18,16 @@ namespace eUcitelj.Reporsitory
             CreateMap<Korisnik, IKorisnikDomainModel>().PreserveReferences().ReverseMap().PreserveReferences();//dovoljno je mapirati samo entitet sa interfaceom modela. Bind interfacea i modela već postoji.
 
             
-            CreateMap<Predmeti, IPredmetiDomainModel>().PreserveReferences().ReverseMap().PreserveReferences();
+            CreateMap<Predmet, IPredmetiDomainModel>().PreserveReferences().ReverseMap().PreserveReferences();
 
             
-            CreateMap<Ocjene, IOcjeneDomainModel>().PreserveReferences().ReverseMap().PreserveReferences();
+            CreateMap<Ocjena, IOcjeneDomainModel>().PreserveReferences().ReverseMap().PreserveReferences();
 
             
             CreateMap<Kviz, IKvizDomainModel>().PreserveReferences().ReverseMap().PreserveReferences();
 
             
-            CreateMap<Ucenici, IUceniciDomainModel>().PreserveReferences().ReverseMap().PreserveReferences();
+            CreateMap<Ucenik, IUceniciDomainModel>().PreserveReferences().ReverseMap().PreserveReferences();
         }
     }
 }

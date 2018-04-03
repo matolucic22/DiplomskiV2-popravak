@@ -2,13 +2,13 @@
     id = $stateParams.UcPrId;
 
     //PRIKAZ IMENA KORISNIKA//
-    $http.get('api/Predmeti/getP?id=' + id)
+    $http.get('api/Predmeti?id=' + id)
         .then(function (response) {
-            predmeti = response.data;
+            predmet = response.data;
 
-            id2 = predmeti.KorisnikId;
+            id2 = predmet.KorisnikId;
 
-            $http.get('api/Korisnik/getK?id=' + id2)
+            $http.get('api/Korisnik?id=' + id2)
        .then(function (response) {
            $scope.TrKorisnik = response.data;
            
@@ -22,21 +22,21 @@
 
     //DODAVANJE OCJENE U BAZU//
     $scope.Upisi = function () {
-        if ($scope.Ocjena > 0 && $scope.Ocjena < 6) {
+        if ($scope.Ocj > 0 && $scope.Ocj < 6) {
             var addO = {
-                Ocjena: $scope.Ocjena,
+                Ocj: $scope.Ocj,
                 Opis: $scope.Opis,
                 DatumOcjene: $scope.DatumOcjene,
-                PredmetiId: id
+                PredmetId: id
             };
 
-            $http.post('api/Ocjene/addO', addO)
+            $http.post('api/Ocjene', addO)
                .then(function (data) {
                    $scope.response = data;
                    $window.alert("Ocjena dodana");
                    $location.path('/ocjene/ocjeneUnos');
                }, function () {
-                   console.log("Greška prilikom upisivanja ocjene.");
+                   $window.alert("Greška prilikom upisivanja ocjene.");
                });
         }else
         {

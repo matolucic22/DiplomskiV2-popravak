@@ -10,74 +10,76 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Reporsitory
 {
-   public class UceniciGenericReporsitory:IUceniciGenericReporsitory
+    public class KvizRepository : IKvizRepository
     {
-        protected IReporsitory Reporsitory { get; set; }
-        public UceniciGenericReporsitory(IReporsitory reporsitory)
+        protected IGenericRepository Reporsitory { get; set; }
+        public KvizRepository (IGenericRepository reporsitory)
         {
             this.Reporsitory = reporsitory;
         }
-
-        public async Task<int> AddAsync(IUceniciDomainModel addObj)
+        public async Task<int> AddAsync(IKvizDomainModel addObj)
         {
             try
             {
-                return await Reporsitory.AddAsync(Mapper.Map<Ucenici>(addObj));
+                return await Reporsitory.AddAsync(Mapper.Map<Kviz>(addObj));
             }
             catch (Exception e)
             {
                 throw e;
-            }         
+            }
+            
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
             try
             {
-                return await Reporsitory.DeleteAsync<Ucenici>(Id);
+                return await Reporsitory.DeleteAsync<Kviz>(Id);
             }
             catch (Exception e)
             {
                 throw e;
-            }          
+            }
+            
         }
 
-        public async Task<IEnumerable<IUceniciDomainModel>> GetAllAsync()
+        public async Task<IEnumerable<IKvizDomainModel>> GetAllAsync()
         {
             try
             {
-                return Mapper.Map<IEnumerable<IUceniciDomainModel>>(await Reporsitory.GetAllAsync<Ucenici>());
-
+                return Mapper.Map<IEnumerable<IKvizDomainModel>>(await Reporsitory.GetAllAsync<Kviz>());
             }
             catch (Exception e)
             {
                 throw e;
             }
+            
         }
 
-        public async Task<IUceniciDomainModel> GetAsync(Guid Id)
+        public async Task<IKvizDomainModel> GetAsync(Guid Id)
         {
             try
             {
-                return Mapper.Map<IUceniciDomainModel>(await Reporsitory.GetAsync<Ucenici>(Id));
-
+                return Mapper.Map<IKvizDomainModel>(await Reporsitory.GetAsync<Kviz>(Id));
             }
             catch (Exception e)
             {
                 throw e;
             }
+            
         }
 
-        public async Task<int> UpdateAsync(IUceniciDomainModel updated)
+        public async Task<int> UpdateAsync(IKvizDomainModel updated)
         {
             try
             {
-                return await Reporsitory.UpdateAsync(Mapper.Map<Ucenici>(updated));
+                return await Reporsitory.UpdateAsync<Kviz>(Mapper.Map<Kviz>(updated));
             }
             catch (Exception e)
             {
                 throw e;
             }
+            
         }
     }
 }

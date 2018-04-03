@@ -15,7 +15,7 @@ using System.Web.Http;
 namespace eUcitelj.MVC_WebApi.Controllers
 {
     
-    [RoutePrefix("api/Korisnik")]
+    [RoutePrefix("api")]
     public class KorisnikController : ApiController
     {
         protected IKorisnikService KorisnikService { get; set; }
@@ -26,7 +26,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getAllK")]
+        [Route("Korisnik")]
         public async Task<HttpResponseMessage> GetAllKorisnik()
         {
             try
@@ -41,7 +41,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getK")]
+        [Route("Korisnik")]
         public async Task<HttpResponseMessage> GetKorisnik(Guid Id)
         {
             try
@@ -63,7 +63,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("addK")]
+        [Route("Korisnik")]
         public async Task<HttpResponseMessage> AddKorisnik(KorisnikViewModel addObj)//httpresponsemessage - convert to HTTP convert message
         {
             
@@ -80,7 +80,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPut]
-        [Route("updateK")]
+        [Route("Korisnik")]
         public async Task<HttpResponseMessage> UpdateKorisnik(KorisnikViewModel updateK)
         {
             /*KorisnikViewModel toBeUpdated = Mapper.Map<KorisnikViewModel>(await KorisnikService.Get(updateK.KorisnikId)); -nema potrebe mapirati response u view, nego u domain model, i onda dobiveni view model (updateK)treba mapirati u domain koji se onda šalje na update
@@ -108,9 +108,9 @@ namespace eUcitelj.MVC_WebApi.Controllers
                     toBeUpdated.Prezime_korisnika = updateK.Prezime_korisnika;
                     toBeUpdated.Korisnicko_ime = updateK.Korisnicko_ime;
                     toBeUpdated.KorisnikId = updateK.KorisnikId;
-                    toBeUpdated.Password = updateK.Password;
+                    toBeUpdated.Lozinka = updateK.Lozinka;
                     toBeUpdated.Potvrda = updateK.Potvrda;
-                    toBeUpdated.Role = updateK.Role;
+                    toBeUpdated.Uloga = updateK.Uloga;
                 }
                 var response = await KorisnikService.Update(Mapper.Map<IKorisnikDomainModel>(toBeUpdated));// 3)Mapiram toBeUpdated i saljem "Update" metodom u bazu
                 return Request.CreateResponse(HttpStatusCode.OK, response);//***Ovaj način sam sam smislio dok sam radio. Malo drugačije smo radili Lvl. 3 zd na praksi kod vas. Tek kasnije sam primjetio da nismo tako radili, ali nisam ništa htio mijenjat zato što je i ovako funkcioniralo, samo što ima više kooda i teze je razumjeti.***
@@ -122,7 +122,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("deleteK")]
+        [Route("Korisnik")]
         public async Task<HttpResponseMessage> DeleteKorisnik(Guid Id)
         {
             try
@@ -137,7 +137,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("logintoken")]
+        [Route("Korisnik/logintoken")]
         public async Task<HttpResponseMessage> LoginTonken(UserCredentials userCredentials)
         {
             try
@@ -148,7 +148,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 {
                     return Request.CreateResponse(HttpStatusCode.NotFound, "Korisnik nije registriran");
                 }
-                else if (userCredentials.Password != userToLogin.Password)
+                else if (userCredentials.Lozinka != userToLogin.Lozinka)
                 {
                     return Request.CreateResponse(HttpStatusCode.BadRequest, "Password is incorect");
                 }
@@ -161,7 +161,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
                         KorisnikId = userToLogin.KorisnikId,
                         Korisnicko_ime = userCredentials.Korisnicko_ime,
                         Token = token,
-                        Role = userToLogin.Role,
+                        Uloga = userToLogin.Uloga,
                         
                     };
 
@@ -177,7 +177,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getKI")]
+        [Route("Korisnik/getKorisnickoIme")]
         public async Task<HttpResponseMessage> GetAllKorisnicko_ime()
         {
             try {
@@ -192,7 +192,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getAllKorId")]
+        [Route("Korisnik/getAllKorisnikId")]
         public async Task<HttpResponseMessage> GetAllKorisnikId()
         {
             try

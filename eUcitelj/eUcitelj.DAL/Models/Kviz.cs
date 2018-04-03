@@ -14,9 +14,6 @@ namespace eUcitelj.DAL.Models
         [Required(ErrorMessage = "Greška u sustavu (ID kviza nije stvoren)")]
         public Guid KvizId { get; set; }
 
-        [Required(ErrorMessage = "Bodovi je obavezno polje za unos")]
-        public int Bodovi { get; set; }
-
         [Required(ErrorMessage = "Odgovor je obavezno polje za unos")]
         public string Odg1 { get; set; }
 
@@ -30,7 +27,7 @@ namespace eUcitelj.DAL.Models
         public string Pitanje { get; set; }
 
         [Required(ErrorMessage = "Greška u sustavu (ID predmeta nije poznat)")]
-        public Guid PredmetiId { get; set; }
+        public Guid PredmetId { get; set; }
 
         [Required(ErrorMessage = "Točan odgovor je obavezno polje za unos")]
         public string Tocan_odgovor { get; set; }

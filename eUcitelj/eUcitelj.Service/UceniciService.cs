@@ -11,9 +11,9 @@ namespace eUcitelj.Service
 {
    public class UceniciService:IUceniciService
     {
-        protected IUceniciGenericReporsitory PredmetiGenericReporsitory { get; set; }
+        protected IUceniciRepository PredmetiGenericReporsitory { get; set; }
 
-        public UceniciService(IUceniciGenericReporsitory predmetiGenericReporsitory)
+        public UceniciService(IUceniciRepository predmetiGenericReporsitory)
         {
             this.PredmetiGenericReporsitory = predmetiGenericReporsitory;
         }

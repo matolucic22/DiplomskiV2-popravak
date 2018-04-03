@@ -3,7 +3,7 @@
     predmeti = [];
 
     $scope.find = function () {
-        $http.get('api/Predmeti/getAllP')
+        $http.get('api/Predmeti')
              .then(function (response) {
                 predmeti = response.data;
             }, function () {
@@ -22,11 +22,11 @@
             {
                 if ($scope.Ime_predmeta != null) {
                     var updated = {
-                        PredmetiId: predmeti[i].PredmetiId,
+                        PredmetId: predmeti[i].PredmetId,
                         Ime_predmeta: $scope.Ime_predmeta
                     };
 
-                    $http.put('/api/Predmeti/updateP', updated).then(function (data) {
+                    $http.put('/api/Predmeti', updated).then(function (data) {
                         $location.path('/predmeti/predmetiIndex');
                     });
                 } else {
