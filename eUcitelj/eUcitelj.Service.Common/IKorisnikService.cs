@@ -11,11 +11,11 @@ namespace eUcitelj.Service.Common
     {
         Task<IEnumerable<IKorisnikDomainModel>> GetAll();//task je asinkrona metoda
         Task<IKorisnikDomainModel> Get(Guid Id);
-        Task<int> Add(IKorisnikDomainModel addObj);
-        Task<int> Update(IKorisnikDomainModel updated);
-        Task<int> Delete(Guid Id);
-        Task<IKorisnikDomainModel> FindByUserName(string korisnicko_ime);
-        Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnicko_ime();
-        Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikId();
+        Task<int> AddAsync(IKorisnikDomainModel addObj);
+        Task<int> UpdateAsync(IKorisnikDomainModel updated);
+        Task<int> DeleteAsync(Guid Id);
+        Task<IKorisnikDomainModel> FindByUserNameAsync(string korisnicko_ime);
+        Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnicko_imeAsync();
+        Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikIdAsync();
     }
 }

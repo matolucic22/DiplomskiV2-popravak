@@ -1,0 +1,32 @@
+﻿<div class="container" ng-controller="UnosOcjenaController">
+    <h1>Odaberite učenika</h1>
+    <br />
+
+    <form class="form-inline">
+        <div class="form-group">
+            <label>Pretraži</label>
+            <input type="text" ng-model="search" class="form-control" placeholder="Pretraži po imenu učenika">
+        </div>
+    </form>
+    <br />
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th ng-click="sort('Ime_korisnika')" style="cursor:pointer">
+                    Ime učenika
+                    <span class="glyphicon sort-icon" ng-show="sortKey=='Ime_korisnika'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr dir-paginate="kor in korisnici | itemsPerPage:40 | filter:search | orderBy:sortKey:reverse">
+                <td ng-if="kor.Uloga=='Ucenik'||kor.Uloga=='ucenik'"><a ui-sref="pregledOcjenaUcenik({KoId: kor.KorisnikId})">{{kor.Ime_korisnika}} {{kor.Prezime_korisnika}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <dir-pagination-controls max-size="50"
+                             direction-links="true"
+                             boundary-links="true">
+    </dir-pagination-controls>
+</div>
+

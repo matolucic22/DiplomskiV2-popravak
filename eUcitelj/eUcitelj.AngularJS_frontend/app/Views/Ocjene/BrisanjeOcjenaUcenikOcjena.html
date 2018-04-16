@@ -1,0 +1,26 @@
+﻿<div class="container" ng-controller="BrisanjeOcjenaUcenikPredmetiController">
+    <h1>Pregled ocjena učenika <b>{{TrKorisnik.Ime_korisnika}} {{TrKorisnik.Prezime_korisnika}}</b> iz predmeta <b>{{predmet.Ime_predmeta}}</b></h1>
+    <br />
+
+    <table class="table table-striped table-bordered" style="padding-top:5px">
+        <thead>
+            <tr>
+                <th>OCJENA</th>
+                <th>OPIS</th>
+                <th>DATUM OCJENE</th>
+                <th>DATUM UPISA</th>
+                <th>OBRIŠI</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="o in Ocjene">
+                <td>{{o.Ocj}}</td>
+                <td>{{o.Opis}}</td>
+                <td>{{o.DatumOcjene}}</td>
+                <td>{{o.DatumUpisa}}</td>
+                <td><button type="button" class="delete" ng-click="Obrisi(o.OcjenaId)">Obriši</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

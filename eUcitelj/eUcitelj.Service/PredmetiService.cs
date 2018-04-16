@@ -1,6 +1,7 @@
 ﻿using eUcitelj.Model.Common;
 using eUcitelj.Reporsitory.Common;
 using eUcitelj.Service.Common;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,29 +20,34 @@ namespace eUcitelj.Service
         }
 
 
-        public async Task<int> Add(IPredmetiDomainModel addObj)
+        public async Task<int> AddAsync(IPredmetiDomainModel addObj)
         {
             return await PredmetiGenericReporsitory.AddAsync(addObj);
         }
 
-        public async Task<int> Delete(Guid Id)
+        public async Task<int> DeleteAsync(Guid Id)
         {
             return await PredmetiGenericReporsitory.DeleteAsync(Id);
         }
 
-        public async Task<IPredmetiDomainModel> Get(Guid Id)
+        public async Task<IPredmetiDomainModel> GetAsync(Guid Id)
         {
             return await PredmetiGenericReporsitory.GetAsync(Id);
         }
 
-        public async Task<IEnumerable<IPredmetiDomainModel>> GetAll()
+        public async Task<IEnumerable<IPredmetiDomainModel>> GetAllAsync()
         {
             return await PredmetiGenericReporsitory.GetAllAsync();
         }
 
-        public async Task<int> Update(IPredmetiDomainModel updated)
+        public async Task<int> UpdateAsync(IPredmetiDomainModel updated)
         {
             return await PredmetiGenericReporsitory.UpdateAsync(updated);
+        }
+
+        public async Task<IPagedList<IPredmetiDomainModel>> SortingPagingFilteringAsync(string redoslijed, string trazeniPojam, int? brStr)
+        {
+            return await PredmetiGenericReporsitory.SortingPagingFilteringAsync(redoslijed, trazeniPojam, brStr);
         }
     }
 }

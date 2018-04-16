@@ -32,6 +32,11 @@ namespace eUcitelj.MVC_WebApi.AutoMapperConf
             
             //Interface(Domain)-View
             CreateMap<IUceniciDomainModel, UcenikViewModel>().PreserveReferences().ReverseMap().PreserveReferences();
+
+
+            //mapiranje elemenata prilikom updatea u kontroleru
+
+          //  CreateMap<, >().PreserveReferences().ReverseMap().PreserveReferences();
         }
     }
 }

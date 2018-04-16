@@ -16,7 +16,7 @@ namespace eUcitelj.MVC_WebApi
                         "~/Scripts/jquery.validate*"));
 
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
-                "~/Scripts/angular.js", 
+                "~/Scripts/angular.js",
                 "~/Scripts/angular-ui-router.js",
                 "~/Scripts/angular-local-storage.js",
                 "~/app/js/md5.js",
@@ -24,14 +24,15 @@ namespace eUcitelj.MVC_WebApi
                 "~/app/js/unique.js",
                 "~/Scripts/dirPagination.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/aplikacijaApp").Include(
-               "~/app/app.js",
-               "~/app/Controllers/Predmeti/*Controller.js",
-               "~/app/Controllers/Korisnik/*Controller.js",
-               "~/app/Controllers/Ocjene/*Controller.js",
-               "~/app/Controllers/Kviz/*Controller.js",
-               "~/app/Controllers/*Controller.js",
-               "~/app/Services/*Service.js"));
+            bundles.Add(new ScriptBundle("~/bundles/aplikacija").Include(
+              "~/app/app.js",
+              "~/app/Controllers/Predmeti/*Controller.js",
+              "~/app/Controllers/Korisnik/*Controller.js",
+              "~/app/Controllers/Ocjene/*Controller.js",
+              "~/app/Controllers/Kviz/*Controller.js",
+              "~/app/Controllers/*Controller.js",
+              "~/app/Services/*Service.js"
+              ));
 
 
 

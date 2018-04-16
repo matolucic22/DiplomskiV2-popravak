@@ -9,10 +9,10 @@ namespace eUcitelj.Service.Common
 {
     public interface IOcjeneService
     {
-        Task<IEnumerable<IOcjeneDomainModel>> GetAll();
-        Task<IOcjeneDomainModel> Get(Guid Id);
-        Task<int> Add(IOcjeneDomainModel addObj);
-        Task<int> Update(IOcjeneDomainModel updated);
-        Task<int> Delete(Guid Id);
+        Task<IEnumerable<IOcjeneDomainModel>> GetAllAsync();
+        Task<IOcjeneDomainModel> GetAsync(Guid Id);
+        Task<int> AddAsync(IOcjeneDomainModel addObj);
+        Task<int> UpdateAsync(IOcjeneDomainModel updated);
+        Task<int> DeleteAsync(Guid Id);
     }
 }

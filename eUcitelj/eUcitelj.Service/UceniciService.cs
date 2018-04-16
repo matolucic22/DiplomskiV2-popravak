@@ -18,27 +18,27 @@ namespace eUcitelj.Service
             this.PredmetiGenericReporsitory = predmetiGenericReporsitory;
         }
 
-        public async Task<int> Add(IUceniciDomainModel addObj)
+        public async Task<int> AddAsync(IUceniciDomainModel addObj)
         {
             return await PredmetiGenericReporsitory.AddAsync(addObj);
         }
 
-        public async Task<int> Delete(Guid Id)
+        public async Task<int> DeleteAsync(Guid Id)
         {
             return await PredmetiGenericReporsitory.DeleteAsync(Id);
         }
 
-        public async Task<IUceniciDomainModel> Get(Guid Id)
+        public async Task<IUceniciDomainModel> GetAsync(Guid Id)
         {
             return await PredmetiGenericReporsitory.GetAsync(Id);
         }
 
-        public async Task<IEnumerable<IUceniciDomainModel>> GetAll()
+        public async Task<IEnumerable<IUceniciDomainModel>> GetAllAsync()
         {
             return await PredmetiGenericReporsitory.GetAllAsync();
         }
 
-        public async Task<int> Update(IUceniciDomainModel updated)
+        public async Task<int> UpdateAsync(IUceniciDomainModel updated)
         {
             return await PredmetiGenericReporsitory.UpdateAsync(updated);
         }

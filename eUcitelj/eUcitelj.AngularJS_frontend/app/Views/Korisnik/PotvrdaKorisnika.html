@@ -1,0 +1,30 @@
+﻿<div class="container" ng-controller="PotvrdaKorisnikaController" style="padding-top:20px"><!--!!!!!*****NERIJEŠENO****!!!!-->
+    <h1>Korisnici u sustavu</h1>
+    <div padding-top:20px;">
+        <a ui-sref="potvrdaKorisnika"><b>NERIJEŠENO</b></a> ||
+        <a ui-sref="potvrdaKorisnikaPotvrdeno">POTVRĐENO</a> ||
+        <a ui-sref="potvrdaKorisnikaOdbijeno">ODBIJENO</a>
+    </div>
+    <table class="table table-striped table-bordered" style="padding-top:5px">
+        <thead>
+            <tr>
+                <th>POTVRDI</th>
+                <th>IME KORISNIKA</th>
+                <th>PREZIME KORISNIKA</th>
+                <th>KORISNIČKO IME</th>
+                <th>ROLE</th>
+                <th>POTVRDA</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="korisnik in korisnici" ng-if="korisnik.Potvrda=='???'">
+                <td style="text-align:center" ><a ng-click="Da(korisnik.KorisnikId)" style="cursor: pointer">DA</a>/<a ng-click="Ne(korisnik.KorisnikId)" style="cursor: pointer">NE</a></td>
+                <td>{{korisnik.Ime_korisnika}}</td>
+                <td>{{korisnik.Prezime_korisnika}}</td>
+                <td>{{korisnik.Korisnicko_ime}}</td>
+                <td>{{korisnik.Uloga}}</td>
+                <td>{{korisnik.Potvrda}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

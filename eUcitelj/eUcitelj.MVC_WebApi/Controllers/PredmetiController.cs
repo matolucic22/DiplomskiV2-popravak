@@ -2,6 +2,7 @@
 using eUcitelj.Model.Common;
 using eUcitelj.MVC_WebApi.ViewModels;
 using eUcitelj.Service.Common;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using System.Web.Http;
 
 namespace eUcitelj.MVC_WebApi.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/predmeti")]
     public class PredmetiController : ApiController
     {
         protected IPredmetiService PredmetiService { get; set; }
@@ -22,12 +23,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
         
         [HttpGet]
-        [Route("Predmeti")]
-        public async Task<HttpResponseMessage> GetAllPredmeti()
+        public async Task<HttpResponseMessage> GetAllPredmetiAsync()
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.GetAll());
+                var response = Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.GetAllAsync());
                 
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
@@ -39,12 +39,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Predmeti")]
-        public async Task<HttpResponseMessage> GetPredmeti(Guid Id)
+        public async Task<HttpResponseMessage> GetPredmetiAsync(Guid Id)
         {
             try
             {
-                var response = Mapper.Map<PredmetViewModel>(await PredmetiService.Get(Id));
+                var response = Mapper.Map<PredmetViewModel>(await PredmetiService.GetAsync(Id));
                 
                 if(response==null)
                 {
@@ -61,13 +60,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("Predmeti")]
-        public async Task<HttpResponseMessage> AddPredmet(PredmetViewModel addObj)
+        public async Task<HttpResponseMessage> AddPredmetAsync(PredmetViewModel addObj)
         {
             try
             {             
                 addObj.PredmetId = Guid.NewGuid();
-                var response= await PredmetiService.Add(Mapper.Map<IPredmetiDomainModel>(addObj));
+                var response= await PredmetiService.AddAsync(Mapper.Map<IPredmetiDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }catch(Exception e)
@@ -77,12 +75,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPut]
-        [Route("Predmeti")]
-        public async Task<HttpResponseMessage> UpdatePredmet(PredmetViewModel updateP)
+        public async Task<HttpResponseMessage> UpdatePredmetAsync(PredmetViewModel updateP)
         {
             try
             {
-                PredmetViewModel toBeUpdated = Mapper.Map<PredmetViewModel>(await PredmetiService.Get(updateP.PredmetId));
+                PredmetViewModel toBeUpdated = Mapper.Map<PredmetViewModel>(await PredmetiService.GetAsync(updateP.PredmetId));
 
                 if(toBeUpdated==null)
                 {
@@ -92,7 +89,8 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 {
                     toBeUpdated.Ime_predmeta = updateP.Ime_predmeta;
                 }
-                var response = await PredmetiService.Update(Mapper.Map<IPredmetiDomainModel>(toBeUpdated));
+
+                var response = await PredmetiService.UpdateAsync(Mapper.Map<IPredmetiDomainModel>(toBeUpdated));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }catch(Exception e)
@@ -102,15 +100,29 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("Predmeti")]
-        public async Task<HttpResponseMessage> DeletePredmeti(Guid Id)
+        public async Task<HttpResponseMessage> DeletePredmetiAsync(Guid Id)
         {
             try
             {
-                var response = await PredmetiService.Delete(Id);
+                var response = await PredmetiService.DeleteAsync(Id);
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+            }
+        }
+
+        [HttpGet]
+        [Route("spf")]
+        public async Task<HttpResponseMessage> SortingPagingFilteringAsync(string redoslijed, string trazeniPojam, int? brStr)
+        {
+            try
+            {
+                var response =Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.SortingPagingFilteringAsync(redoslijed, trazeniPojam, brStr));
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+
+            }catch(Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
             }

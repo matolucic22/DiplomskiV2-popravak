@@ -1,4 +1,5 @@
 ﻿using eUcitelj.Model.Common;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace eUcitelj.Reporsitory.Common
         Task<int> AddAsync(IPredmetiDomainModel addObj);
         Task<int> UpdateAsync(IPredmetiDomainModel updated);//obavi i returna samo save
         Task<int> DeleteAsync(Guid Id);
+        Task<IPagedList<IPredmetiDomainModel>> SortingPagingFilteringAsync(string Redoslijed, string trazeniPojam, int? brStr);
     }
 }

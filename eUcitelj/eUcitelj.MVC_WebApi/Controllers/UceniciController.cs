@@ -13,7 +13,7 @@ using System.Web.Http;
 
 namespace eUcitelj.MVC_WebApi.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/ucenici")]
     public class UceniciController:ApiController
     {
         protected IUceniciService UceniciService { get; set; }
@@ -23,12 +23,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Ucenici")]
-        public async Task<HttpResponseMessage> GetAllUcenici()
+        public async Task<HttpResponseMessage> GetAllUceniciAsync()
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<UcenikViewModel>>(await UceniciService.GetAll());
+                var response = Mapper.Map<IEnumerable<UcenikViewModel>>(await UceniciService.GetAllAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }
@@ -39,12 +38,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Ucenici")]
-        public async Task<HttpResponseMessage> GetUcenici(Guid Id)
+        public async Task<HttpResponseMessage> GetUceniciAsync(Guid Id)
         {
             try
             {
-                var response = Mapper.Map<UcenikViewModel>(await UceniciService.Get(Id));
+                var response = Mapper.Map<UcenikViewModel>(await UceniciService.GetAsync(Id));
 
                 if (response == null)
                 {
@@ -61,14 +59,13 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("Ucenici")]
-        public async Task<HttpResponseMessage> AddUcenici(UcenikViewModel addObj)
+        public async Task<HttpResponseMessage> AddUceniciAsync(UcenikViewModel addObj)
         {
             try
             {
 
                 addObj.UcenikId = Guid.NewGuid();
-                var response = await UceniciService.Add(Mapper.Map<IUceniciDomainModel>(addObj));
+                var response = await UceniciService.AddAsync(Mapper.Map<IUceniciDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }
@@ -79,12 +76,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("Ucenici")]
-        public async Task<HttpResponseMessage> DeleteUcenici(Guid Id)
+        public async Task<HttpResponseMessage> DeleteUceniciAsync(Guid Id)
         {
             try
             {
-                var response = await UceniciService.Delete(Id);
+                var response = await UceniciService.DeleteAsync(Id);
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)

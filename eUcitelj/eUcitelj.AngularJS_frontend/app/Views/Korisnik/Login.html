@@ -1,0 +1,39 @@
+﻿<div class="container" ng-controller="LoginController" style="padding-top:20px">
+    <div class="col-md-10 col-offset-1">
+        <div class="well">
+            <table class="table table-bordered">
+                <thead>
+                    <tr class="success">
+                        <td colspan="2">
+                            <b>Prijava postojećeg korisnika</b>
+                            <a class="btn btn-success pull-right" href="#!/korisnik/registracija">Registriraj se</a> 
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            Korisničko ime
+                        </td>
+                        <td>
+                            <input type="text" id="Korisnicko_ime" placeholder="Korisničko ime" ng-model="Korisnicko_ime" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Lozinka
+                        </td>
+                        <td>
+                            <input type="password" id="Password" placeholder="Lozinka" ng-model="Lozinka" />
+                        </td>
+                    </tr>
+                    <tr class="success">
+                        <td colspan="2">
+                            <input id="btnLogin" class="btn btn-success" type="button" value="Prijavi se" ng-click="doStuff()"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

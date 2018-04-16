@@ -1,0 +1,20 @@
+﻿<div class="container" ng-controller="DohvatiPredmeteUcenikaZaRoditeljaController">
+    <h1>Odaberite ucenika za pregled ocjene</h1>
+ 
+    <br />
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    Ime i prezime učenika
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="Ucenici in ucenici">
+                <td><a ui-sref="pregledOcjenaUcenik({KoId: Ucenici.IdKorisnikaU})">{{Ucenici.Ime_korisnika}} {{Ucenici.Prezime_korisnika}}</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+

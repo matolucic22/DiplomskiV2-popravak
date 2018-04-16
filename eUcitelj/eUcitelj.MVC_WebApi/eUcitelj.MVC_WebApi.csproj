@@ -105,6 +105,10 @@
       <HintPath>..\packages\Ninject.Web.WebApi.3.2.4.0\lib\net45-full\Ninject.Web.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -216,6 +220,7 @@
     <Content Include="app\Controllers\Korisnik\IzmjeniUcenikeRoditeljuController.js" />
     <Content Include="app\Controllers\Korisnik\LoginController.js" />
     <Content Include="app\Controllers\Korisnik\PotvrdaKorisnikaController.js" />
+    <Content Include="app\Controllers\Korisnik\RegisterController.js" />
     <Content Include="app\Controllers\Kviz\DodajKvizController.js" />
     <Content Include="app\Controllers\Kviz\DohvatiPredmeteController.js" />
     <Content Include="app\Controllers\Kviz\ObrisiKvizController.js" />
@@ -234,7 +239,6 @@
     <Content Include="app\Controllers\Predmeti\DeletePredmetiController.js" />
     <Content Include="app\Controllers\Predmeti\EditPredmetiController.js" />
     <Content Include="app\Controllers\Predmeti\PredmetiController.js" />
-    <Content Include="app\Controllers\Korisnik\RegisterController.js" />
     <Content Include="app\Controllers\Predmeti\ShowPredmetiController.js" />
     <Content Include="app\js\md5.js" />
     <Content Include="app\js\ngStorage.js" />
@@ -255,13 +259,14 @@
     <Content Include="app\Views\Kviz\DohvatiPredmeteRjesavanje.html" />
     <Content Include="app\Views\Kviz\ObrisiKviz.html" />
     <Content Include="app\Views\Kviz\PopraviKviz.html" />
+    <Content Include="app\Views\Kviz\PregledajKviz.html" />
     <Content Include="app\Views\Kviz\RjesavajKviz.html" />
     <Content Include="app\Views\OAplikaciji.html" />
     <Content Include="app\Views\Ocjene\BrisanjeOcjena.html" />
     <Content Include="app\Views\Ocjene\BrisanjeOcjenaUcenik.html" />
     <Content Include="app\Views\Ocjene\BrisanjeOcjenaUcenikOcjena.html" />
-    <Content Include="app\Views\Ocjene\DohvatiPredmeteUcenikRoditelj.html" />
     <Content Include="app\Views\Ocjene\DohvatiPredmeteUcenikaZaRoditelja.html" />
+    <Content Include="app\Views\Ocjene\DohvatiPredmeteUcenikRoditelj.html" />
     <Content Include="app\Views\Ocjene\PregledOcjena.html" />
     <Content Include="app\Views\Ocjene\PregledOcjenaUcenik.html" />
     <Content Include="app\Views\Ocjene\PregledOcjenaUcenikOcjena.html" />
@@ -273,7 +278,6 @@
     <Content Include="app\Views\Predmeti\EditPredmeti.html" />
     <Content Include="app\Views\Predmeti\IndexPredmeti.html" />
     <Content Include="app\Views\Predmeti\ShowPredmeti.html" />
-    <Content Include="app\Views\Kviz\PregledajKviz.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DropDownMenu.css" />
@@ -1114,6 +1118,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\eUcitelj.AngularJS_frontend\eUcitelj.AngularJS_frontend.csproj">
+      <Project>{d99c1900-a7ad-4c7b-811a-4cbfd72b10ce}</Project>
+      <Name>eUcitelj.AngularJS_frontend</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eUcitelj.DAL\eUcitelj.DAL.csproj">
       <Project>{882A72A0-778C-439D-B70A-C4C0257C59A3}</Project>
       <Name>eUcitelj.DAL</Name>
@@ -1161,7 +1169,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52384</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52384/</IISUrl>
+          <IISUrl>http://localhost:52383/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

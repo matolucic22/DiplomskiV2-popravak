@@ -15,7 +15,7 @@ using System.Web.Http;
 namespace eUcitelj.MVC_WebApi.Controllers
 {
     
-    [RoutePrefix("api")]
+    [RoutePrefix("api/korisnik")]
     public class KorisnikController : ApiController
     {
         protected IKorisnikService KorisnikService { get; set; }
@@ -26,8 +26,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Korisnik")]
-        public async Task<HttpResponseMessage> GetAllKorisnik()
+        public async Task<HttpResponseMessage> GetAllKorisnikAsync()
         {
             try
             {  
@@ -41,8 +40,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Korisnik")]
-        public async Task<HttpResponseMessage> GetKorisnik(Guid Id)
+        public async Task<HttpResponseMessage> GetKorisnikAsync(Guid Id)
         {
             try
             {
@@ -63,14 +61,13 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("Korisnik")]
-        public async Task<HttpResponseMessage> AddKorisnik(KorisnikViewModel addObj)//httpresponsemessage - convert to HTTP convert message
+        public async Task<HttpResponseMessage> AddKorisnikAsync(KorisnikViewModel addObj)//httpresponsemessage - convert to HTTP convert message
         {
             
                 try
                 {
                     addObj.KorisnikId = Guid.NewGuid();
-                    var response = await KorisnikService.Add(Mapper.Map<IKorisnikDomainModel>(addObj));
+                    var response = await KorisnikService.AddAsync(Mapper.Map<IKorisnikDomainModel>(addObj));
                     return Request.CreateResponse(HttpStatusCode.OK, response);
                 }
                 catch (Exception e)
@@ -80,8 +77,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPut]
-        [Route("Korisnik")]
-        public async Task<HttpResponseMessage> UpdateKorisnik(KorisnikViewModel updateK)
+        public async Task<HttpResponseMessage> UpdateKorisnikAsync(KorisnikViewModel updateK)
         {
             /*KorisnikViewModel toBeUpdated = Mapper.Map<KorisnikViewModel>(await KorisnikService.Get(updateK.KorisnikId)); -nema potrebe mapirati response u view, nego u domain model, i onda dobiveni view model (updateK)treba mapirati u domain koji se onda šalje na update
             
@@ -102,18 +98,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Nije pronađen trazeni korisnik.");
                 }
-                else// 2) toBeUpdated objektu dodjeljujem propertije iz view-a - updateK
+                else// 2)updateK
                 {
-                    toBeUpdated.Ime_korisnika = updateK.Ime_korisnika;
-                    toBeUpdated.Prezime_korisnika = updateK.Prezime_korisnika;
-                    toBeUpdated.Korisnicko_ime = updateK.Korisnicko_ime;
-                    toBeUpdated.KorisnikId = updateK.KorisnikId;
-                    toBeUpdated.Lozinka = updateK.Lozinka;
-                    toBeUpdated.Potvrda = updateK.Potvrda;
-                    toBeUpdated.Uloga = updateK.Uloga;
+                    var response = await KorisnikService.UpdateAsync(Mapper.Map<IKorisnikDomainModel>(updateK));// 3)Mapiram updateK i saljem "Update" metodom u bazu
+                    return Request.CreateResponse(HttpStatusCode.OK, response);//***Ovaj način sam sam smislio dok sam radio. Malo drugačije smo radili Lvl. 3 zd na praksi kod vas. Tek kasnije sam primjetio da nismo tako radili, ali nisam ništa htio mijenjat zato što je i ovako funkcioniralo, samo što ima više kooda i teze je razumjeti.***
                 }
-                var response = await KorisnikService.Update(Mapper.Map<IKorisnikDomainModel>(toBeUpdated));// 3)Mapiram toBeUpdated i saljem "Update" metodom u bazu
-                return Request.CreateResponse(HttpStatusCode.OK, response);//***Ovaj način sam sam smislio dok sam radio. Malo drugačije smo radili Lvl. 3 zd na praksi kod vas. Tek kasnije sam primjetio da nismo tako radili, ali nisam ništa htio mijenjat zato što je i ovako funkcioniralo, samo što ima više kooda i teze je razumjeti.***
                 
             } catch (Exception e)
             {
@@ -122,12 +111,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("Korisnik")]
-        public async Task<HttpResponseMessage> DeleteKorisnik(Guid Id)
+        public async Task<HttpResponseMessage> DeleteKorisnikAsync(Guid Id)
         {
             try
             {
-                var response = await KorisnikService.Delete(Id);
+                var response = await KorisnikService.DeleteAsync(Id);
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -137,12 +125,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("Korisnik/logintoken")]
-        public async Task<HttpResponseMessage> LoginTonken(UserCredentials userCredentials)
+        [Route("logintoken")]
+        public async Task<HttpResponseMessage> LoginTonkenAsync(UserCredentials userCredentials)
         {
             try
             {
-                var userToLogin = Mapper.Map<KorisnikViewModel>(await KorisnikService.FindByUserName(userCredentials.Korisnicko_ime));
+                var userToLogin = Mapper.Map<KorisnikViewModel>(await KorisnikService.FindByUserNameAsync(userCredentials.Korisnicko_ime));
 
                 if (userToLogin == null)
                 {
@@ -177,11 +165,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Korisnik/getKorisnickoIme")]
-        public async Task<HttpResponseMessage> GetAllKorisnicko_ime()
+        [Route("getKorisnickoIme")]
+        public async Task<HttpResponseMessage> GetAllKorisnicko_imeAsync()
         {
             try {
-                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetAllKorisnicko_ime());
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetAllKorisnicko_imeAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
                 
             } catch(Exception ex)
@@ -192,12 +180,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Korisnik/getAllKorisnikId")]
-        public async Task<HttpResponseMessage> GetAllKorisnikId()
+        [Route("getAllKorisnikId")]
+        public async Task<HttpResponseMessage> GetAllKorisnikIdAsync()
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetAllKorisnikId());
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetAllKorisnikIdAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)

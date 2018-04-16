@@ -24,12 +24,12 @@ namespace eUcitelj.Service
         {
             this.KorisnikGenericReporsitory = korisnikGenericReporsitory;
         }
-        public async Task<int> Add(IKorisnikDomainModel addObj)
+        public async Task<int> AddAsync(IKorisnikDomainModel addObj)
         {
             return await KorisnikGenericReporsitory.AddAsync(addObj);
         }
 
-        public async Task<int> Delete(Guid Id)
+        public async Task<int> DeleteAsync(Guid Id)
         {
             return await KorisnikGenericReporsitory.DeleteAsync(Id);
         }
@@ -44,24 +44,24 @@ namespace eUcitelj.Service
             return KorisnikGenericReporsitory.GetAllAsync();   
         }
 
-        public async Task<int> Update(IKorisnikDomainModel updated)
+        public async Task<int> UpdateAsync(IKorisnikDomainModel updated)
         {
             return await KorisnikGenericReporsitory.UpdateAsync(updated);
         }
         //find user by username
-        public async Task<IKorisnikDomainModel> FindByUserName(string korisnicko_ime)
+        public async Task<IKorisnikDomainModel> FindByUserNameAsync(string korisnicko_ime)
         {
-            return await KorisnikGenericReporsitory.GetByUsername(korisnicko_ime);
+            return await KorisnikGenericReporsitory.GetByUsernameAsync(korisnicko_ime);
         }
 
-        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnicko_ime()
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnicko_imeAsync()
         {
-            return await KorisnikGenericReporsitory.GetAllKorisnicko_ime();
+            return await KorisnikGenericReporsitory.GetAllKorisnicko_imeAsync();
         }
 
-        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikId()
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikIdAsync()
         {
-            return await KorisnikGenericReporsitory.GetAllKorisnikId();
+            return await KorisnikGenericReporsitory.GetAllKorisnikIdAsync();
         }
 
     }

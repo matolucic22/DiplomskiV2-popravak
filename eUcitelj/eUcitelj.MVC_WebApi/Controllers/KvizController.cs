@@ -12,7 +12,7 @@ using System.Web.Http;
 
 namespace eUcitelj.MVC_WebApi.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/kviz")]
     public class KvizController : ApiController
     {
         protected IKvizService KvizService { get; set; }
@@ -22,12 +22,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Kviz")]
-        public async Task<HttpResponseMessage> GetAllKviz()
+        public async Task<HttpResponseMessage> GetAllKvizAsync()
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<KvizViewModel>>(await KvizService.GetAll());
+                var response = Mapper.Map<IEnumerable<KvizViewModel>>(await KvizService.GetAllAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -37,12 +36,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("Kviz")]
-        public async Task<HttpResponseMessage> GetKviz(Guid Id)
+        public async Task<HttpResponseMessage> GetKvizAsync(Guid Id)
         {
             try
             {
-                var response = Mapper.Map<KvizViewModel>(await KvizService.Get(Id));
+                var response = Mapper.Map<KvizViewModel>(await KvizService.GetAsync(Id));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -52,13 +50,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPost]
-        [Route("Kviz")]
-        public async Task<HttpResponseMessage> AddKviz(KvizViewModel addObj)//httpresponsemessage - convert to HTTP convert message
+        public async Task<HttpResponseMessage> AddKvizAsync(KvizViewModel addObj)//httpresponsemessage - convert to HTTP convert message
         {
             try
             {
                 addObj.KvizId = Guid.NewGuid();
-                var response = await KvizService.Add(Mapper.Map<IKvizDomainModel>((addObj)));
+                var response = await KvizService.AddAsync(Mapper.Map<IKvizDomainModel>((addObj)));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }
@@ -69,13 +66,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpPut]
-        [Route("Kviz")]
-        public async Task<HttpResponseMessage> UpdateKviz(KvizViewModel updateK)
+        public async Task<HttpResponseMessage> UpdateKvizAsync(KvizViewModel updateK)
         {
             try
             {
 
-                KvizViewModel toBeUpdated = Mapper.Map<KvizViewModel>(await KvizService.Get(updateK.KvizId));
+                KvizViewModel toBeUpdated = Mapper.Map<KvizViewModel>(await KvizService.GetAsync(updateK.KvizId));
 
                 if (toBeUpdated == null)
                 {
@@ -87,9 +83,9 @@ namespace eUcitelj.MVC_WebApi.Controllers
                     toBeUpdated.Odg2 = updateK.Odg2;
                     toBeUpdated.Odg3 = updateK.Odg3;
                     toBeUpdated.Pitanje = updateK.Pitanje;
-                    toBeUpdated.Tocan_odgovor = updateK.Tocan_odgovor;              
+                    toBeUpdated.Tocan_odgovor = updateK.Tocan_odgovor;
                 }
-                var response = await KvizService.Update(Mapper.Map<IKvizDomainModel>(toBeUpdated));
+                var response = await KvizService.UpdateAsync(Mapper.Map<IKvizDomainModel>(toBeUpdated));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }
@@ -100,12 +96,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        [Route("Kviz")]
-        public async Task<HttpResponseMessage> DeleteKviz(Guid Id)
+        public async Task<HttpResponseMessage> DeleteKvizAsync(Guid Id)
         {
             try
             {
-                var response = await KvizService.Delete(Id);
+                var response = await KvizService.DeleteAsync(Id);
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)

@@ -86,7 +86,7 @@ namespace eUcitelj.Reporsitory
             }
         }
 
-        public async Task<IKorisnikDomainModel> GetByUsername(string korisnicko_ime)
+        public async Task<IKorisnikDomainModel> GetByUsernameAsync(string korisnicko_ime)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace eUcitelj.Reporsitory
             }
         }
 
-        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnicko_ime()
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnicko_imeAsync()
         {
             try {
 
@@ -113,7 +113,7 @@ namespace eUcitelj.Reporsitory
             }
         }
 
-        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikId()//Ova metoda dohvaca sve korisnike kojima je uloga (Rola) u sustavu "ucenik". Korištena je prilikom odobravanje uloge "roditelj", da bi se roditelju dodijelio ID ucenika kojem je roditelj i na taj nacin je omogucen pristup ocjenama samo onog ucenika kojem je roditelj.
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikIdAsync()//Ova metoda dohvaca sve korisnike kojima je uloga (Rola) u sustavu "ucenik". Korištena je prilikom odobravanje uloge "roditelj", da bi se roditelju dodijelio ID ucenika kojem je roditelj i na taj nacin je omogucen pristup ocjenama samo onog ucenika kojem je roditelj.
         {
             try
             {

@@ -18,27 +18,27 @@ namespace eUcitelj.Service
             this.KvizGenericReporsitory = kvizGenericReporsitory;
         }
 
-        public async Task<IEnumerable<IKvizDomainModel>> GetAll()
+        public async Task<IEnumerable<IKvizDomainModel>> GetAllAsync()
         {
             return await KvizGenericReporsitory.GetAllAsync();
         }
 
-        public async Task<IKvizDomainModel> Get(Guid Id)
+        public async Task<IKvizDomainModel> GetAsync(Guid Id)
         {
             return await KvizGenericReporsitory.GetAsync(Id);
         }
 
-        public async Task<int> Add(IKvizDomainModel addObj)
+        public async Task<int> AddAsync(IKvizDomainModel addObj)
         {
             return await KvizGenericReporsitory.AddAsync(addObj);
         }
 
-        public async Task<int> Update(IKvizDomainModel updated)
+        public async Task<int> UpdateAsync(IKvizDomainModel updated)
         {
             return await KvizGenericReporsitory.UpdateAsync(updated);
         }
 
-        public async Task<int> Delete(Guid Id)
+        public async Task<int> DeleteAsync(Guid Id)
         {
             return await KvizGenericReporsitory.DeleteAsync(Id);
         }

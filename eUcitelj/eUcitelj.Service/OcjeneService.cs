@@ -21,27 +21,27 @@ namespace eUcitelj.Service
             this.OcjeneGenericReporsitory = ocjeneGenericReporsitory;
         }
 
-        public async Task<int> Add(IOcjeneDomainModel addObj)
+        public async Task<int> AddAsync(IOcjeneDomainModel addObj)
         {
             return await OcjeneGenericReporsitory.AddAsync(addObj);
         }
 
-        public async Task<int> Delete(Guid Id)
+        public async Task<int> DeleteAsync(Guid Id)
         {
             return await OcjeneGenericReporsitory.DeleteAsync(Id);
         }
 
-        public async Task<IOcjeneDomainModel> Get(Guid Id)
+        public async Task<IOcjeneDomainModel> GetAsync(Guid Id)
         {
             return await OcjeneGenericReporsitory.GetAsync(Id);
         }
 
-        public async Task<IEnumerable<IOcjeneDomainModel>> GetAll()
+        public async Task<IEnumerable<IOcjeneDomainModel>> GetAllAsync()
         {
             return await OcjeneGenericReporsitory.GetAllAsync();
         }
 
-        public async Task<int> Update(IOcjeneDomainModel updated)
+        public async Task<int> UpdateAsync(IOcjeneDomainModel updated)
         {
             return await OcjeneGenericReporsitory.UpdateAsync(updated);
         }
