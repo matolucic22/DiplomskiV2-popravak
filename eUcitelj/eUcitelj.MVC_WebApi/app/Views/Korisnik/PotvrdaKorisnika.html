@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="korisnik in korisnici" ng-if="korisnik.Potvrda=='???'">
-                <td style="text-align:center" ><a ng-click="Da(korisnik.KorisnikId)" style="cursor: pointer">DA</a>/<a ng-click="Ne(korisnik.KorisnikId)" style="cursor: pointer">NE</a></td>
+                <td style="text-align:center" ><a ng-click="da(korisnik.KorisnikId)" style="cursor: pointer">DA</a>/<a ng-click="ne(korisnik.KorisnikId)" style="cursor: pointer">NE</a></td>
                 <td>{{korisnik.Ime_korisnika}}</td>
                 <td>{{korisnik.Prezime_korisnika}}</td>
                 <td>{{korisnik.Korisnicko_ime}}</td>

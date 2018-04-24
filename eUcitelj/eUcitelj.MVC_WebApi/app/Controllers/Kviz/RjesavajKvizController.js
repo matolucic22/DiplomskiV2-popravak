@@ -1,11 +1,11 @@
-﻿app.controller('RjesavajKvizController', function ($scope, $http, $stateParams, $window) {
+﻿app.controller('RjesavajKvizController', function ($scope, $http, $stateParams, $window, predmetiService, KONSTANTE) {
     idPredmet = $stateParams.UcPrId;
-    var Predmet = [];
+    var predmet = [];
     
-    $http.get('api/predmeti?id=' + idPredmet).then(function (response) {
-        Predmet = response.data;
-        $scope.Pitanja = Predmet.Kviz;
-        if($scope.Pitanja.length == 0)
+    predmetiService.get(idPredmet).then(function (response) {
+        predmet = response.data;
+        $scope.pitanja = predmet.Kviz;
+        if($scope.pitanja.length == 0)
         {
             $window.alert("Pitanja nisu dodana.");
             var button = document.getElementById("button");
@@ -13,10 +13,10 @@
         }
     }, function ()
     {
-        $window.alert("Greška prilikom pronalasa kviza");
+        $window.alert(KONSTANTE.DOHVACANJE_PREDMETA_GRESKA);
     });
 
-    $scope.Snimi = function () {
+    $scope.snimi = function () {
         var a = 0;
         var b = 0;
         var odgDiv = document.getElementsByClassName('Odg');

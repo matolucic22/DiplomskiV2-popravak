@@ -1,46 +1,46 @@
-﻿app.controller('PregledajKvizController', function ($scope, $http, $stateParams, $window) {
+﻿app.controller('PregledajKvizController', function ($scope, $http, $stateParams, $window, predmetiService, kvizService, KONSTANTE) {
     id = $stateParams.UcPrId;
+    var txtPitanje;
     
-    $http.get('/api/predmeti?id=' + id).then(function (response) {
-        $scope.Predmet = response.data;
-        $scope.Kviz = $scope.Predmet.Kviz;
+    predmetiService.get(id).then(function (response) {
+        $scope.predmet = response.data;
+        $scope.kviz = $scope.predmet.Kviz;
 
     }, function (jqXHR) {
-            $window.alert("Greška prilikom dohvaćanja predmeta.");
+        $window.alert(KONSTANTE.DOHVACANJE_PREDMETA_GRESKA);
         });
 
     //brisanje
-    $scope.Obrisi = function (id2) {
-        var KvizPromjenjeno;
-        $http.get('/api/kviz?Id=' + id2).then(function (response) {
+    $scope.obrisi = function (id2) {
+        var kvizPromjenjeno;
+        kvizService.delete(id2).then(function (response) {
             $scope.kPitanje = response.data;
             txtPitanje = $scope.kPitanje.Pitanje;
         }, function () {
-            alert("Greška prilikom dohvaćanja korisnika.");
+            $window.alert(KONSTANTE.BRISANJE_GRESKA);
         });
 
+        kvizService.getAll().then(function (response) {
+            kvizovi = response.data;
 
-        $http.get('/api/kviz').then(function (response) {
-            Kvizovi = response.data;
-
-            for (i = 0; i < Kvizovi.length; i++) {
-                if (Kvizovi[i].Pitanje == txtPitanje) {
-                    $http.delete('api/kviz?id=' + Kvizovi[i].KvizId).then(function (response) {
-                        KvizPromjenjeno = response.data;
-                        $http.get('/api/predmeti?id=' + id).then(function (response) {
-                            $scope.Predmet = response.data;
-                            $scope.Kviz = $scope.Predmet.Kviz;
+            for (i = 0; i < kvizovi.length; i++) {
+                if (kvizovi[i].Pitanje == txtPitanje) {
+                    kvizService.delete(kvizovi[i].KvizId).then(function (response) {
+                        kvizPromjenjeno = response.data;
+                        predmetiService.get(id).then(function (response) {
+                            $scope.predmet = response.data;
+                            $scope.kviz = $scope.predmet.Kviz;
 
                         }, function (jqXHR) {
-                            $window.alert("Greška prilikom dohvaćanja predmeta.");
+                            $window.alert(KONSTANTE.DOHVACANJE_PREDMETA_GRESKA);
                         });
                     }, function () {
-                        $window.alert("Greška prilikom promjene");
+                        $window.alert(KONSTANTE.BRISANJE_GRESKA);
                     });
                 }
             }
         }, function () {
-            alert("Greška prilikom dohvaćanja korisnika.");
+            alert(KONSTANTE.DOHVACANJE_KVIZA_GRESKA);
         });
     }; 
 });

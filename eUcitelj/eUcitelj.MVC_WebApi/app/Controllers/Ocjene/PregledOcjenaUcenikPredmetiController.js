@@ -1,31 +1,28 @@
-﻿app.controller('PregledOcjenaUcenikPredmetiController', function ($scope, $stateParams, $http, $window, $location) {//unos ocjena uceniku
+﻿app.controller('PregledOcjenaUcenikPredmetiController', function ($scope, $stateParams, $http, $window, $location, predmetiService, korisnikService, KONSTANTE) {//unos ocjena uceniku
     id = $stateParams.UcPrId;
     //PRIKAZ IMENA KORISNIKA//
-    $http.get('api/predmeti?id=' + id)
-        .then(function (response) {
+    predmetiService.get(id).then(function (response) {
             predmet = response.data;
 
             id2 = predmet.KorisnikId;
 
-            $http.get('api/korisnik?id=' + id2)
-       .then(function (response) {
-           $scope.TrKorisnik = response.data;
+            korisnikService.get(id2).then(function (response) {
+           $scope.trKorisnik = response.data;
 
        }, function () {
-           console.log("Nemoguće dohvatiti korsnika pod tim ID-om.");
+           $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
        });
 
         }, function () {
-            console.log("Nemoguće dohvatiti predmet pod tim ID-om.");
+            $window.alert(KONSTANTE.DOHVACANJE_PREDMETA_GRESKA);
         });
 
     //DOHVAĆANJE OCJENA//
-    $http.get('api/predmeti?id='+id)
-        .then(function (response) {
-            $scope.Predmet = response.data;
-            $scope.Ocjene = $scope.Predmet.Ocjene;
+    predmetiService.get(id).then(function (response) {
+            $scope.predmet = response.data;
+            $scope.ocjene = $scope.predmet.Ocjene;
 
         }, function () {
-            console.log("Greška prilikom prikazivanja ocjene.");
+            $window.alert(KONSTANTE.DOHVACANJE_OCJENE_GRESKA);
         });
 });

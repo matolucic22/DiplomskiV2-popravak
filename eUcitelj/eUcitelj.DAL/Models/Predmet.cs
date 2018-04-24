@@ -19,6 +19,7 @@ namespace eUcitelj.DAL.Models
         public Guid KorisnikId { get; set; }
 
         [Required(ErrorMessage = "Ime predmeta je obavezno polje za unos")]
+        //[Unique(ErrorMessage = "This already exist !!")]
         public string Ime_predmeta { get; set; }
 
         public virtual ICollection<Ocjena> Ocjene { get; set; }//1 predmet moze imati vise ocijena

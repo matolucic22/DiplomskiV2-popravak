@@ -1,30 +1,31 @@
-﻿app.controller('DodajUcenikeRoditeljuController', function ($scope, $http, $stateParams, $window, $location, $rootScope) {
+﻿app.controller('DodajUcenikeRoditeljuController', function ($scope, $http, $stateParams, $window, $location, $rootScope, korisnikService, KONSTANTE) {
   
-    $http.get('/api/korisnik').then(function (response) {
+    korisnikService.getAll().then(function (response) {
 
         $scope.korisnici = response.data;
-
     }, function () {
-        console.log("Greška prilikom preuzimanja korisnika iz baze.");
+        $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
     });
+
+    
 
 
     $scope.Snimi = function () {
         var check = document.getElementsByClassName('check');
-        var Ids = [];
+        var ids = [];
         var obj = [];
         var a = 0;
         var Ucenik = [];
         for (var i = 0; i < check.length; i++) {
             if (check[i].checked) {
-                Ids[a] = check[i].value;
+                ids[a] = check[i].value;
                 a++;
             }
         }
 
-        for (i = 0; i < Ids.length; i++)
+        for (i = 0; i < ids.length; i++)
         {
-            $http.get('/api/korisnik?Id=' + Ids[i]).then(function (response) {
+            korisnikService.get(ids[i]).then(function (response) {
                 Ucenik = response.data;
 
                 obj[i] = {
@@ -38,12 +39,12 @@
                     $scope.response = response.data;
 
                 }, function () {
-                    $window.alert("Greška prilikom unosa u bazu.");
+                    $window.alert(KONSTANTE.UNOS_U_BAZU_GRESKA);
                 });
 
 
             }, function () {
-                alert("Greška prilikom dohvaćanja korisnika.");
+                $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
             });
 
             

@@ -1,20 +1,20 @@
-﻿app.controller("EditPredmetiController", function ($scope, $stateParams, $http, $window, $location) {
+﻿app.controller("EditPredmetiController", function ($scope, $stateParams, $http, $window, $state, predmetiService, KONSTANTE) {
 
     predmeti = [];
 
     $scope.find = function () {
-        $http.get('api/predmeti')
+        predmetiService.getAll()
              .then(function (response) {
                 predmeti = response.data;
             }, function () {
-                console.log("Can't get response.");
+                window.alert(KONSTANTE.DOHVACANJE_PREDMETA_GRESKA);
             });
 
     };
 
     $scope.update = function () {
 
-        var ime = $stateParams.PrIme;
+        var ime = $stateParams.PrIme;//razlog proslijeđivanja imena predmeta je objašnjen u PredmetiController.js fileu pod --> ***ODG: ... Imam više imena i želim ih sve update-at.
 
         for(i=0; i<predmeti.length; i++)
         {
@@ -26,8 +26,8 @@
                         Ime_predmeta: $scope.Ime_predmeta
                     };
 
-                    $http.put('/api/predmeti', updated).then(function (data) {
-                        $location.path('/predmeti/predmetiIndex');
+                    predmetiService.update(updated).then(function (data) {
+                        $state.go('predmetiIndex');
                     });
                 } else {
                     $window.alert("Došlo je do greške prilikom popunjavanja polja.");

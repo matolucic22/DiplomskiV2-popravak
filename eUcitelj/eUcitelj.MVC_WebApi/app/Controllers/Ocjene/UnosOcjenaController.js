@@ -1,10 +1,10 @@
-﻿app.controller('UnosOcjenaController', function ($scope, $http) {
+﻿app.controller('UnosOcjenaController', function ($scope, $http, $window, korisnikService, KONSTANTE) {
     $scope.korisnici = [];
-    $http.get('/api/korisnik').then(function (response) {
+    korisnikService.getAll().then(function (response) {
         $scope.korisnici = response.data;
 
     }, function () {
-        console.log("Greška prilikom preuzimanja korisnika iz baze.");
+        $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
     });
 
 });

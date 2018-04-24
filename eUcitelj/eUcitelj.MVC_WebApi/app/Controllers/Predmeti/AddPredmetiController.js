@@ -1,64 +1,67 @@
-﻿app.controller("AddPredmetiController", function ($scope, $http, $location, $window) {
+﻿app.controller("AddPredmetiController", function ($scope, $http, $location, $window, $state, predmetiService, korisnikService, KONSTANTE) {
 
-    var KorisnikIds = {
+    var test = 'Test';
+    var korisnikIdovi = {
         KorisnikId:undefined
     };
 
-    var Predmeti = [];
+    var predmeti = [];
 
-    var PredmetiI = [];
+    var predmetiI = [];
+    
+    korisnikService.getAllKorisnikId().then(function (response) {
+        korisnikIdovi = response.data;
 
-    $http.get('/api/korisnik/getAllKorisnikId').then(function (response) {
-        KorisnikIdovi = response.data;
-
-        if (KorisnikIdovi.length == 0) {
+        if (korisnikIdovi.length == 0) {
             var addK = {
-                Ime_korisnika: 'Test',
-                Prezime_korisnika: 'Test',
-                Korisnicko_ime: 'Test',
-                Lozinka: 'Test',
-                PotvrdaLozinke: 'Test',
+                Ime_korisnika: test,
+                Prezime_korisnika: test,
+                Korisnicko_ime: test,
+                Lozinka: test,
+                PotvrdaLozinke: test,
                 Potvrda: "Da",
                 Uloga: "ucenik"
             };
-            $http.post('/api/korisnik', addK)
+            korisnikService.add(addK)
         .then(function (data) {
             $scope.response = data;
             $window.alert("Učenika trenutno nemate u bazi. Kako bi ste mogli dodati predmete kreiran je testni učenik. Predmeti se obavezno moraju pridružiti učenicima. Kada se registrira barem jedan učenik, slobodno možete obrisati testnog. Predmeti će ostati pohranjeni. Vratite se nazad i ponovno upišite predmet.");
-
         }
             , function (jqXHR) {
-
                 window.alert("Greška prilikom stvaranja testnog korisnika.");
             });
      }
     });
         
 
-    $scope.addPredmeti = function () {
+    $scope.addPredmet = function () {
 
-        $http.get('api/predmeti').then(function (response) {
-            Predmeti = response.data;
-            for (i = 0; i < Predmeti.length; i++)
+        //PITANJE: "  •	stavljati item za update ili create na objekt, i onda se cijeli objekt može proslijediti u update/create metodu "
+        //ODG: Nisam razumio pitanje. Prilikom create(add)/update sad stvorio objekt i na njega stavio potrebne item-e te poslao na metodu.
+
+        predmetiService.getAll().then(function (response) {//prvo sam dohvatio sve predmete da mogu provjeriti dali unešeni string (Ime predmeta) već postoji u bazi. Taj način sam iskoristio ovdje, kasnije sam shvatio da potoji lakših, bržih, učinkovitijih načina za pretragu.
+            predmeti = response.data;
+            for (i = 0; i < predmeti.length; i++)
             {
-                PredmetiI[i] = Predmeti[i].Ime_predmeta;
+                predmetiI[i] = predmeti[i].Ime_predmeta;
             }
                         
-            if (PredmetiI.indexOf($scope.Ime_predmeta) == -1) {
-                for (i = 0; i < KorisnikIdovi.length; i++) {
+            if (predmetiI.indexOf($scope.Ime_predmeta) == -1) {// Jedan od načina koji sam koristio da vidim dali mi unešeni string (Ime predmeta) već postoji u bazi. 
+                for (i = 0; i < korisnikIdovi.length; i++) { //Pokušavao sam još ranije postaviti itemu Ime_predmeta u bazi index 'unique', ali s obzirom da u tablici Predmet imam više istih Imena predmeta sa različitim ID-ovima i ID-ovima korisnika (Objašnjeno u PredmetiController.js skripti kao komentar pod  --> ***ODG:) logika nije dobro funkcionirala pa sam se odlučio na ovo.
                     var objAdd = {
-                        KorisnikId: KorisnikIdovi[i].KorisnikId,
+                        KorisnikId: korisnikIdovi[i].KorisnikId,
                         Ime_predmeta: $scope.Ime_predmeta
                     };
 
-                    $http.post('api/predmeti', objAdd).then(function (data) {
+                    predmetiService.add(objAdd).then(function (data) {
                         $scope.response = data;
-                        $location.path('/predmeti/predmetiIndex');
+                        $state.go('predmetiIndex');
                     });
                 }
             }else
             {
-                $window.alert("Predmet već postoji u bazi.");
+                $window.alert(KONSTANTE.UNOS_POSTOJI);//poruka o validaciji je u ovom obliku. U slučaju unosa itema koji već postji u tablici, u Controlleru se kreira InternalServerError sa nekim Exceptionom 
+                                                      //koji nije user friendly te je modificiran na frontendu. 
             }
         });       
     };

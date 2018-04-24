@@ -1,27 +1,25 @@
-﻿app.controller('UnosOcjenaUcenikPredmetiController', function ($scope, $stateParams, $http, $window, $location) {//unos ocjena uceniku
+﻿app.controller('UnosOcjenaUcenikPredmetiController', function ($scope, $stateParams, $http, $window, $location, $state, predmetiService, korisnikService, ocjeneService) {//unos ocjena uceniku
     id = $stateParams.UcPrId;
 
     //PRIKAZ IMENA KORISNIKA//
-    $http.get('api/predmeti?id=' + id)
-        .then(function (response) {
+    predmetiService.get(id).then(function (response) {
             predmet = response.data;
 
             id2 = predmet.KorisnikId;
 
-            $http.get('api/korisnik?id=' + id2)
-       .then(function (response) {
-           $scope.TrKorisnik = response.data;
+            korisnikService.get(id2).then(function (response) {
+           $scope.trKorisnik = response.data;
            
        }, function () {
-           console.log("Nemoguće dohvatiti korsnika pod tim ID-om.");
+           $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
        });
 
         }, function () {
-            console.log("Nemoguće dohvatiti predmet pod tim ID-om.");
+            $window.alert(KONSTANTE.DOHVACANJE_PREDMETA_GRESKA);
         });
 
     //DODAVANJE OCJENE U BAZU//
-    $scope.Upisi = function () {
+    $scope.upisi = function () {
         if ($scope.Ocj > 0 && $scope.Ocj < 6) {
             var addO = {
                 Ocj: $scope.Ocj,
@@ -30,13 +28,12 @@
                 PredmetId: id
             };
 
-            $http.post('api/ocjene', addO)
-               .then(function (data) {
+            ocjeneService.add(addO).then(function (data) {
                    $scope.response = data;
                    $window.alert("Ocjena dodana");
-                   $location.path('/ocjene/ocjeneUnos');
+                   $state.go('unosOcjena');
                }, function () {
-                   $window.alert("Greška prilikom upisivanja ocjene.");
+                   $window.alert(KONSTANTE.UNOS_U_BAZU_GRESKA);
                });
         }else
         {

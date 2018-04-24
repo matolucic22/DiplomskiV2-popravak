@@ -26,6 +26,7 @@ namespace eUcitelj.MVC_WebApi
 
             bundles.Add(new ScriptBundle("~/bundles/aplikacija").Include(
               "~/app/app.js",
+              "~/app/Controllers/konstante.js",
               "~/app/Controllers/Predmeti/*Controller.js",
               "~/app/Controllers/Korisnik/*Controller.js",
               "~/app/Controllers/Ocjene/*Controller.js",

@@ -1,5 +1,5 @@
 ﻿<div class="container" ng-controller="PregledOcjenaUcenikPredmetiController">
-    <h1>Pregled ocjena učenika <b>{{TrKorisnik.Ime_korisnika}} {{TrKorisnik.Prezime_korisnika}}</b> iz predmeta <b>{{Predmet.Ime_predmeta}}</b></h1>
+    <h1>Pregled ocjena učenika <b>{{trKorisnik.Ime_korisnika}} {{trKorisnik.Prezime_korisnika}}</b> iz predmeta <b>{{predmet.Ime_predmeta}}</b></h1>
     <br />
 
     <table class="table table-striped table-bordered" style="padding-top:5px">
@@ -12,7 +12,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="o in Ocjene">
+            <tr ng-repeat="o in ocjene">
                 <td>{{o.Ocj}}</td>
                 <td>{{o.Opis}}</td>
                 <td>{{o.DatumOcjene}}</td>

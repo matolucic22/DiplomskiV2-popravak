@@ -5,7 +5,7 @@
     <div>
         <div>Broj točnih odgovora:<div id="TocanOdgovor"></div> </div>
         <hr>
-        <form ng-repeat="p in Pitanja">
+        <form ng-repeat="p in pitanja">
             <h2>{{p.Pitanje}}</h2> 
 
             <div>
@@ -28,7 +28,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Snimi" class="btn btn-default" ng-click="Snimi()" id="button" />
+            <input type="submit" value="Snimi" class="btn btn-default" ng-click="snimi()" id="button" />
         </div>
     </div>
 

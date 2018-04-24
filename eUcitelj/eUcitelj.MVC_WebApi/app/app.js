@@ -95,24 +95,6 @@ app.config(function ($stateProvider, $urlRouterProvider, localStorageServiceProv
                 }
             }
 
-        }).state('deletePredmeti', {
-            url: '/predmeti/predmetiDel/:PrIme',
-            controller: 'DeletePredmetiController',
-            views: {
-                "root": {
-                    templateUrl: 'app/Views/Predmeti/DeletePredmeti.html'
-                }
-            }
-
-        }).state('showPredmeti', {
-            url: '/predmeti/predmetiShow',
-            controller: 'ShowPredmetiController',
-            views: {
-                "root": {
-                    templateUrl: 'app/Views/Predmeti/ShowPredmeti.html'
-                }
-            }
-
         }).state('unosOcjena', {
             url: '/ocjene/ocjeneUnos',
             controller: 'UnosOcjenaController',

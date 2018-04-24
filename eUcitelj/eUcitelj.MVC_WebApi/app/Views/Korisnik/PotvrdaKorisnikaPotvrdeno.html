@@ -20,7 +20,7 @@
         </thead>
         <tbody>
             <tr ng-repeat="korisnik in korisnici" ng-if="korisnik.Potvrda=='Da'">
-                <td style="text-align:center"><a ng-click="Ne(korisnik.KorisnikId)" style="cursor: pointer">Ne</a></td>
+                <td style="text-align:center"><a ng-click="ne(korisnik.KorisnikId)" style="cursor: pointer">Ne</a></td>
                 <td>{{korisnik.Ime_korisnika}}</td>
                 <td>{{korisnik.Prezime_korisnika}}</td>
                 <td>{{korisnik.Korisnicko_ime}}</td>

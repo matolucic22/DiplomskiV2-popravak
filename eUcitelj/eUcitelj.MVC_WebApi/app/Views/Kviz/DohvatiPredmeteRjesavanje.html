@@ -19,7 +19,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr dir-paginate="pr in Predmeti | itemsPerPage:5 | filter:search | orderBy:sortKey:reverse">
+            <tr dir-paginate="pr in predmeti | itemsPerPage:5 | filter:search | orderBy:sortKey:reverse">
                 <td><a ui-sref="rjesavajKviz({UcPrId: pr.PredmetId})">{{pr.Ime_predmeta}}</a></td>
             </tr>
         </tbody>

@@ -1,32 +1,31 @@
-﻿app.controller('DodajKvizController', function ($scope, $http, $stateParams, $location, $window) {
+﻿app.controller('DodajKvizController', function ($scope, $http, $stateParams, $location, $window, predmetiService, kvizService, KONSTANTE) {
 
     id = $stateParams.UcPrId;
     
-    PredmetiIme = [];
-    Predmeti = [];
+    predmeti = [];
 
     //dohvati ime predmeta 
-    $http.get('/api/predmeti?id='+id).then(function (response) {
-        $scope.Predmeti = response.data;
-        imePredmeta=$scope.Predmeti.Ime_predmeta;
+    predmetiService.get(id).then(function (response) {
+        $scope.predmet = response.data;
+        imePredmeta=$scope.predmet.Ime_predmeta;
     }
         , function (jqXHR) {
-            window.alert("Greška prilikom dohvaćanja predmeta.");
+            $window.alert(KONSTANTE.DOHVACANJE_PREDMETA_GRESKA);
         });
 
     //dohvati sve predmete
-    $http.get('/api/predmeti').then(function (response) {
-        Predmeti = response.data;
+    predmetiService.getAll().then(function (response) {
+        predmeti = response.data;
     }
         , function (jqXHR) {
-            window.alert("Greška prilikom dohvaćanja predmeta.");
+            $window.alert(KONSTANTE.DOHVACANJE_PREDMETA_GRESKA);
         });
 
-    $scope.Unesi = function () {
-        for (i = 0; i < Predmeti.length; i++) {
-            if (Predmeti[i].Ime_predmeta==imePredmeta) {
+    $scope.unesi = function () {
+        for (i = 0; i < predmeti.length; i++) {
+            if (predmeti[i].Ime_predmeta==imePredmeta) {
                 var obj = {
-                    PredmetId: Predmeti[i].PredmetId,
+                    PredmetId: predmeti[i].PredmetId,
                     Pitanje: $scope.Pitanje,
                     Odg1: $scope.Odg1,
                     Odg2: $scope.Odg2,
@@ -34,7 +33,7 @@
                     Tocan_odgovor: $scope.Tocan_odgovor
                 };
 
-                $http.post('api/kviz', obj).then(function (response) {
+                kvizService.add(obj).then(function (response) {
                     $scope.response = response.data;
                     document.getElementById('id_Odg2').value = '';
                     document.getElementById('id_Odg3').value = '';
@@ -43,7 +42,7 @@
                     document.getElementById('id_Odg1').value = '';
 
                 }, function () {
-                    $window.alert("Greška prilikom unosa kviza.");
+                    $window.alert(KONSTANTE.UNOS_U_BAZU_GRESKA);
                 });
             }
         }

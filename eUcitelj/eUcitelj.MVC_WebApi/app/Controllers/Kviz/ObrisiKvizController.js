@@ -1,29 +1,28 @@
-﻿app.controller('ObrisiKvizController', function ($scope, $http, $stateParams, $location, $window) {
+﻿app.controller('ObrisiKvizController', function ($scope, $http, $stateParams, $location, $window, kvizService, KONSTANTE) {
 
-    var KvizPromjenjeno;
+    var kvizPromjenjeno;
     var id = $stateParams.KvizId;
-    $http.get('/api/kviz?Id=' + id).then(function (response) {
+    kvizService.get(id).then(function (response) {
         $scope.kPitanje = response.data;
         txtPitanje = $scope.kPitanje.Pitanje;
     }, function () {
-        alert("Greška prilikom dohvaćanja korisnika.");
+        $window.alert(KONSTANTE.DOHVACANJE_KVIZA_GRESKA);
     });
 
+    kvizService.getAll().then(function (response) {
+        kvizovi = response.data;
 
-    $http.get('/api/kviz').then(function (response) {
-        Kvizovi = response.data;
-
-        for (i = 0; i < Kvizovi.length; i++) {
-            if (Kvizovi[i].Pitanje == txtPitanje) {
-                $http.delete('api/kviz?id=' + Kvizovi[i].KvizId).then(function (response) {
-                    KvizPromjenjeno = response.data;
+        for (i = 0; i < kvizovi.length; i++) {
+            if (kvizovi[i].Pitanje == txtPitanje) {
+                kvizService.delete(kvizovi[i].KvizId).then(function (response) {
+                    kvizPromjenjeno = response.data;
                 }, function () {
                     $window.alert("Greška prilikom promjene");
                 });
             }
         }
     }, function () {
-        alert("Greška prilikom dohvaćanja korisnika.");
+        $window.alert(KONSTANTE.DOHVACANJE_KVIZA_GRESKA);
     });
 });
 

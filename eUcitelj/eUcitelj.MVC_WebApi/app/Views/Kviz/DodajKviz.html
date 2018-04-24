@@ -1,5 +1,5 @@
 ﻿<div class="container" ng-controller="DodajKvizController">
-    <h2>Kviz-upisivanje pitanja iz predmeta <b>{{Predmet.Ime_predmeta}}</b></h2>
+    <h2>Kviz-upisivanje pitanja iz predmeta <b>{{predmet.Ime_predmeta}}</b></h2>
     <br />
 
     <br />
@@ -21,7 +21,7 @@
     <input type="text" id="id_TocanOdg" placeholder="T" ng-model="Tocan_odgovor" />
     <br />
     <br />
-    <input id="btnUnesi" class="btn btn-success" type="button" value="Unesi pitanje" ng-click="Unesi()" ui-sref="dodajKviz" />
+    <input id="btnUnesi" class="btn btn-success" type="button" value="Unesi pitanje" ng-click="unesi()" ui-sref="dodajKviz" />
 
  
 </div>

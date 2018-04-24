@@ -1,19 +1,19 @@
-﻿app.controller('DohvatiPredmeteController', function ($scope, $http, $stateParams) {
-    var KorisnikIds = {
+﻿app.controller('DohvatiPredmeteController', function ($scope, $http, $stateParams, korisnikService, KONSTANTE) {
+    var korisnikIdovi = {
         KorisnikId:undefined
     };
-    $scope.Korisnik = [];
+    $scope.korisnik = [];
 
-    $http.get('/api/korisnik/getAllKorisnikId').then(function (response) {
-        KorisnikIds = response.data;
-        id=KorisnikIds[0].KorisnikId
-        $http.get('/api/korisnik?id='+id)
+    korisnikService.getAllKorisnikId().then(function (response) {
+        korisnikIdovi = response.data;
+        id = korisnikIdovi[0].KorisnikId
+        korisnikService.get(id)
     .then(function (response) {
-        $scope.Korisnik = response.data;
-        $scope.Predmeti = $scope.Korisnik.Predmeti;
+        $scope.korisnik = response.data;
+        $scope.predmeti = $scope.korisnik.Predmeti;
     }
         , function (jqXHR) {
-            window.alert("Greška prilikom dohvaćanja predmeta.");
+            window.alert(KONSTANTE.DOHVACANJE_PREDMETA_GRESKA);
         });
     });
 

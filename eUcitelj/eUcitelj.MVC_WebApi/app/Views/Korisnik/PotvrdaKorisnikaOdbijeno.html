@@ -20,13 +20,13 @@
         </thead>
         <tbody>
             <tr ng-repeat="korisnik in korisnici" ng-if="korisnik.Potvrda=='Ne'">
-                <td style="text-align:center"><a ng-click="Da(korisnik.KorisnikId)" style="cursor: pointer">Da</a></td>
+                <td style="text-align:center"><a ng-click="da(korisnik.KorisnikId)" style="cursor: pointer">Da</a></td>
                 <td>{{korisnik.Ime_korisnika}}</td>
                 <td>{{korisnik.Prezime_korisnika}}</td>
                 <td>{{korisnik.Korisnicko_ime}}</td>
                 <td>{{korisnik.Uloga}}</td>
                 <td>{{korisnik.Potvrda}}</td>
-                <td><button type="button" class="delete" ng-click="DeleteK(korisnik.KorisnikId)">OBRISI</button></td>
+                <td><button type="button" class="delete" ng-click="deleteK(korisnik.KorisnikId)">OBRISI</button></td>
             </tr>
         </tbody>
     </table>

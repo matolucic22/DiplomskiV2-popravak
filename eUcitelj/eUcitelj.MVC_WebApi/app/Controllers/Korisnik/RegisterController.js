@@ -1,16 +1,17 @@
-﻿app.controller('RegisterController', function ($scope, $http, md5, $location) {//singup
+﻿app.controller('RegisterController', function ($scope, $http, md5, $location, $state, korisnikService, $window, KONSTANTE) {//singup
+
     var modal = document.getElementById('successModal');
 
     var provjeraKI = {
         Korisnicko_ime: undefined
     };
 
-    $http.get('/api/korisnik/getKorisnickoIme').then(function (response) {
+    korisnikService.getKorisnickoIme().then(function (response) {
 
         provjeraKI = response.data;
 
     }, function (response) {
-        window.alert("Greška prilikom preuzimanja korisnika iz baze.");
+        $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
     });
 
     $scope.doStuff = function () {
@@ -43,8 +44,8 @@
         else {
             addObj.Lozinka = md5.createHash($scope.Lozinka || '');
 
-            //upis korisnika u bazu
-            $http.post('/api/korisnik', addObj)
+           //upis korisnika u bazu
+           korisnikService.add(addObj)
                 .then(function (data) {
                     $scope.response = data;
                     modal.style.display = "block";                   
@@ -52,19 +53,20 @@
             , function (jqXHR) {
 
                 window.alert("Sve rubrike moraju biti popunjene.");
+                //Validacijske poruke se prikazuju u obliku popup-a (alert) iz kontrolera.
 
             });
         }
 
         $scope.close = function () {
             modal.style.display = "none";
-            $location.path('#!/korisnik/login');
+            $state.go('login');
         };
 
         window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = "none";
-                $location.path('#!/korisnik/login');
+                $state.go('login');
             }
         };
     };

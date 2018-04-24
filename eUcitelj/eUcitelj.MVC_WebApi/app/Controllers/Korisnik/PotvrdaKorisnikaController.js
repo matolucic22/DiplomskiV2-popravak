@@ -1,19 +1,19 @@
-﻿app.controller('PotvrdaKorisnikaController', function ($scope, $http, $stateParams, $window, $location, $rootScope) {
+﻿app.controller('PotvrdaKorisnikaController', function ($scope, $http, $stateParams, $window, $location, $rootScope, $state, korisnikService, predmetiService, KONSTANTE) {
     $scope.korisnici = [];
     $scope.myVal = [];
    
 
-    $http.get('/api/korisnik').then(function (response) {
+    korisnikService.getAll().then(function (response) {
 
         $scope.korisnici = response.data;       
 
     }, function ()
     {
-        console.log("Greška prilikom preuzimanja korisnika iz baze.");
+        console.log(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
     });
 
 
-    $scope.Da = function (KorisnikId) {
+    $scope.da = function (KorisnikId) {
         
         $rootScope.KorisnikId = KorisnikId;
         var rola = prompt("Upišite ulogu potvrđenog korisnika (Ucitelj/Ucenik/Roditelj):", "");
@@ -21,80 +21,78 @@
         
         if (rolaLower == "ucitelj" || rolaLower == "ucenik" || rolaLower == "roditelj") {
             if (rolaLower == "roditelj") {
-                $location.path('/korisnik/dodajUcenikeRoditelju');
-                $http.get('/api/korisnik?id=' + KorisnikId).then(function (response) {
-                    var Korisnik = response.data;
-                    Korisnik2 = {
-                        KorisnikId: Korisnik.KorisnikId,
-                        Ime_korisnika: Korisnik.Ime_korisnika,
-                        Prezime_korisnika: Korisnik.Prezime_korisnika,
-                        Korisnicko_ime: Korisnik.Korisnicko_ime,
-                        Lozinka: Korisnik.Lozinka,
+                $state.go('dodajUcenikeRoditelju');
+                korisnikService.get(KorisnikId).then(function (response) {
+                    var korisnik = response.data;
+                    korisnik2 = {
+                        KorisnikId: korisnik.KorisnikId,
+                        Ime_korisnika: korisnik.Ime_korisnika,
+                        Prezime_korisnika: korisnik.Prezime_korisnika,
+                        Korisnicko_ime: korisnik.Korisnicko_ime,
+                        Lozinka: korisnik.Lozinka,
                         Potvrda: "Da",
                         Uloga: rola
                     };
+                   
 
-                    $http.put('api/korisnik', Korisnik2).then(function (data) {
+                    korisnikService.update(korisnik2).then(function (data) {
                         $window.alert("Promijenjeno");
-                        $http.get('/api/korisnik').then(function (response) {
+                        korisnikService.getAll().then(function (response) {
                             $scope.korisnici = response.data;
                         }, function () {
-                            console.log("Greška prilikom preuzimanja korisnika iz baze.");
+                            $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
                         });
                     }, function () {
-                        console.log("Greška prilikom postavljanja promjene u bazu.");
+                        $window.alert(KONSTANTE.UNOS_U_BAZU_GRESKA);
                     });
 
                 }, function () {
 
-                    console.log("Greška prilikom dohvata podataka iz baze");
+                    $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
                 });
 
             } else {
-                $http.get('/api/korisnik?id=' + KorisnikId).then(function (response) {
-                    var Korisnik = response.data;
-                    Korisnik2 = {
-                        KorisnikId: Korisnik.KorisnikId,
-                        Ime_korisnika: Korisnik.Ime_korisnika,
-                        Prezime_korisnika: Korisnik.Prezime_korisnika,
-                        Korisnicko_ime: Korisnik.Korisnicko_ime,
-                        Lozinka: Korisnik.Lozinka,
+                korisnikService.get(KorisnikId).then(function (response) {
+                    var korisnik = response.data;
+                    korisnik2 = {
+                        KorisnikId: korisnik.KorisnikId,
+                        Ime_korisnika: korisnik.Ime_korisnika,
+                        Prezime_korisnika: korisnik.Prezime_korisnika,
+                        Korisnicko_ime: korisnik.Korisnicko_ime,
+                        Lozinka: korisnik.Lozinka,
                         Potvrda: "Da",
                         Uloga: rola
                     };
-
-                    $http.put('api/korisnik', Korisnik2).then(function (data) {
+                    korisnikService.update(korisnik2).then(function (data) {
                         $window.alert("Promijenjeno");
-                        $http.get('/api/korisnik/getAll').then(function (response) {
+                        korisnikService.getAll().then(function (response) {
                             $scope.korisnici = response.data;
                         }, function () {
-                            console.log("Greška prilikom preuzimanja korisnika iz baze.");
+                            $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
                         });
                     }, function () {
-                        console.log("Greška prilikom postavljanja promjene u bazu.");
+                        $window.alert(KONSTANTE.UNOS_U_BAZU_GRESKA);
                     });
 
                 }, function () {
 
-                    console.log("Greška prilikom dohvata podataka iz baze");
+                    $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
                 });
             }
 
         }else
         {
-            alert("U prazno polje upišite ulogu potvrđenog korisnika. Pazite da unos bude kao što je predloženo.");
+            $window.alert("U prazno polje upišite ulogu potvrđenog korisnika. Pazite da unos bude kao što je predloženo.");
         }
 
         if(rolaLower=="ucenik")
         {
-            
-            $http.get('/api/korisnik/getAllKorisnikId').then(function (response) {
+            korisnikService.getAllKorisnikId().then(function (response) {
 
                 korisniciId = response.data;       
                 
-                    ////dohvati sve predmete zbog imena.
-                    $http.get('/api/Predmeti')
-                       .then(function (response) {
+                ////dohvati sve predmete zbog imena.
+                predmetiService.getAll().then(function (response) {
                            predmeti = response.data;
 
                            for (i = 0; i < predmeti.length; i++) {
@@ -107,18 +105,18 @@
                                        KorisnikId: KorisnikId,
                                        Ime_predmeta: predmeti[i].Ime_predmeta
                                    };
-                                   $http.post('api/predmeti', objAddPr).then(function (data) {
+                                   predmetiService.add(objAddPr).then(function (data) {
                                        $scope.response = data;
                                    });
                                }
                            }
                        }, function () {
-                           window.alert("Greška prilikom dohvaćanja predmeta.");
+                           window.alert(KONSTANTE.DOHVACANJE_PREDMETA_GRESKA);
                        });
                                        
                 
              }, function () {
-                        window.alert("Greška prilikom dohvaćanja IDa korisnika.");
+                        window.alert("Greška prilikom dohvaćanja ID-ova korisnika.");
                     });         
 
                 window.alert("Dodani predmeti učeniku.");
@@ -126,58 +124,57 @@
     };
         
 
-    $scope.Ne = function (KorisnikId) {
+    $scope.ne = function (KorisnikId) {
 
-        $http.get('/api/korisnik?id=' + KorisnikId).then(function (response) {
-            var Korisnik = response.data;
-            if (Korisnik.Ime_korisnika == 'ucitelj')
+        korisnikService.get(KorisnikId).then(function (response) {
+            var korisnik = response.data;
+            if (korisnik.Ime_korisnika == 'ucitelj')
             {
                 $window.alert('Ucitelj se ostavlja kao obavezan u aplikaciji te mu kao takvom ne možete zabraniti pristup ili ga obrisati.');
             } else
             {
-                var Korisnik2 = {
-                    KorisnikId: Korisnik.KorisnikId,
-                    Ime_korisnika: Korisnik.Ime_korisnika,
-                    Prezime_korisnika: Korisnik.Prezime_korisnika,
-                    Korisnicko_ime: Korisnik.Korisnicko_ime,
-                    Lozinka: Korisnik.Lozinka,
+                var korisnik2 = {
+                    KorisnikId: korisnik.KorisnikId,
+                    Ime_korisnika: korisnik.Ime_korisnika,
+                    Prezime_korisnika: korisnik.Prezime_korisnika,
+                    Korisnicko_ime: korisnik.Korisnicko_ime,
+                    Lozinka: korisnik.Lozinka,
                     Potvrda: "Ne",
                     Uloga: "???"
                 };
-
-                $http.put('api/korisnik', Korisnik2).then(function (data) {
+                korisnikService.update(korisnik2).then(function (data) {
                     $window.alert("Promijenjeno");
-                    $http.get('/api/korisnik').then(function (response) {
+                    korisnikService.getAll().then(function (response) {
                         $scope.korisnici = response.data;
                     }, function () {
-                        console.log("Greška prilikom preuzimanja korisnika iz baze.");
+                        $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
                     });
                 }, function () {
-                    console.log("Greška prilikom postavljanja promjene u bazu.");
+                    $window.alert(KONSTANTE.UNOS_U_BAZU_GRESKA);
                 });
             }
 
             }, function () {
 
-                console.log("Greška prilikom dohvata podataka iz baze");
+                $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
             });
         
     };
 
-    $scope.DeleteK = function (KorisnikId)
+    $scope.deleteK = function (KorisnikId)
     {
         
-        $http.delete('/api/korisnik?Id=' + KorisnikId).then(function (response) {
+        korisnikService.delete(KorisnikId).then(function (response) {
             $window.alert("Korisnik uklonjen.");
 
-                $http.get('/api/korisnik').then(function (response) {
+            korisnikService.getAll().then(function (response) {
                     $scope.korisnici = response.data;
                 }, function () {
-                    console.log("Greška prilikom preuzimanja korisnika iz baze.");
+                    $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
                 });
         }, function () {
 
-            alert("Greska prilikom uklanjanja iz baze korisnika.");
+            $window.alert(KONSTANTE.UKLANJANJE_KOR_GRESKA);
 
         });
     };  

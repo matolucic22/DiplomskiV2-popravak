@@ -1,4 +1,4 @@
-﻿app.controller('navbarController', function navbarController($scope, $http, $stateParams, $window, $state, $localStorage, AuthenticationService) {
+﻿app.controller('NavbarController', function navbarController($scope, $http, $stateParams, $window, $state, $localStorage, AuthenticationService) {
     $scope.LogOut = function () {
         AuthenticationService.Logout();
         $window.location.href = '/#/korisnik/login';

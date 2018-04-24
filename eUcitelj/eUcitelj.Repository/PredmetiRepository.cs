@@ -99,7 +99,7 @@ namespace eUcitelj.Reporsitory
                     predmeti = predmeti.OrderBy(p => p.Ime_predmeta);
                     break;
             }
-            return predmeti.ToPagedList(brStr ?? 1, 2);//1. broj trenutne stranice (indeks podskupa); 2. velicina stranice(maksimalni broj elemenata na stranici-->maksimalna velicina podskupa)
+            return predmeti.ToPagedList(brStr ?? 1, 4);//1. broj trenutne stranice (indeks podskupa); 2. velicina stranice(maksimalni broj elemenata na stranici-->maksimalna velicina podskupa)
             //brStr ?? 1 --> ako je brStr null, stavi da bude 1. int?-->omogucava da bude var null.
         }
     }
