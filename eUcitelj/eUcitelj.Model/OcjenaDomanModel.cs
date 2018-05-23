@@ -13,6 +13,7 @@ namespace eUcitelj.Model
     {
         public Guid OcjenaId { get; set; }       
         public Guid PredmetId { get; set; }
+        public Guid KorisnikId { get; set; }
         public int Ocj { get; set; }
         public string Opis { get; set; }
         [Column(TypeName = "date")]

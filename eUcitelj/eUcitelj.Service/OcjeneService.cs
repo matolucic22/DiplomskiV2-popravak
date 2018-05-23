@@ -23,6 +23,8 @@ namespace eUcitelj.Service
 
         public async Task<int> AddAsync(IOcjeneDomainModel addObj)
         {
+            addObj.OcjenaId = Guid.NewGuid();
+            addObj.DatumUpisa = DateTime.Now.Date;
             return await OcjeneGenericReporsitory.AddAsync(addObj);
         }
 
@@ -44,6 +46,11 @@ namespace eUcitelj.Service
         public async Task<int> UpdateAsync(IOcjeneDomainModel updated)
         {
             return await OcjeneGenericReporsitory.UpdateAsync(updated);
+        }
+
+        public async Task<IEnumerable<IOcjeneDomainModel>> GetByKorisnikIdAsync(Guid KorisnikId)
+        {
+            return await OcjeneGenericReporsitory.GetByKorisnikIdAsync(KorisnikId);
         }
     }
 }

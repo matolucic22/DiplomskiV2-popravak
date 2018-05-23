@@ -30,6 +30,7 @@ namespace eUcitelj.Service
 
         public async Task<int> AddAsync(IKvizDomainModel addObj)
         {
+            addObj.KvizId = Guid.NewGuid();
             return await KvizGenericReporsitory.AddAsync(addObj);
         }
 

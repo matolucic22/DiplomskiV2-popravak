@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using eUcitelj.Common;
 using eUcitelj.DAL.Models;
 using eUcitelj.Model.Common;
 using eUcitelj.Reporsitory.Common;
@@ -22,75 +23,47 @@ namespace eUcitelj.Reporsitory
 
         public async Task<int> AddAsync(IPredmetiDomainModel addObj)
         {
-            try
-            {
-                return await Reporsitory.AddAsync(Mapper.Map<Predmet>(addObj));
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            
+            return await Reporsitory.AddAsync(Mapper.Map<Predmet>(addObj));
+        }
+
+        public async Task<int> AddToBridgeAsync(IPredmetKorisnikDomainModel addObj)
+        {
+            return await Reporsitory.AddAsync(Mapper.Map<PredmetKorisnik>(addObj));
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
-            try
-            {
-                return await Reporsitory.DeleteAsync<Predmet>(Id);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return await Reporsitory.DeleteAsync<Predmet>(Id);
         }
 
         public async Task<IEnumerable<IPredmetiDomainModel>> GetAllAsync()
         {
-            try
-            {
-                return Mapper.Map<IEnumerable<IPredmetiDomainModel>>(await Reporsitory.GetAllAsync<Predmet>());
-            }catch(Exception e)
-            {
-                throw e;
-            }
+            return Mapper.Map<IEnumerable<IPredmetiDomainModel>>(await Reporsitory.GetAllAsync<Predmet>());
         }
 
         public async Task<IPredmetiDomainModel> GetAsync(Guid Id)
         {
-            try
-            {
-                return Mapper.Map<IPredmetiDomainModel>(await Reporsitory.GetAsync<Predmet>(Id));
-
-            }catch(Exception e)
-            {
-                throw e;
-            }
+            return Mapper.Map<IPredmetiDomainModel>(await Reporsitory.GetAsync<Predmet>(Id));
         }
 
         public async Task<int> UpdateAsync(IPredmetiDomainModel updated)
         {
-            try
-            {
-                return await Reporsitory.UpdateAsync(Mapper.Map<Predmet>(updated));
-            }catch(Exception e)
-            {
-                throw e;
-            }
+            return await Reporsitory.UpdateAsync(Mapper.Map<Predmet>(updated));
         }
 
-        public async Task<IPagedList<IPredmetiDomainModel>> SortingPagingFilteringAsync(string redoslijed, string trazeniPojam, int? brStr)
+        public async Task<IPagedList<IPredmetiDomainModel>> SortingPagingFilteringAsync(FilterModel filterModel)
         {
-            IEnumerable<IPredmetiDomainModel> predmeti = Mapper.Map<IEnumerable<IPredmetiDomainModel>>(await Reporsitory.GetAllAsync<Predmet>());
-            if(String.IsNullOrWhiteSpace(trazeniPojam) || trazeniPojam=="undefined")
+            IEnumerable <IPredmetiDomainModel> predmeti;
+            if(String.IsNullOrWhiteSpace(filterModel.TrazeniPojam) || filterModel.TrazeniPojam == "undefined")
             {
-               Console.WriteLine("Null je! Funkcija se preskace.");
+                predmeti = Mapper.Map<IEnumerable<IPredmetiDomainModel>>(await Reporsitory.GetAllAsync<Predmet>());
             }
             else
             {
-                predmeti = predmeti.Where(p => p.Ime_predmeta.Contains(trazeniPojam));
+                predmeti=Mapper.Map<IEnumerable<IPredmetiDomainModel>>(await Reporsitory.GetAllAsync<Predmet>()).Where(p => p.Ime_predmeta.Contains(filterModel.TrazeniPojam));
+                
             }
-            switch (redoslijed)
+            switch (filterModel.Redoslijed)
             {
                 case "Ime_silazno":
                     predmeti = predmeti.OrderByDescending(p => p.Ime_predmeta);
@@ -99,7 +72,7 @@ namespace eUcitelj.Reporsitory
                     predmeti = predmeti.OrderBy(p => p.Ime_predmeta);
                     break;
             }
-            return predmeti.ToPagedList(brStr ?? 1, 4);//1. broj trenutne stranice (indeks podskupa); 2. velicina stranice(maksimalni broj elemenata na stranici-->maksimalna velicina podskupa)
+            return predmeti.ToPagedList(filterModel.BrStr ?? 1, 4);//1. broj trenutne stranice (indeks podskupa); 2. velicina stranice(maksimalni broj elemenata na stranici-->maksimalna velicina podskupa)
             //brStr ?? 1 --> ako je brStr null, stavi da bude 1. int?-->omogucava da bude var null.
         }
     }

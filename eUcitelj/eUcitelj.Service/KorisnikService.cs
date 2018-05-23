@@ -24,9 +24,18 @@ namespace eUcitelj.Service
         {
             this.KorisnikGenericReporsitory = korisnikGenericReporsitory;
         }
+
         public async Task<int> AddAsync(IKorisnikDomainModel addObj)
         {
-            return await KorisnikGenericReporsitory.AddAsync(addObj);
+            try
+            {
+                addObj.KorisnikId = Guid.NewGuid();
+                return await KorisnikGenericReporsitory.AddAsync(addObj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public async Task<int> DeleteAsync(Guid Id)
@@ -48,7 +57,7 @@ namespace eUcitelj.Service
         {
             return await KorisnikGenericReporsitory.UpdateAsync(updated);
         }
-        //find user by username
+        
         public async Task<IKorisnikDomainModel> FindByUserNameAsync(string korisnicko_ime)
         {
             return await KorisnikGenericReporsitory.GetByUsernameAsync(korisnicko_ime);

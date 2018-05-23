@@ -14,5 +14,6 @@ namespace eUcitelj.Service.Common
         Task<int> AddAsync(IOcjeneDomainModel addObj);
         Task<int> UpdateAsync(IOcjeneDomainModel updated);
         Task<int> DeleteAsync(Guid Id);
+        Task<IEnumerable<IOcjeneDomainModel>> GetByKorisnikIdAsync(Guid KorisnikId);
     }
 }

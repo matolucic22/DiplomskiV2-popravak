@@ -1,0 +1,36 @@
+﻿<div class="container" ng-controller="RjesavajKvizController">
+    <h1><b>KVIZ</b></h1>
+    <hr>
+    <hr>
+    <div>
+        <div>Broj točnih odgovora:<div id="TocanOdgovor"></div> </div>
+        <hr>
+        <form ng-repeat="p in pitanja">
+            <h2>{{p.Pitanje}}</h2> 
+
+            <div>
+                <input type="radio" name="{{p.Tocan_odgovor}}" id="id_Odg1" value="{{p.Odg1}}" ng-model="mojaVrijednost" class="Odg"/>
+                <label for="id_Odg1">{{p.Odg1}} </label>
+            </div>
+
+            <div>
+                <input type="radio" name="{{p.Tocan_odgovor}}" id="id_Odg2" value="{{p.Odg2}}" ng-model="mojaVrijednost" class="Odg"/><!--ng-model-->
+                <label for="id_Odg2">{{p.Odg2}} </label>
+            </div>
+
+            <div>
+                <input type="radio" name="{{p.Tocan_odgovor}}" id="id_Odg3" value="{{p.Odg3}}" ng-model="mojaVrijednost" class="Odg"/>
+                <label for="id_Odg3">{{p.Odg3}} </label>
+            </div>
+            <hr> 
+        </form>
+        <hr>    
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Snimi" class="btn btn-default" ng-click="snimi()" id="button" />
+        </div>
+    </div>
+
+</div>
+

@@ -202,7 +202,9 @@
     <Compile Include="Controllers\KvizController.cs" />
     <Compile Include="Controllers\OcjeneController.cs" />
     <Compile Include="Controllers\PredmetiController.cs" />
+    <Compile Include="Controllers\PredmetKorisnikController.cs" />
     <Compile Include="Controllers\UceniciController.cs" />
+    <Compile Include="Controllers\ValidateModelAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,6 +212,7 @@
     <Compile Include="ViewModels\KorisnikViewModel.cs" />
     <Compile Include="ViewModels\KvizViewModel.cs" />
     <Compile Include="ViewModels\OcjenaViewModel.cs" />
+    <Compile Include="ViewModels\PredmetKorisnikViewModel.cs" />
     <Compile Include="ViewModels\PredmetViewModel.cs" />
     <Compile Include="ViewModels\UcenikViewModel.cs" />
   </ItemGroup>
@@ -219,13 +222,11 @@
     <Content Include="app\Controllers\Korisnik\DodajUcenikeRoditeljuController.js" />
     <Content Include="app\Controllers\Korisnik\HomeController.js" />
     <Content Include="app\Controllers\Korisnik\IzmjeniUcenikeRoditeljuController.js" />
-    <Content Include="app\Services\KorisnikService.js" />
     <Content Include="app\Controllers\Korisnik\LoginController.js" />
     <Content Include="app\Controllers\Korisnik\PotvrdaKorisnikaController.js" />
     <Content Include="app\Controllers\Korisnik\RegisterController.js" />
     <Content Include="app\Controllers\Kviz\DodajKvizController.js" />
     <Content Include="app\Controllers\Kviz\DohvatiPredmeteController.js" />
-    <Content Include="app\Services\KvizService.js" />
     <Content Include="app\Controllers\Kviz\ObrisiKvizController.js" />
     <Content Include="app\Controllers\Kviz\PopraviKvizController.js" />
     <Content Include="app\Controllers\Kviz\PregledajKvizController.js" />
@@ -234,7 +235,6 @@
     <Content Include="app\Controllers\Ocjene\BrisanjeOcjenaUcenikPredmetiController.js" />
     <Content Include="app\Controllers\Ocjene\DohvatiPredmeteUcenikaZaRoditeljaController.js" />
     <Content Include="app\Controllers\Ocjene\DohvatiPredmeteUcenikRoditeljController.js" />
-    <Content Include="app\Services\OcjeneService.js" />
     <Content Include="app\Controllers\Ocjene\PregledOcjenaUcenikPredmetiController.js" />
     <Content Include="app\Controllers\Ocjene\UnosOcjenaController.js" />
     <Content Include="app\Controllers\Ocjene\UnosOcjenaUcenikController.js" />
@@ -242,11 +242,15 @@
     <Content Include="app\Controllers\Predmeti\AddPredmetiController.js" />
     <Content Include="app\Controllers\Predmeti\EditPredmetiController.js" />
     <Content Include="app\Controllers\Predmeti\PredmetiController.js" />
-    <Content Include="app\Services\PredmetiService.js" />
     <Content Include="app\js\md5.js" />
     <Content Include="app\js\ngStorage.js" />
     <Content Include="app\js\unique.js" />
     <Content Include="app\Services\AuthenticationService.js" />
+    <Content Include="app\Services\KorisnikService.js" />
+    <Content Include="app\Services\KvizService.js" />
+    <Content Include="app\Services\OcjeneService.js" />
+    <Content Include="app\Services\PredmetiService.js" />
+    <Content Include="app\Services\PredmetKorisnikService.js" />
     <Content Include="app\Views\Kontakt.html" />
     <Content Include="app\Views\Korisnik\DodajUcenikeRoditelju.html" />
     <Content Include="app\Views\Korisnik\Home.html" />
@@ -282,11 +286,14 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DropDownMenu.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="Images\ucionica.jpg" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -320,26 +327,8 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Scripts\dirPagination.js" />
     <Content Include="Scripts\dirPagination.tpl.html" />
-    <Content Include="Scripts\errors.json" />
-    <Content Include="Scripts\angular-touch.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
-    <Content Include="Scripts\angular-route.min.js.map" />
-    <Content Include="Scripts\angular-resource.min.js.map" />
-    <Content Include="Scripts\angular-parse-ext.min.js.map" />
-    <Content Include="Scripts\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular-message-format.min.js.map" />
-    <Content Include="Scripts\angular-loader.min.js.map" />
-    <Content Include="Scripts\angular-cookies.min.js.map" />
-    <Content Include="Scripts\angular-aria.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
-    <Content Include="Scripts\angular.min.js.map" />
-    <Content Include="Scripts\angular-local-storage.min.js.map" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\i18n\angular-locale_af-na.js" />
     <Content Include="Scripts\i18n\angular-locale_af-za.js" />
     <Content Include="Scripts\i18n\angular-locale_af.js" />
@@ -1078,6 +1067,7 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -1088,7 +1078,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1105,7 +1095,6 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1116,12 +1105,31 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
+    <Content Include="Scripts\angular-aria.min.js.map" />
+    <Content Include="Scripts\angular-cookies.min.js.map" />
+    <Content Include="Scripts\angular-loader.min.js.map" />
+    <Content Include="Scripts\angular-local-storage.min.js.map" />
+    <Content Include="Scripts\angular-message-format.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
+    <Content Include="Scripts\angular-parse-ext.min.js.map" />
+    <Content Include="Scripts\angular-resource.min.js.map" />
+    <Content Include="Scripts\angular-route.min.js.map" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\angular-touch.min.js.map" />
+    <Content Include="Scripts\angular.min.js.map" />
+    <Content Include="Scripts\errors.json" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eUcitelj.AngularJS_frontend\eUcitelj.AngularJS_frontend.csproj">
-      <Project>{d99c1900-a7ad-4c7b-811a-4cbfd72b10ce}</Project>
-      <Name>eUcitelj.AngularJS_frontend</Name>
+    <ProjectReference Include="..\eUcitelj.AngularJS.frontend\eUcitelj.AngularJS.frontend.csproj">
+      <Project>{55258594-B699-40BB-84D9-2D92C06FFC92}</Project>
+      <Name>eUcitelj.AngularJS.frontend</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\eUcitelj.Common\eUcitelj.Common.csproj">
+      <Project>{DA5A9BF9-1829-49BA-A83B-E8B4EE35CF6A}</Project>
+      <Name>eUcitelj.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\eUcitelj.DAL\eUcitelj.DAL.csproj">
       <Project>{882A72A0-778C-439D-B70A-C4C0257C59A3}</Project>

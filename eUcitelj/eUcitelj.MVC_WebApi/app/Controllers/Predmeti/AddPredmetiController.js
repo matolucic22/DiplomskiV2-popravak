@@ -1,4 +1,4 @@
-﻿app.controller("AddPredmetiController", function ($scope, $http, $location, $window, $state, predmetiService, korisnikService, KONSTANTE) {
+﻿app.controller("AddPredmetiController", function ($scope, $http, $location, $window, $state, predmetiService, korisnikService, KONSTANTE, uuid, predmetKorisnikService) {
 
     var test = 'Test';
     var korisnikIdovi = {
@@ -26,43 +26,51 @@
         .then(function (data) {
             $scope.response = data;
             $window.alert("Učenika trenutno nemate u bazi. Kako bi ste mogli dodati predmete kreiran je testni učenik. Predmeti se obavezno moraju pridružiti učenicima. Kada se registrira barem jedan učenik, slobodno možete obrisati testnog. Predmeti će ostati pohranjeni. Vratite se nazad i ponovno upišite predmet.");
-        }
-            , function (jqXHR) {
-                window.alert("Greška prilikom stvaranja testnog korisnika.");
-            });
+        }).catch(function (response) {
+            for (var key in response.data.ModelState)
+            {
+                alert(response.data.ModelState[key][0]);
+            }
+        });
      }
     });
         
 
     $scope.addPredmet = function () {
 
-        //PITANJE: "  •	stavljati item za update ili create na objekt, i onda se cijeli objekt može proslijediti u update/create metodu "
-        //ODG: Nisam razumio pitanje. Prilikom create(add)/update sad stvorio objekt i na njega stavio potrebne item-e te poslao na metodu.
+        PrId = uuid.new();
 
-        predmetiService.getAll().then(function (response) {//prvo sam dohvatio sve predmete da mogu provjeriti dali unešeni string (Ime predmeta) već postoji u bazi. Taj način sam iskoristio ovdje, kasnije sam shvatio da potoji lakših, bržih, učinkovitijih načina za pretragu.
-            predmeti = response.data;
-            for (i = 0; i < predmeti.length; i++)
-            {
-                predmetiI[i] = predmeti[i].Ime_predmeta;
-            }
-                        
-            if (predmetiI.indexOf($scope.Ime_predmeta) == -1) {// Jedan od načina koji sam koristio da vidim dali mi unešeni string (Ime predmeta) već postoji u bazi. 
-                for (i = 0; i < korisnikIdovi.length; i++) { //Pokušavao sam još ranije postaviti itemu Ime_predmeta u bazi index 'unique', ali s obzirom da u tablici Predmet imam više istih Imena predmeta sa različitim ID-ovima i ID-ovima korisnika (Objašnjeno u PredmetiController.js skripti kao komentar pod  --> ***ODG:) logika nije dobro funkcionirala pa sam se odlučio na ovo.
-                    var objAdd = {
-                        KorisnikId: korisnikIdovi[i].KorisnikId,
-                        Ime_predmeta: $scope.Ime_predmeta
-                    };
+        var addPR = {
+            Ime_predmeta: $scope.Ime_predmeta,
+            PredmetId: PrId
+        };
 
-                    predmetiService.add(objAdd).then(function (data) {
-                        $scope.response = data;
-                        $state.go('predmetiIndex');
-                    });
-                }
-            }else
+        predmetiService.add(addPR).then(function (data) {
+            $scope.response = data;
+        }).catch(function (response) {
+            for (var key in response.data.ModelState)
             {
-                $window.alert(KONSTANTE.UNOS_POSTOJI);//poruka o validaciji je u ovom obliku. U slučaju unosa itema koji već postji u tablici, u Controlleru se kreira InternalServerError sa nekim Exceptionom 
-                                                      //koji nije user friendly te je modificiran na frontendu. 
+                alert(response.data.ModelState[key][0]);
             }
-        });       
+        });
     };
+    
+});
+
+app.factory('uuid', function () {
+    var svc = {
+        new: function () {
+            function _p8(s) {
+                var p = (Math.random().toString(16) + "000000000").substr(2, 8);
+                return s ? "-" + p.substr(0, 4) + "-" + p.substr(4, 4) : p;
+            }
+            return _p8() + _p8(true) + _p8(true) + _p8();
+        },
+
+        empty: function () {
+            return '00000000-0000-0000-0000-000000000000';
+        }
+    };
+
+    return svc;
 });

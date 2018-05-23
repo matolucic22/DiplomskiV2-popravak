@@ -22,9 +22,34 @@ namespace eUcitelj.DAL
         public DbSet<Ocjena> Ocjene { get; set; }//make table
         public DbSet<Predmet> Predmeti { get; set; }
         public DbSet<Ucenik> Ucenici { get; set; }
+        public DbSet<PredmetKorisnik> PredmetKorisnik { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)//code first
         {
+            //modelBuilder.Entity<Predmet>()
+            //    .HasMany(t => t.Korisnik)
+            //    .WithMany(t => t.Predmet)
+            //    .Map(m =>
+            //    {
+            //        m.ToTable("PredmetKorisnik");
+            //        m.MapLeftKey("PredmetId");
+            //        m.MapRightKey("KorisnikId");
+            //    });
+
+            //     modelBuilder.Entity<PredmetKorisnik>()
+            //.HasKey(c => new { c.PredmetId, c.KorisnikId });
+
+            //     modelBuilder.Entity<Predmet>()
+            //         .HasMany(c => c.PredmetKorisnici)
+            //         .WithRequired()
+            //         .HasForeignKey(c => c.PredmetId);
+
+            //     modelBuilder.Entity<Korisnik>()
+            //         .HasMany(c => c.PredmetKorisnici)
+            //         .WithRequired()
+            //         .HasForeignKey(c => c.KorisnikId);
+
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();//Instead, the table names will be Korisnici, Kvizovi. Developers disagree about whether table names should be pluralized or not. Method prevents table name of being puralized.
         }
 

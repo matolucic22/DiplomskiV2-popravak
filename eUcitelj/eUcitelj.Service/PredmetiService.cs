@@ -1,4 +1,5 @@
-﻿using eUcitelj.Model.Common;
+﻿using eUcitelj.Common;
+using eUcitelj.Model.Common;
 using eUcitelj.Reporsitory.Common;
 using eUcitelj.Service.Common;
 using PagedList;
@@ -25,6 +26,11 @@ namespace eUcitelj.Service
             return await PredmetiGenericReporsitory.AddAsync(addObj);
         }
 
+        public async Task<int> AddToBridgeAsync(IPredmetKorisnikDomainModel addObj)
+        {
+            return await PredmetiGenericReporsitory.AddToBridgeAsync(addObj);
+        }
+
         public async Task<int> DeleteAsync(Guid Id)
         {
             return await PredmetiGenericReporsitory.DeleteAsync(Id);
@@ -45,9 +51,9 @@ namespace eUcitelj.Service
             return await PredmetiGenericReporsitory.UpdateAsync(updated);
         }
 
-        public async Task<IPagedList<IPredmetiDomainModel>> SortingPagingFilteringAsync(string redoslijed, string trazeniPojam, int? brStr)
+        public async Task<IPagedList<IPredmetiDomainModel>> FindAsync(FilterModel filterModel)
         {
-            return await PredmetiGenericReporsitory.SortingPagingFilteringAsync(redoslijed, trazeniPojam, brStr);
+            return await PredmetiGenericReporsitory.SortingPagingFilteringAsync(filterModel);
         }
     }
 }

@@ -17,6 +17,8 @@ namespace eUcitelj.Service
             Bind<IOcjeneService>().To<OcjeneService>();
             Bind<IKvizService>().To<KvizService>();
             Bind<IUceniciService>().To<UceniciService>();
+            Bind<IPredmetKorisnikService>().To<PredmetKorisnikService>();
+
         }
     }
 }

@@ -22,68 +22,27 @@ namespace eUcitelj.Reporsitory
         }
         public async Task<int> AddAsync(IKorisnikDomainModel addObj)
         {
-            try
-            {
-                //await Reporsitory.GetQueryable<Korisnik>().Where(i => i.Korisnicko_ime == addObj.Korisnicko_ime).FirstOrDefaultAsync(); --> nije potrebno u aplikaciji. Zaboravio sam obrisati, koristio sam za neko testiranje koje mi kasnije nije bilo potrebno. Provjera dali vec postoji korisnik sa tim korisnickim imenom u bazi se odvija u AngularJS-u.
-                return await Reporsitory.AddAsync(Mapper.Map<Korisnik>(addObj));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            
+            return await Reporsitory.AddAsync(Mapper.Map<Korisnik>(addObj));           
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
-            try
-            {
-                return await Reporsitory.DeleteAsync<Korisnik>(Id);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-
+            return await Reporsitory.DeleteAsync<Korisnik>(Id);
         }
 
         public async Task<IEnumerable<IKorisnikDomainModel>> GetAllAsync()
         {
-            //PITANJE: -nema paging, sorting, filtering - GetAllAsync metoda - nikad se neće svi podaci dohvaćati odjednom
-            //ODGOVOR: Paging, filtering, sorting su prema potrebama aplikacije odrađeni u AngularJS-u. GetAllAsync metodu sam koristio da bi dohvatio sve elemente iz jedne tablice npr. za prikaz svih korisnika u sustavu prilikom odredivanja uloga (rola).
-            try
-            {
-                return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(await Reporsitory.GetAllAsync<Korisnik>());
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(await Reporsitory.GetAllAsync<Korisnik>());  
         }
 
         public async Task<IKorisnikDomainModel> GetAsync(Guid Id)
         {
-            try
-            {
-                return Mapper.Map<IKorisnikDomainModel>(await Reporsitory.GetAsync<Korisnik>(Id));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return Mapper.Map<IKorisnikDomainModel>(await Reporsitory.GetAsync<Korisnik>(Id));
         }
 
         public async Task<int> UpdateAsync(IKorisnikDomainModel updated)
         {
-            try
-            {
-                return await Reporsitory.UpdateAsync(Mapper.Map<Korisnik>(updated));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return await Reporsitory.UpdateAsync(Mapper.Map<Korisnik>(updated));
         }
 
         public async Task<IKorisnikDomainModel> GetByUsernameAsync(string korisnicko_ime)

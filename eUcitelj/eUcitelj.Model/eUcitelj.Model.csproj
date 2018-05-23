@@ -50,6 +50,7 @@
     <Compile Include="KvizDomainModel.cs" />
     <Compile Include="OcjenaDomanModel.cs" />
     <Compile Include="PredmetDomainModel.cs" />
+    <Compile Include="PredmetKorisnikDomainModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UcenikDomainModel.cs" />
   </ItemGroup>

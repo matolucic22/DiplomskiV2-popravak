@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using eUcitelj.Common;
 using eUcitelj.Model.Common;
 using eUcitelj.MVC_WebApi.ViewModels;
+using eUcitelj.Service;
 using eUcitelj.Service.Common;
 using PagedList;
 using System;
@@ -31,10 +33,9 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
-
             }catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 
@@ -55,26 +56,43 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<HttpResponseMessage> AddPredmetAsync(PredmetViewModel addObj)
         {
             try
-            {             
-                addObj.PredmetId = Guid.NewGuid();
+            {
                 var response= await PredmetiService.AddAsync(Mapper.Map<IPredmetiDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e);
+            }
+        }
+
+        [HttpPost]
+        [Route("addtobridge")]
+        public async Task<HttpResponseMessage> AddToBridgeAsync(PredmetKorisnikViewModel addObj)
+        {
+            try
+            {
+                var response = await PredmetiService.AddToBridgeAsync(Mapper.Map<IPredmetKorisnikDomainModel>(addObj));
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greska prilikom odavanja");
             }
         }
 
         [HttpPut]
+        [ValidateModel]
         public async Task<HttpResponseMessage> UpdatePredmetAsync(PredmetViewModel updateP)
         {
             try
@@ -95,7 +113,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
 
             }catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greska prilikom promjene");
             }
         }
 
@@ -109,23 +127,25 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greška prilikom brisanja");
             }
         }
 
         [HttpGet]
         [Route("spf")]
-        public async Task<HttpResponseMessage> SortingPagingFilteringAsync(string redoslijed, string trazeniPojam, int? brStr)
+        public async Task<HttpResponseMessage> FindAsync(string redoslijed, string trazeniPojam, int? brStr)
         {
             try
             {
-                var response =Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.SortingPagingFilteringAsync(redoslijed, trazeniPojam, brStr));
+                FilterModel filterModel = new FilterModel(redoslijed, trazeniPojam, brStr);
+                var response =Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.FindAsync(filterModel));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greška kod SPF-a.");
             }
         }
+    
     }
 }

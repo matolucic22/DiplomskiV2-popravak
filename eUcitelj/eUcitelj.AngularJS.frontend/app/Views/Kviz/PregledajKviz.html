@@ -1,0 +1,31 @@
+﻿<div class="container" ng-controller="PregledajKvizController">
+    <h2>Pregled pitanja kviza iz predmeta <b>{{predmet.Ime_predmeta}}</b></h2>
+    <br />
+
+    <table class="table table-striped table-bordered" style="padding-top:5px">
+        <thead>
+            <tr>
+                <th>PITANJE</th>
+                <th>ODGOVOR 1</th>
+                <th>ODGOVOR 2</th>
+                <th>ODGOVOR 3</th>
+                <th>TOČAN ODGOVOR</th>
+                <th>POPRAVI/OBRIŠI</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="k in kviz">
+                <td>{{k.Pitanje}}</td>
+                <td>{{k.Odg1}}</td>
+                <td>{{k.Odg2}}</td>
+                <td>{{k.Odg3}}</td>
+                <td>{{k.Tocan_odgovor}}</td>
+                <td>
+                <a ui-sref="popraviKviz({KvizId: k.KvizId})">Popravi </a> 
+                <a ng-click="obrisi(k.KvizId)" style="cursor: pointer" >Obriši</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

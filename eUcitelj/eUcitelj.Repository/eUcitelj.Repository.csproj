@@ -67,11 +67,16 @@
     <Compile Include="MappingProfile.cs" />
     <Compile Include="OcjeneRepository.cs" />
     <Compile Include="PredmetiRepository.cs" />
+    <Compile Include="PredmetKorisnikRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GenericRepository.cs" />
     <Compile Include="UceniciRepository.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\eUcitelj.Common\eUcitelj.Common.csproj">
+      <Project>{DA5A9BF9-1829-49BA-A83B-E8B4EE35CF6A}</Project>
+      <Name>eUcitelj.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eUcitelj.DAL\eUcitelj.DAL.csproj">
       <Project>{882A72A0-778C-439D-B70A-C4C0257C59A3}</Project>
       <Name>eUcitelj.DAL</Name>

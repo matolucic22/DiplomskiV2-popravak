@@ -14,5 +14,6 @@ namespace eUcitelj.Reporsitory.Common
         Task<int> AddAsync(IOcjeneDomainModel addObj);
         Task<int> UpdateAsync(IOcjeneDomainModel updated);//obavi i returna samo save
         Task<int> DeleteAsync(Guid Id);
+        Task<IEnumerable<IOcjeneDomainModel>> GetByKorisnikIdAsync(Guid KorisnikId);
     }
 }

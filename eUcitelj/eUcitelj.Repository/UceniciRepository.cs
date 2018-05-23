@@ -19,65 +19,28 @@ namespace eUcitelj.Reporsitory
         }
 
         public async Task<int> AddAsync(IUceniciDomainModel addObj)
-        {
-            try
-            {
-                return await Reporsitory.AddAsync(Mapper.Map<Ucenik>(addObj));
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }         
+        { 
+            return await Reporsitory.AddAsync(Mapper.Map<Ucenik>(addObj));
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
-            try
-            {
-                return await Reporsitory.DeleteAsync<Ucenik>(Id);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }          
+            return await Reporsitory.DeleteAsync<Ucenik>(Id);
         }
 
         public async Task<IEnumerable<IUceniciDomainModel>> GetAllAsync()
         {
-            try
-            {
-                return Mapper.Map<IEnumerable<IUceniciDomainModel>>(await Reporsitory.GetAllAsync<Ucenik>());
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return Mapper.Map<IEnumerable<IUceniciDomainModel>>(await Reporsitory.GetAllAsync<Ucenik>());
         }
 
         public async Task<IUceniciDomainModel> GetAsync(Guid Id)
         {
-            try
-            {
-                return Mapper.Map<IUceniciDomainModel>(await Reporsitory.GetAsync<Ucenik>(Id));
-
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return Mapper.Map<IUceniciDomainModel>(await Reporsitory.GetAsync<Ucenik>(Id));
         }
 
         public async Task<int> UpdateAsync(IUceniciDomainModel updated)
         {
-            try
-            {
-                return await Reporsitory.UpdateAsync(Mapper.Map<Ucenik>(updated));
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
+            return await Reporsitory.UpdateAsync(Mapper.Map<Ucenik>(updated));
         }
     }
 }

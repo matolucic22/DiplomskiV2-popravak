@@ -28,6 +28,9 @@ namespace eUcitelj.Reporsitory
 
             
             CreateMap<Ucenik, IUceniciDomainModel>().PreserveReferences().ReverseMap().PreserveReferences();
+
+
+            CreateMap<PredmetKorisnik, IPredmetKorisnikDomainModel>().PreserveReferences().ReverseMap().PreserveReferences();
         }
     }
 }

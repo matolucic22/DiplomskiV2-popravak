@@ -1,4 +1,4 @@
-﻿using eUcitelj.AngularJS_frontend;
+﻿using eUcitelj.AngularJS.frontend;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,8 +20,10 @@ namespace eUcitelj.MVC_WebApi
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-            //BConfig.RegisterB(BundleTable.Bundles);
+            BConfig.RegisterBundles(BundleTable.Bundles);
+            //BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
+
 
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Serialize;
             GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);

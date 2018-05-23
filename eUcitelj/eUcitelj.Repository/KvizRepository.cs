@@ -19,67 +19,27 @@ namespace eUcitelj.Reporsitory
         }
         public async Task<int> AddAsync(IKvizDomainModel addObj)
         {
-            try
-            {
-                return await Reporsitory.AddAsync(Mapper.Map<Kviz>(addObj));
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            
+            return await Reporsitory.AddAsync(Mapper.Map<Kviz>(addObj));
         }
 
         public async Task<int> DeleteAsync(Guid Id)
         {
-            try
-            {
-                return await Reporsitory.DeleteAsync<Kviz>(Id);
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            
+            return await Reporsitory.DeleteAsync<Kviz>(Id);
         }
 
         public async Task<IEnumerable<IKvizDomainModel>> GetAllAsync()
         {
-            try
-            {
-                return Mapper.Map<IEnumerable<IKvizDomainModel>>(await Reporsitory.GetAllAsync<Kviz>());
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            
+            return Mapper.Map<IEnumerable<IKvizDomainModel>>(await Reporsitory.GetAllAsync<Kviz>());
         }
 
         public async Task<IKvizDomainModel> GetAsync(Guid Id)
         {
-            try
-            {
-                return Mapper.Map<IKvizDomainModel>(await Reporsitory.GetAsync<Kviz>(Id));
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            
+            return Mapper.Map<IKvizDomainModel>(await Reporsitory.GetAsync<Kviz>(Id));            
         }
 
         public async Task<int> UpdateAsync(IKvizDomainModel updated)
         {
-            try
-            {
-                return await Reporsitory.UpdateAsync<Kviz>(Mapper.Map<Kviz>(updated));
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            
+            return await Reporsitory.UpdateAsync<Kviz>(Mapper.Map<Kviz>(updated));
         }
     }
 }

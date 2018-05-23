@@ -13,14 +13,14 @@ namespace eUcitelj.Model
     public class PredmetDomainModel:IPredmetiDomainModel
     {
         public string Ime_predmeta { get; set; }
-
-        public Guid KorisnikId { get; set; }
         
         public Guid PredmetId { get; set; }
 
         public virtual ICollection<IOcjeneDomainModel> Ocjene { get; set; }//1 predmet moze imati vise ocjena
 
         public virtual ICollection<IKvizDomainModel> Kviz { get; set; }//1 predmet moze imati vise kvizova
+
+        public virtual ICollection<IPredmetKorisnikDomainModel> PredmetKorisnici { get; set; }
     }
 }
 

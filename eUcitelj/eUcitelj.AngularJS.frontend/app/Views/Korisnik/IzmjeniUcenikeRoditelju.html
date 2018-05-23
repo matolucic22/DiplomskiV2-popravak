@@ -1,0 +1,22 @@
+﻿<div class="container" ng-controller="IzmjeniUcenikeRoditeljuController">
+    <h1>Učenici roditelja <b>{{ucenici.Ime_korisnika}}</b></h1>
+
+    <table class="table table-striped table-bordered" style="padding-top:5px">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>IME KORISNIKA</th>
+                <th>PREZIME KORISNIKA</th>
+                <th>OBRIŠI</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="uc in ucenici">
+                <td>{{uc.KorisnikId}}</td>
+                <td>{{uc.Ime_korisnika}}</td>
+                <td>{{uc.Prezime_korisnika}}</td>
+                <td><button type="button" class="delete" ng-click="DeleteK(uc.UcenikId)">OBRIŠI</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

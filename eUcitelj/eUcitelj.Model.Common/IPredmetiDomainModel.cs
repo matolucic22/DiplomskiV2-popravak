@@ -10,11 +10,12 @@ namespace eUcitelj.Model.Common
    public interface IPredmetiDomainModel
     {
         Guid PredmetId { get; set; }
-        Guid KorisnikId { get; set; }
         String Ime_predmeta { get; set; }        
 
         ICollection<IOcjeneDomainModel> Ocjene { get; set; }//1 predmet moze imati vise ocijena
 
         ICollection<IKvizDomainModel> Kviz { get; set; }//1 predmet moze imati vise ocijena
+
+        ICollection<IPredmetKorisnikDomainModel> PredmetKorisnici { get; set; }
     }
 }

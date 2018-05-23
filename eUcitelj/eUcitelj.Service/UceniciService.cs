@@ -20,6 +20,7 @@ namespace eUcitelj.Service
 
         public async Task<int> AddAsync(IUceniciDomainModel addObj)
         {
+            addObj.UcenikId = Guid.NewGuid();
             return await PredmetiGenericReporsitory.AddAsync(addObj);
         }
 

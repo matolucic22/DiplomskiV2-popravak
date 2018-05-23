@@ -50,6 +50,7 @@
     <Compile Include="IOcjeneRepository.cs" />
     <Compile Include="IPredmetiRepository.cs" />
     <Compile Include="IGenericRepository.cs" />
+    <Compile Include="IPredmetKorisnikRepository.cs" />
     <Compile Include="IUceniciRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -58,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\eUcitelj.Common\eUcitelj.Common.csproj">
+      <Project>{DA5A9BF9-1829-49BA-A83B-E8B4EE35CF6A}</Project>
+      <Name>eUcitelj.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\eUcitelj.Model.Common\eUcitelj.Model.Common.csproj">
       <Project>{EF4CA9BF-D2D7-4259-964B-6C48B590A344}</Project>
       <Name>eUcitelj.Model.Common</Name>

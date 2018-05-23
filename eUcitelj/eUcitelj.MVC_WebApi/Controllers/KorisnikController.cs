@@ -35,7 +35,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 
@@ -56,57 +56,47 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch(Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> AddKorisnikAsync(KorisnikViewModel addObj)//httpresponsemessage - convert to HTTP convert message
+        [ValidateModel]
+        public async Task<HttpResponseMessage> AddKorisnikAsync(KorisnikViewModel addObj)
         {
             
-                try
-                {
-                    addObj.KorisnikId = Guid.NewGuid();
-                    var response = await KorisnikService.AddAsync(Mapper.Map<IKorisnikDomainModel>(addObj));
-                    return Request.CreateResponse(HttpStatusCode.OK, response);
-                }
-                catch (Exception e)
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
-                }       
+            try
+            {
+                var response = await KorisnikService.AddAsync(Mapper.Map<IKorisnikDomainModel>(addObj));
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e);
+            }       
         }
 
         [HttpPut]
+        [ValidateModel]
         public async Task<HttpResponseMessage> UpdateKorisnikAsync(KorisnikViewModel updateK)
         {
-            /*KorisnikViewModel toBeUpdated = Mapper.Map<KorisnikViewModel>(await KorisnikService.Get(updateK.KorisnikId)); -nema potrebe mapirati response u view, nego u domain model, i onda dobiveni view model (updateK)treba mapirati u domain koji se onda šalje na update
-            
-            toBeUpdated.Ime_korisnika = updateK.Ime_korisnika;
-            toBeUpdated.Prezime_korisnika = updateK.Prezime_korisnika;
-            toBeUpdated.Korisnicko_ime = updateK.Korisnicko_ime;
-            toBeUpdated.KorisnikId = updateK.KorisnikId;
-            toBeUpdated.Password = updateK.Password;
-            toBeUpdated.Potvrda = updateK.Potvrda;
-            toBeUpdated.Role = updateK.Role;
-            var response = await KorisnikService.Update(Mapper.Map<IKorisnikDomainModel>(toBeUpdated));*/ //Nisam tocno shvatio sto ste htjeli sa ovim reci pa sam Vam objasnio korake po kojima sam radio update. Smatram da niste shvatili kako sam napavio. KORACI - 1), 2) i 3). 
-
             try
             {
-                KorisnikViewModel toBeUpdated =Mapper.Map<KorisnikViewModel>(await KorisnikService.Get(updateK.KorisnikId));//1) Iz baze dohvaćam korisnika nad kojim želim napraviti "update", preko ID-a (updateK.KorisnikId - properti koji je "došao iz view-a" kao ulazni podatak u metodu). Potrebno je mapirati toBeUpdated u ViewModel zato što je objekt koji dolazi iz baze (iz domain modela).
+                KorisnikViewModel toBeUpdated =Mapper.Map<KorisnikViewModel>(await KorisnikService.Get(updateK.KorisnikId));
 
                 if (toBeUpdated == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Nije pronađen trazeni korisnik.");
                 }
-                else// 2)updateK
+                else
                 {
-                    var response = await KorisnikService.UpdateAsync(Mapper.Map<IKorisnikDomainModel>(updateK));// 3)Mapiram updateK i saljem "Update" metodom u bazu
+                    var response = await KorisnikService.UpdateAsync(Mapper.Map<IKorisnikDomainModel>(updateK));
                     return Request.CreateResponse(HttpStatusCode.OK, response);//***Ovaj način sam sam smislio dok sam radio. Malo drugačije smo radili Lvl. 3 zd na praksi kod vas. Tek kasnije sam primjetio da nismo tako radili, ali nisam ništa htio mijenjat zato što je i ovako funkcioniralo, samo što ima više kooda i teze je razumjeti.***
                 }
                 
             } catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greska prilikom promjene");
             }
         }
 
@@ -120,7 +110,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greška prilikom brisanja");
             }
         }
 
@@ -157,11 +147,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
 
                 }
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                throw ex;
+                return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, e);
             }
-            
+
         }
 
         [HttpGet]
@@ -172,9 +162,9 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetAllKorisnicko_imeAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
                 
-            } catch(Exception ex)
+            } catch(Exception e)
             {
-                throw ex;
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
 
         }
@@ -190,7 +180,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 

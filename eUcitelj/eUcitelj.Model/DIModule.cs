@@ -17,6 +17,7 @@ namespace eUcitelj.Model
             Bind<IPredmetiDomainModel>().To<PredmetDomainModel>();
             Bind<IOcjeneDomainModel>().To<OcjenaDomanModel>();
             Bind<IKvizDomainModel>().To<KvizDomainModel>();
+            Bind<IPredmetKorisnikDomainModel>().To<PredmetKorisnikDomainModel>();
         }
     }
 }

@@ -32,7 +32,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 
@@ -46,28 +46,27 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<HttpResponseMessage> AddOcjeneAsync(OcjenaViewModel addObj)//httpresponsemessage - convert to HTTP convert message
         {
             try
             {
-                addObj.OcjenaId = Guid.NewGuid();
-                addObj.DatumUpisa = DateTime.Now.Date;
                 var response = await OcjeneService.AddAsync(Mapper.Map<IOcjeneDomainModel>((addObj)));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
-
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e);
             }
         }
 
         [HttpPut]
+        [ValidateModel]
         public async Task<HttpResponseMessage> UpdateOcjeneAsync(OcjenaViewModel updateO)//Nepotrebna metoda
         {
             try
@@ -89,7 +88,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greska prilikom promjene");
             }
         }
 
@@ -103,7 +102,22 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greška prilikom brisanja");
+            }
+        }
+
+        [HttpGet]
+        [Route("korisnikid")]
+        public async Task<HttpResponseMessage> GetByKorisnikIdAsync(Guid KorisnikId)
+        {
+            try
+            {
+                var response = Mapper.Map<IEnumerable<OcjenaViewModel>>(await OcjeneService.GetByKorisnikIdAsync(KorisnikId));
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
     }

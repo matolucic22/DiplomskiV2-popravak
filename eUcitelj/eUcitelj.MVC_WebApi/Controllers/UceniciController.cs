@@ -33,7 +33,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 
@@ -54,24 +54,22 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<HttpResponseMessage> AddUceniciAsync(UcenikViewModel addObj)
         {
             try
             {
-
-                addObj.UcenikId = Guid.NewGuid();
                 var response = await UceniciService.AddAsync(Mapper.Map<IUceniciDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
-
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e);
             }
         }
 
@@ -85,7 +83,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greška prilikom brisanja");
             }
         }
     }

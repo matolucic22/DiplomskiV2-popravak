@@ -31,7 +31,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 
@@ -45,27 +45,27 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
         }
 
         [HttpPost]
+        [ValidateModel]
         public async Task<HttpResponseMessage> AddKvizAsync(KvizViewModel addObj)//httpresponsemessage - convert to HTTP convert message
         {
             try
             {
-                addObj.KvizId = Guid.NewGuid();
                 var response = await KvizService.AddAsync(Mapper.Map<IKvizDomainModel>((addObj)));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
-
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e);
             }
         }
 
         [HttpPut]
+        [ValidateModel]
         public async Task<HttpResponseMessage> UpdateKvizAsync(KvizViewModel updateK)
         {
             try
@@ -91,7 +91,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greska prilikom promjene");
             }
         }
 
@@ -105,7 +105,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e);
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greška prilikom brisanja");
             }
         }
     }
