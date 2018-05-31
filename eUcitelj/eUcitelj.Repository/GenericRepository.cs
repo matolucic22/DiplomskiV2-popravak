@@ -49,7 +49,7 @@ namespace eUcitelj.Reporsitory
             
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class
+        public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class  
         {
             try
             {
@@ -59,7 +59,7 @@ namespace eUcitelj.Reporsitory
             {
                 throw ex;
             }
-            
+
         }
 
         public async Task<T> GetAsync<T>(Guid Id) where T : class

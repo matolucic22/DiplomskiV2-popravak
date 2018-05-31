@@ -169,7 +169,7 @@ app.config(function ($stateProvider, $urlRouterProvider, localStorageServiceProv
 
         }).state('brisanjeOcjenaUcenikPredmet', {
             url: '/ocjene/ocjeneBrisanjeUcenik/:KoId/:UcPrId',
-            controller: 'BrisanjeOcjenaUcenikPredmetiController',
+            controller: 'BrisanjeOcjeneController',
             views: {
                 "root": {
                     templateUrl: 'app/Views/Ocjene/BrisanjeOcjenaUcenikOcjena.html'
@@ -178,7 +178,7 @@ app.config(function ($stateProvider, $urlRouterProvider, localStorageServiceProv
 
         }).state('dohvatiPredmeteUcenikaU', {//dohvaća da ucenik moze vidit samo svoje predmete
             url: '/ocjene/ocjenePregledPredmeti/',
-            controller: 'DohvatiPredmeteUcenikRoditeljController',
+            controller: 'DohvatiPredmeteController',
             views: {
                 "root": {
                     templateUrl: 'app/Views/Ocjene/DohvatiPredmeteUcenikRoditelj.html'

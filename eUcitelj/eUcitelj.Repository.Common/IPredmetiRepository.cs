@@ -11,12 +11,13 @@ namespace eUcitelj.Reporsitory.Common
 {
    public interface IPredmetiRepository
     {
-        Task<IEnumerable<IPredmetiDomainModel>> GetAllAsync();//vraća IEnumerable polje podataka
-        Task<IPredmetiDomainModel> GetAsync(Guid Id);
-        Task<int> AddAsync(IPredmetiDomainModel addObj);
+        Task<IPredmetDomainModel> GetAsync(Guid Id);
+        Task<int> AddAsync(IPredmetDomainModel addObj);
         Task<int> AddToBridgeAsync(IPredmetKorisnikDomainModel addObj);
-        Task<int> UpdateAsync(IPredmetiDomainModel updated);//obavi i returna samo save
+        Task<int> UpdateAsync(IPredmetDomainModel updated);//obavi i returna samo save
         Task<int> DeleteAsync(Guid Id);
-        Task<IPagedList<IPredmetiDomainModel>> SortingPagingFilteringAsync(FilterModel filterModel);
+        Task<IPagedList<IPredmetDomainModel>> SortingPagingFilteringAsync(FilterModel filterModel);
+        Task<IEnumerable<IPredmetDomainModel>> GetAllImePredmetaAsync();
+        Task<IEnumerable<IPredmetDomainModel>> GetAllAsync();
     }
 }

@@ -44,7 +44,7 @@
     <Compile Include="IKorisnikDomainModel.cs" />
     <Compile Include="IKvizDomainModel.cs" />
     <Compile Include="IOcjeneDomainModel.cs" />
-    <Compile Include="IPredmetiDomainModel.cs" />
+    <Compile Include="IPredmetDomainModel.cs" />
     <Compile Include="IPredmetKorisnikDomainModel.cs" />
     <Compile Include="IUceniciDomainModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

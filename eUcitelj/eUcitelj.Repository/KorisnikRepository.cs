@@ -30,11 +30,6 @@ namespace eUcitelj.Reporsitory
             return await Reporsitory.DeleteAsync<Korisnik>(Id);
         }
 
-        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllAsync()
-        {
-            return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(await Reporsitory.GetAllAsync<Korisnik>());  
-        }
-
         public async Task<IKorisnikDomainModel> GetAsync(Guid Id)
         {
             return Mapper.Map<IKorisnikDomainModel>(await Reporsitory.GetAsync<Korisnik>(Id));
@@ -60,24 +55,69 @@ namespace eUcitelj.Reporsitory
 
         public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnicko_imeAsync()
         {
-            try {
+            try
+            {
 
                 var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
-                var names= response.Select(a => new Korisnik { Korisnicko_ime = a.Korisnicko_ime }).ToList();
+                var names = response.Select(a => new Korisnik { Korisnicko_ime = a.Korisnicko_ime }).ToList();
                 return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(names);
 
-            } catch (Exception ex) {
+            }
+            catch (Exception ex)
+            {
 
                 throw ex;
             }
         }
 
-        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikIdAsync()//Ova metoda dohvaca sve korisnike kojima je uloga (Rola) u sustavu "ucenik". Korištena je prilikom odobravanje uloge "roditelj", da bi se roditelju dodijelio ID ucenika kojem je roditelj i na taj nacin je omogucen pristup ocjenama samo onog ucenika kojem je roditelj.
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllUcenikAsync()//Ova metoda dohvaca sve korisnike kojima je uloga (Rola) u sustavu "ucenik". Koristena je za dohvacanje i prikaz svih ucenika u sustavu.
         {
             try
             {
                 var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
-                var Ids = response.Select(a => new Korisnik { KorisnikId = a.KorisnikId, Uloga = a.Uloga }).Where(a => a.Uloga == "ucenik").ToList();
+                var Ids =  response.Select(a => new Korisnik { Id = a.Id, Ime_korisnika = a.Ime_korisnika, Prezime_korisnika = a.Prezime_korisnika, Korisnicko_ime = a.Korisnicko_ime, Uloga = a.Uloga }).Where(a => a.Uloga == "ucenik").ToList();
+                return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(Ids);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetNepotvrdenoAsync()//Ova metoda dohvaca sve korisnike kojima je potvrda u sustavu "???". Koristena je za dohvacanje i prikaz svih ucenika u sustavu sa takvom potvrdom.
+        {
+            try
+            {
+                var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
+                var Ids = response.Select(a => new Korisnik { Id = a.Id, Ime_korisnika = a.Ime_korisnika, Prezime_korisnika = a.Prezime_korisnika, Korisnicko_ime = a.Korisnicko_ime, Uloga = a.Uloga, Potvrda=a.Potvrda }).Where(a => a.Potvrda == "???").ToList();
+                return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(Ids);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetPotvrdenoAsync()//Ova metoda dohvaca sve korisnike kojima je potvrda u sustavu "Da". Koristena je za dohvacanje i prikaz svih ucenika u sustavu sa takvom potvrdom.
+        {
+            try
+            {
+                var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
+                var Ids = response.Select(a => new Korisnik { Id = a.Id, Ime_korisnika = a.Ime_korisnika, Prezime_korisnika = a.Prezime_korisnika, Korisnicko_ime = a.Korisnicko_ime, Uloga = a.Uloga, Potvrda = a.Potvrda }).Where(a => a.Potvrda == "Da").ToList();
+                return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(Ids);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetOdbijenoAsync()//Ova metoda dohvaca sve korisnike kojima je potvrda u sustavu "Ne". Koristena je za dohvacanje i prikaz svih ucenika u sustavu sa takvom potvrdom.
+        {
+            try
+            {
+                var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
+                var Ids = response.Select(a => new Korisnik { Id = a.Id, Ime_korisnika = a.Ime_korisnika, Prezime_korisnika = a.Prezime_korisnika, Korisnicko_ime = a.Korisnicko_ime, Uloga = a.Uloga, Potvrda = a.Potvrda }).Where(a => a.Potvrda == "Ne").ToList();
                 return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(Ids);
             }
             catch (Exception ex)

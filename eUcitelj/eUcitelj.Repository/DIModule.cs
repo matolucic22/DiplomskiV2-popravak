@@ -19,6 +19,7 @@ namespace eUcitelj.Reporsitory
             Bind<IKvizRepository>().To<KvizRepository>();
             Bind<IUceniciRepository>().To<UceniciRepository>();
             Bind<IPredmetKorisnikRepository>().To<PredmetKorisnikRepository>();
+            Bind<IUnitOfWork>().To<UnitOfWork>();
         }
     }
 }

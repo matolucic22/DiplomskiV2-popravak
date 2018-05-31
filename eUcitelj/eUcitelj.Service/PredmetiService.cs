@@ -21,8 +21,9 @@ namespace eUcitelj.Service
         }
 
 
-        public async Task<int> AddAsync(IPredmetiDomainModel addObj)
+        public async Task<int> AddAsync(IPredmetDomainModel addObj)
         {
+            addObj.Id = Guid.NewGuid();
             return await PredmetiGenericReporsitory.AddAsync(addObj);
         }
 
@@ -36,24 +37,27 @@ namespace eUcitelj.Service
             return await PredmetiGenericReporsitory.DeleteAsync(Id);
         }
 
-        public async Task<IPredmetiDomainModel> GetAsync(Guid Id)
+        public async Task<IPredmetDomainModel> GetAsync(Guid Id)
         {
             return await PredmetiGenericReporsitory.GetAsync(Id);
         }
 
-        public async Task<IEnumerable<IPredmetiDomainModel>> GetAllAsync()
-        {
-            return await PredmetiGenericReporsitory.GetAllAsync();
-        }
-
-        public async Task<int> UpdateAsync(IPredmetiDomainModel updated)
+        public async Task<int> UpdateAsync(IPredmetDomainModel updated) 
         {
             return await PredmetiGenericReporsitory.UpdateAsync(updated);
         }
 
-        public async Task<IPagedList<IPredmetiDomainModel>> FindAsync(FilterModel filterModel)
+        public async Task<IPagedList<IPredmetDomainModel>> FindPredmetiAsync(FilterModel filterModel)
         {
             return await PredmetiGenericReporsitory.SortingPagingFilteringAsync(filterModel);
+        }
+        public async Task<IEnumerable<IPredmetDomainModel>> GetAllImePredmetaAsync()
+        {
+            return await PredmetiGenericReporsitory.GetAllImePredmetaAsync();
+        }
+        public async Task<IEnumerable<IPredmetDomainModel>> GetAllAsync()
+        {
+            return await PredmetiGenericReporsitory.GetAllAsync();
         }
     }
 }

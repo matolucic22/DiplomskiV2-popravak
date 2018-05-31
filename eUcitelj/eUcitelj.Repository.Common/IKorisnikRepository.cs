@@ -9,13 +9,15 @@ namespace eUcitelj.Reporsitory.Common
 {
     public interface IKorisnikRepository
     {
-        Task<IEnumerable<IKorisnikDomainModel>> GetAllAsync();
         Task<IKorisnikDomainModel> GetAsync(Guid Id);
         Task<int> AddAsync(IKorisnikDomainModel addObj);
         Task<int> UpdateAsync(IKorisnikDomainModel updated);
         Task<int> DeleteAsync(Guid Id);
         Task<IKorisnikDomainModel> GetByUsernameAsync(string korisnicko_ime);
         Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnicko_imeAsync();
-        Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikIdAsync();
+        Task<IEnumerable<IKorisnikDomainModel>> GetAllUcenikAsync();
+        Task<IEnumerable<IKorisnikDomainModel>> GetNepotvrdenoAsync();
+        Task<IEnumerable<IKorisnikDomainModel>> GetPotvrdenoAsync();
+        Task<IEnumerable<IKorisnikDomainModel>> GetOdbijenoAsync();
     }
 }

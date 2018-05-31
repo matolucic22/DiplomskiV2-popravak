@@ -9,8 +9,7 @@ namespace eUcitelj.DAL.Models
     {
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        //[Required]
-        public Guid KorisnikId { get; set; }
+        public Guid Id { get; set; }
         
         public string Ime_korisnika { get; set; }
         

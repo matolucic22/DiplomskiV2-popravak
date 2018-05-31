@@ -12,7 +12,5 @@ namespace eUcitelj.Model
        public Guid UcenikId { get; set; }
        public Guid KorisnikId { get; set; }
        public Guid IdKorisnikaU { get; set; }
-       public String Ime_korisnika { get; set; }
-       public String Prezime_korisnika { get; set; }
     }
 }

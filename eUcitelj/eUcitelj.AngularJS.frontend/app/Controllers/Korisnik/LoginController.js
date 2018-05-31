@@ -1,10 +1,5 @@
 ﻿app.controller('LoginController', function ($scope, $http, $stateParams, $window, $state, $location, AuthenticationService, md5) {//singin
     
-    $scope.loginData = {
-        korisnicko_ime: undefined,
-        lozinka: undefined
-    };
-    
         initController();
 
         function initController() { 

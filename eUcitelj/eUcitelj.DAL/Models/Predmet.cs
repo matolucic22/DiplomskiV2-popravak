@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 namespace eUcitelj.DAL.Models
 {
     [MetadataType(typeof(Predmet))]
-    public class Predmet: IValidatableObject
+    public class Predmet//: IValidatableObject
     {
   
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public Guid PredmetId { get; set; }
+        public Guid Id { get; set; }
         
         public string Ime_predmeta { get; set; }
 

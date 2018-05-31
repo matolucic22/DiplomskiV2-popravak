@@ -1,4 +1,4 @@
-﻿app.controller('UnosOcjenaUcenikController', function ($scope, $http, $stateParams, $window, korisnikService, KONSTANTE, predmetiService) {
+﻿app.controller('DohvatiKorisnikeController', function ($scope, $http, $stateParams, $window, korisnikService, KONSTANTE, predmetiService) {
 
     id = $stateParams.KoId;
    

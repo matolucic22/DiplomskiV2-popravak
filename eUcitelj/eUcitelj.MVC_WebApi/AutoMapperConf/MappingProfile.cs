@@ -19,7 +19,7 @@ namespace eUcitelj.MVC_WebApi.AutoMapperConf
 
 
             //Interface(Domain)-View
-            CreateMap<IPredmetiDomainModel, PredmetViewModel>().PreserveReferences().ReverseMap().PreserveReferences();
+            CreateMap<IPredmetDomainModel, PredmetViewModel>().PreserveReferences().ReverseMap().PreserveReferences();
 
             
             //Interface(Domain)-View

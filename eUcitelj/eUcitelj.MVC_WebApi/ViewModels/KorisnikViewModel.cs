@@ -11,7 +11,7 @@ namespace eUcitelj.MVC_WebApi.ViewModels
     {
         
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid KorisnikId { get; set; }
+        public Guid Id { get; set; }
 
         [Required(ErrorMessage = "Ime korisnika je obavezno polje za unos")]
         public string Ime_korisnika { get; set; }

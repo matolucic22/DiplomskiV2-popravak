@@ -232,12 +232,12 @@
     <Content Include="app\Controllers\Kviz\PregledajKvizController.js" />
     <Content Include="app\Controllers\Kviz\RjesavajKvizController.js" />
     <Content Include="app\Controllers\NavbarController.js" />
-    <Content Include="app\Controllers\Ocjene\BrisanjeOcjenaUcenikPredmetiController.js" />
+    <Content Include="app\Controllers\Ocjene\BrisanjeOcjeneController.js" />
     <Content Include="app\Controllers\Ocjene\DohvatiPredmeteUcenikaZaRoditeljaController.js" />
-    <Content Include="app\Controllers\Ocjene\DohvatiPredmeteUcenikRoditeljController.js" />
+    <Content Include="app\Controllers\Ocjene\DohvatiPredmeteController.js" />
     <Content Include="app\Controllers\Ocjene\PregledOcjenaUcenikPredmetiController.js" />
     <Content Include="app\Controllers\Ocjene\UnosOcjenaController.js" />
-    <Content Include="app\Controllers\Ocjene\UnosOcjenaUcenikController.js" />
+    <Content Include="app\Controllers\Ocjene\DohvatiKorisnikeController.js" />
     <Content Include="app\Controllers\Ocjene\UnosOcjenaUcenikPredmetiController.js" />
     <Content Include="app\Controllers\Predmeti\AddPredmetiController.js" />
     <Content Include="app\Controllers\Predmeti\EditPredmetiController.js" />

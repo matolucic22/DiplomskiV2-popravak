@@ -13,11 +13,5 @@ namespace eUcitelj.MVC_WebApi.ViewModels
         public Guid KorisnikId { get; set; }
         
         public Guid IdKorisnikaU { get; set; }
-
-        [Required(ErrorMessage = "Ime korisnika je obavezno polje za unos")]
-        public String Ime_korisnika { get; set; }
-
-        [Required(ErrorMessage = "Prezime korisnika je obavezno polje za unos")]
-        public String Prezime_korisnika { get; set; }
     }
 }

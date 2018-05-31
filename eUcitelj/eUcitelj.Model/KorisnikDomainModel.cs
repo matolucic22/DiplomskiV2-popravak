@@ -12,7 +12,7 @@ namespace eUcitelj.Model
    public class KorisnikDomainModel:IKorisnikDomainModel
     {
         
-        public Guid KorisnikId { get; set; }
+        public Guid Id { get; set; }
         
         public string Ime_korisnika { get; set; }
         

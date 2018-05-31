@@ -10,7 +10,7 @@ namespace eUcitelj.Model.Common
     public interface IKorisnikDomainModel
     {
         
-        Guid KorisnikId { get; set; }
+        Guid Id { get; set; }
        
         String Ime_korisnika { get; set; }
        

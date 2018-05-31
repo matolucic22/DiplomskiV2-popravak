@@ -11,7 +11,7 @@ namespace eUcitelj.MVC_WebApi.ViewModels
         [Required(ErrorMessage = "Ime predmeta je obavezno polje za unos")]
         public string Ime_predmeta { get; set; }
 
-        public Guid PredmetId { get; set; }
+        public Guid Id { get; set; }
 
         public virtual ICollection<OcjenaViewModel> Ocjene { get; set; }//1 predmet moze imati vise ocjena
 

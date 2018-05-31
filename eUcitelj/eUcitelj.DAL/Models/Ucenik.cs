@@ -15,10 +15,6 @@ namespace eUcitelj.DAL.Models
 
         public Guid IdKorisnikaU { get; set; }//ID ucenika
 
-        public String Ime_korisnika { get; set; }
-        
-        public String Prezime_korisnika { get; set; }
-
         [ForeignKey("KorisnikId")]
         public virtual Korisnik Korisnik { get; set; }
     }

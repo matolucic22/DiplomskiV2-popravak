@@ -11,12 +11,13 @@ namespace eUcitelj.Service.Common
 {
     public interface IPredmetiService
     {
-        Task<IEnumerable<IPredmetiDomainModel>> GetAllAsync();//vraća IEnimerable polje podataka
-        Task<IPredmetiDomainModel> GetAsync(Guid Id);
-        Task<int> AddAsync(IPredmetiDomainModel addObj);
+        Task<IPredmetDomainModel> GetAsync(Guid Id);
+        Task<int> AddAsync(IPredmetDomainModel addObj);
         Task<int> AddToBridgeAsync(IPredmetKorisnikDomainModel addObj);
-        Task<int> UpdateAsync(IPredmetiDomainModel updated);//obavi i returna samo save
+        Task<int> UpdateAsync(IPredmetDomainModel updated);//obavi i returna samo save
         Task<int> DeleteAsync(Guid Id);
-        Task<IPagedList<IPredmetiDomainModel>> FindAsync(FilterModel filterModel);
+        Task<IPagedList<IPredmetDomainModel>> FindPredmetiAsync(FilterModel filterModel);
+        Task<IEnumerable<IPredmetDomainModel>> GetAllImePredmetaAsync();
+        Task<IEnumerable<IPredmetDomainModel>> GetAllAsync();
     }
 }

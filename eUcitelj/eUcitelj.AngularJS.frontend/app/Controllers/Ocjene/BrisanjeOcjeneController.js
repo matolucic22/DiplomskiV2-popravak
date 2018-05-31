@@ -1,4 +1,4 @@
-﻿app.controller('BrisanjeOcjenaUcenikPredmetiController', function ($scope, $stateParams, $http, $window, $location, predmetiService, korisnikService, ocjeneService, KONSTANTE, IDKOR) {//unos ocjena uceniku
+﻿app.controller('BrisanjeOcjeneController', function ($scope, $stateParams, $http, $window, $location, predmetiService, korisnikService, ocjeneService, KONSTANTE, IDKOR) {//unos ocjena uceniku
     id = $stateParams.UcPrId;
     idKorisnik = IDKOR.Id;
     var oc = [];
@@ -10,7 +10,7 @@
 
     }, function () {
         $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
-    });
+    });//dohvato korisnika po IDu
 
     ocjeneService.getByKorisnikIdAsync(idKorisnik).then(function (respose) {
 
@@ -26,10 +26,10 @@
 
     }, function () {
         $window.alert(KONSTANTE.DOHVACANJE_OCJENE_GRESKA);
-    });
+    }); //dohvati ocjene po korisnickom IDu i prikazi
 
 
-    $scope.obrisi = function (OcjeneId) {
+    $scope.obrisi = function (OcjeneId) {//brisanje ocjene
         ocjeneService.delete(OcjeneId).then(function (data) {
             $window.alert("Obrisano");
             predmetiService.get(id).then(function (response) {

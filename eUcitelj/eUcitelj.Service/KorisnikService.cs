@@ -29,7 +29,7 @@ namespace eUcitelj.Service
         {
             try
             {
-                addObj.KorisnikId = Guid.NewGuid();
+                addObj.Id = Guid.NewGuid();
                 return await KorisnikGenericReporsitory.AddAsync(addObj);
             }
             catch (Exception ex)
@@ -48,11 +48,6 @@ namespace eUcitelj.Service
             return KorisnikGenericReporsitory.GetAsync(Id);
         }
 
-        public Task<IEnumerable<IKorisnikDomainModel>> GetAll()//nije async
-        {
-            return KorisnikGenericReporsitory.GetAllAsync();   
-        }
-
         public async Task<int> UpdateAsync(IKorisnikDomainModel updated)
         {
             return await KorisnikGenericReporsitory.UpdateAsync(updated);
@@ -68,9 +63,22 @@ namespace eUcitelj.Service
             return await KorisnikGenericReporsitory.GetAllKorisnicko_imeAsync();
         }
 
-        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnikIdAsync()
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetAllUcenikAsync()
         {
-            return await KorisnikGenericReporsitory.GetAllKorisnikIdAsync();
+            return await KorisnikGenericReporsitory.GetAllUcenikAsync();
+        }
+
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetNepotvrdenoAsync()
+        {
+            return await KorisnikGenericReporsitory.GetNepotvrdenoAsync();
+        }
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetPotvrdenoAsync()
+        {
+            return await KorisnikGenericReporsitory.GetPotvrdenoAsync();
+        }
+        public async Task<IEnumerable<IKorisnikDomainModel>> GetOdbijenoAsync()
+        {
+            return await KorisnikGenericReporsitory.GetOdbijenoAsync();
         }
 
     }

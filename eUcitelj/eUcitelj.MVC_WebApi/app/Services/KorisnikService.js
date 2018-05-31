@@ -10,10 +10,6 @@
         return $http.delete(httpReqKor + '?Id=' + Id);
     };
 
-    this.getAll = function () {
-        return $http.get(httpReqKor);
-    };
-
     this.get = function (Id) {
         return $http.get(httpReqKor + '?Id=' + Id);
     };
@@ -27,10 +23,22 @@
     };
 
     this.getKorisnickoIme = function () {
-        return $http.get(httpReqKor + '/getKorisnickoIme');
+        return $http.get(httpReqKor + '/getkorisnickoime');
     };
 
-    this.getAllKorisnikId = function () {
-        return $http.get(httpReqKor + '/getAllKorisnikId');
+    this.getAllUcenik = function () {
+        return $http.get(httpReqKor + '/getallucenik');
+    };
+
+    this.getAllNepotvrdeno = function () {
+        return $http.get(httpReqKor + '/getallnepotvrdeno');
+    };
+
+    this.getAllPotvrdeno = function () {
+        return $http.get(httpReqKor + '/getallpotvrdeno');
+    };
+
+    this.getAllOdbijeno = function () {
+        return $http.get(httpReqKor + '/getallodbijeno');
     };
 });

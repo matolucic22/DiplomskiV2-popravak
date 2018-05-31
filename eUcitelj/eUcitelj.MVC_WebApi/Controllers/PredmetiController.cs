@@ -23,17 +23,35 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             this.PredmetiService = predmetiService;
         }
-        
+
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAllPredmetiAsync()
+        [Route("imepredmeta")]
+        public async Task<HttpResponseMessage> GetAllImePredmetaAsync()
+        {
+            try
+            {
+                var response = Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.GetAllImePredmetaAsync());
+
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
+            }
+        }
+
+        [HttpGet]
+        public async Task<HttpResponseMessage> GetAllAsync()
         {
             try
             {
                 var response = Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.GetAllAsync());
-                
+
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
@@ -45,8 +63,8 @@ namespace eUcitelj.MVC_WebApi.Controllers
             try
             {
                 var response = Mapper.Map<PredmetViewModel>(await PredmetiService.GetAsync(Id));
-                
-                if(response==null)
+
+                if (response == null)
                 {
                     return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Traženi element nije pronađen u bazi podataka");
                 }
@@ -66,10 +84,10 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response= await PredmetiService.AddAsync(Mapper.Map<IPredmetiDomainModel>(addObj));
+                var response = await PredmetiService.AddAsync(Mapper.Map<IPredmetDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
-            }catch(Exception e)
+            } catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e);
             }
@@ -87,7 +105,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             }
             catch (Exception e)
             {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greska prilikom odavanja");
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greska prilikom dodavanja");
             }
         }
 
@@ -97,21 +115,27 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                PredmetViewModel toBeUpdated = Mapper.Map<PredmetViewModel>(await PredmetiService.GetAsync(updateP.PredmetId));
+                if (updateP != null)
+                { 
+                    PredmetViewModel toBeUpdated = Mapper.Map<PredmetViewModel>(await PredmetiService.GetAsync(updateP.Id));
 
-                if(toBeUpdated==null)
+                    if (toBeUpdated == null)
+                    {
+                        return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Nije pronađen traženi predmet.");
+                    }
+                    else
+                    {
+                        toBeUpdated.Ime_predmeta = updateP.Ime_predmeta;
+                    }
+
+                    var response = await PredmetiService.UpdateAsync(Mapper.Map<IPredmetDomainModel>(toBeUpdated));
+                    return Request.CreateResponse(HttpStatusCode.OK, response);
+                }else
                 {
-                    return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Nije pronađen traženi predmet.");
-                }
-                else
-                {
-                    toBeUpdated.Ime_predmeta = updateP.Ime_predmeta;
+                    return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Predmet nije pronađen");
                 }
 
-                var response = await PredmetiService.UpdateAsync(Mapper.Map<IPredmetiDomainModel>(toBeUpdated));
-                return Request.CreateResponse(HttpStatusCode.OK, response);
-
-            }catch(Exception e)
+            }catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "Greska prilikom promjene");
             }
@@ -133,12 +157,12 @@ namespace eUcitelj.MVC_WebApi.Controllers
 
         [HttpGet]
         [Route("spf")]
-        public async Task<HttpResponseMessage> FindAsync(string redoslijed, string trazeniPojam, int? brStr)
+        public async Task<HttpResponseMessage> FindPredmetiAsync(string redoslijed, string trazeniPojam, int? brStr)
         {
             try
             {
                 FilterModel filterModel = new FilterModel(redoslijed, trazeniPojam, brStr);
-                var response =Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.FindAsync(filterModel));
+                var response =Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.FindPredmetiAsync(filterModel));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }catch(Exception e)

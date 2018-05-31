@@ -52,6 +52,7 @@
     <Compile Include="IGenericRepository.cs" />
     <Compile Include="IPredmetKorisnikRepository.cs" />
     <Compile Include="IUceniciRepository.cs" />
+    <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

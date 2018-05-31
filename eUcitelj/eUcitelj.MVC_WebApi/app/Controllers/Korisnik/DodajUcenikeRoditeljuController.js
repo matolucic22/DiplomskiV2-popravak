@@ -1,6 +1,6 @@
 ﻿app.controller('DodajUcenikeRoditeljuController', function ($scope, $http, $stateParams, $window, $location, $rootScope, korisnikService, KONSTANTE) {
   
-    korisnikService.getAll().then(function (response) {
+    korisnikService.getAllUcenik().then(function (response) {
 
         $scope.korisnici = response.data;
     }, function () {
@@ -30,9 +30,7 @@
 
                 obj[i] = {
                     KorisnikId: $rootScope.KorisnikId,
-                    Ime_korisnika: Ucenik.Ime_korisnika,
-                    Prezime_korisnika: Ucenik.Prezime_korisnika,
-                    IdKorisnikaU: Ucenik.KorisnikId
+                    IdKorisnikaU: Ucenik.Id
                 };
 
                 $http.post('api/ucenici', obj[i]).then(function (response) {

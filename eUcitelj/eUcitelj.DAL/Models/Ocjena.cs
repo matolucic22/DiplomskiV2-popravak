@@ -26,6 +26,6 @@ namespace eUcitelj.DAL.Models
         public Guid KorisnikId { get; set; }
 
         [ForeignKey("PredmetId")]
-        public Predmet Predmeti { get; set; }
+        public Predmet Predmet { get; set; }
     }
 }

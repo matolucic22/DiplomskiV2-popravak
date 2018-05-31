@@ -1,6 +1,6 @@
 ﻿app.controller("PredmetiController", function ($window, $scope, $http, predmetiService, KONSTANTE, $rootScope, $state) {
-       $scope.spfPredmeti = function (redoslijed, trazeniPojam, brStr) {
-        predmetiService.spf(redoslijed, trazeniPojam, brStr)
+       $scope.findPredmet = function (redoslijed, trazeniPojam, brStr) {
+           predmetiService.findPredmet(redoslijed, trazeniPojam, brStr)//ovaj API sam implementirao da radi samo sa predmetima.
        .then(function (response) {
            $scope.predmeti = response.data;
        }, function () {

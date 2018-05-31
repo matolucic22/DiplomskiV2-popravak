@@ -14,7 +14,7 @@ namespace eUcitelj.Model
         {
             Bind<IKorisnikDomainModel>().To<KorisnikDomainModel>();
             Bind<IUceniciDomainModel>().To<UcenikDomainModel>();
-            Bind<IPredmetiDomainModel>().To<PredmetDomainModel>();
+            Bind<IPredmetDomainModel>().To<PredmetDomainModel>();
             Bind<IOcjeneDomainModel>().To<OcjenaDomanModel>();
             Bind<IKvizDomainModel>().To<KvizDomainModel>();
             Bind<IPredmetKorisnikDomainModel>().To<PredmetKorisnikDomainModel>();

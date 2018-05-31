@@ -1,7 +1,7 @@
-﻿<div class="container" ng-controller="PredmetiController" ng-init="spfPredmeti(redoslijed='Ime_uzlazno', trazeniPojam, null)">
+﻿<div class="container" ng-controller="PredmetiController" ng-init="findPredmet(redoslijed='Ime_uzlazno', trazeniPojam, null)">
     <h1>Predmeti</h1>
     <br />
-    <form class="form-inline" ng-submit="spfPredmeti(redoslijed='Ime_uzlazno', trazeniPojam, null)">
+    <form class="form-inline" ng-submit="findPredmet(redoslijed='Ime_uzlazno', trazeniPojam, null)">
         <div class="form-group">
             <label>Pretraži</label>
             <input type="text" ng-model="trazeniPojam" class="form-control" placeholder="Pretraži">
@@ -14,7 +14,7 @@
         <thead>
             <tr>
                 <th>
-                    <a ng-click="spfPredmeti(redoslijed='Ime_silazno', trazeniPojam, null)">ˇ</a> <a ng-click="spfPredmeti(redoslijed='Ime_uzlazno', trazeniPojam, null)">^</a>
+                    <a ng-click="findPredmet(redoslijed='Ime_silazno', trazeniPojam, null)">ˇ</a> <a ng-click="findPredmet(redoslijed='Ime_uzlazno', trazeniPojam, null)">^</a>
                     Ime predmeta
                     <span class="glyphicon sort-icon" ng-show="sortKey=='Ime_predmeta'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                 </th>
@@ -27,18 +27,18 @@
         <tbody>
             <tr ng-repeat="pr in predmeti">
                 <td>{{pr.Ime_predmeta}}</td>
-                <td><a ui-sref="editPredmeti({PrId: pr.PredmetId})">Uredi ||</a>
-                    <a ng-click="del(pr.PredmetId)" style="cursor: pointer"> Obriši</a>
+                <td><a ui-sref="editPredmeti({PrId: pr.Id})">Uredi ||</a>
+                    <a ng-click="del(pr.Id)" style="cursor: pointer"> Obriši</a>
                 </td>
             </tr>
         </tbody>
     </table>
     <form class="form-inline">
         <ul class="pagination">
-            <li><a ng-click="spfPredmeti(redoslijed, trazeniPojam, '1')">1</a></li>
-            <li><a ng-click="spfPredmeti(redoslijed, trazeniPojam, '2')">2</a></li>
-            <li><a ng-click="spfPredmeti(redoslijed, trazeniPojam, '3')">3</a></li>
-            <li><a ng-click="spfPredmeti(redoslijed, trazeniPojam, '4')">4</a></li>
+            <li><a ng-click="findPredmet(redoslijed, trazeniPojam, '1')">1</a></li>
+            <li><a ng-click="findPredmet(redoslijed, trazeniPojam, '2')">2</a></li>
+            <li><a ng-click="findPredmet(redoslijed, trazeniPojam, '3')">3</a></li>
+            <li><a ng-click="findPredmet(redoslijed, trazeniPojam, '4')">4</a></li>
         </ul>
     </form>
 </div>

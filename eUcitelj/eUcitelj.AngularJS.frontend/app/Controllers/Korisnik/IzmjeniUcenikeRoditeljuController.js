@@ -6,13 +6,14 @@
         .then(function (response) {
             korisnik = response.data;
             $scope.ucenici = korisnik.Ucenici;
+           
        }, function () {
            $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
        });
 
-    $scope.DeleteK = function (UceniciId) {
+    $scope.DeleteK = function (KorisnikId) {
 
-        $http.delete('/api/ucenici?Id=' + UceniciId).then(function (response) {
+        $http.delete('/api/ucenici?Id=' + KorisnikId).then(function (response) {
             $window.alert(KONSTANTE.OBJ_UKLONJEN);
             korisnikService.get(id)
                .then(function (response) {

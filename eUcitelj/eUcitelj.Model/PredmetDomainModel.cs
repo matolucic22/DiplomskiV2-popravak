@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Model
 {
-    public class PredmetDomainModel:IPredmetiDomainModel
+    public class PredmetDomainModel:IPredmetDomainModel
     {
         public string Ime_predmeta { get; set; }
         
-        public Guid PredmetId { get; set; }
+        public Guid Id { get; set; }
 
         public virtual ICollection<IOcjeneDomainModel> Ocjene { get; set; }//1 predmet moze imati vise ocjena
 

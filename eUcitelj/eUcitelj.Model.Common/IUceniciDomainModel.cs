@@ -11,7 +11,5 @@ namespace eUcitelj.Model.Common
         Guid UcenikId { get; set; }
         Guid KorisnikId { get; set; }
         Guid IdKorisnikaU { get; set; }
-        String Ime_korisnika { get; set; }
-        String Prezime_korisnika { get; set; }
     }
 }

@@ -2,14 +2,39 @@
     $scope.korisnici = [];
     $scope.myVal = [];
 
+    $scope.potvrdaNepotvrdeno = function () {
 
-    korisnikService.getAll().then(function (response) {
+        korisnikService.getAllNepotvrdeno().then(function (response) {
 
-        $scope.korisnici = response.data;
+            $scope.korisnici = response.data;
 
-    }, function () {
-        console.log(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
-    });
+        }, function () {
+            console.log(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
+        });
+    };
+
+    $scope.potvrdaPotvrdeno = function () {
+
+        korisnikService.getAllPotvrdeno().then(function (response) {
+
+            $scope.korisnici = response.data;
+
+        }, function () {
+            console.log(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
+        });
+    };
+
+    $scope.potvrdaOdbijeno = function () {
+
+        korisnikService.getAllOdbijeno().then(function (response) {
+
+            $scope.korisnici = response.data;
+
+        }, function () {
+            console.log(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
+        });
+    };
+
 
 
     $scope.da = function (KorisnikId) {
@@ -24,7 +49,7 @@
                 korisnikService.get(KorisnikId).then(function (response) {
                     var korisnik = response.data;
                     korisnik2 = {
-                        KorisnikId: korisnik.KorisnikId,
+                        Id: korisnik.Id,
                         Ime_korisnika: korisnik.Ime_korisnika,
                         Prezime_korisnika: korisnik.Prezime_korisnika,
                         Korisnicko_ime: korisnik.Korisnicko_ime,
@@ -36,11 +61,7 @@
 
                     korisnikService.update(korisnik2).then(function (data) {
                         $window.alert("Promijenjeno");
-                        korisnikService.getAll().then(function (response) {
-                            $scope.korisnici = response.data;
-                        }, function () {
-                            $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
-                        });
+                        $state.go('potvrdaKorisnika');
                     }).catch(function (response) {
                         for (var key in response.data.ModelState)
                         {
@@ -58,7 +79,7 @@
                 {
                     var korisnik = response.data;
                     korisnik2 = {
-                        KorisnikId: korisnik.KorisnikId,
+                        Id: korisnik.Id,
                         Ime_korisnika: korisnik.Ime_korisnika,
                         Prezime_korisnika: korisnik.Prezime_korisnika,
                         Korisnicko_ime: korisnik.Korisnicko_ime,
@@ -68,11 +89,7 @@
                     };
                     korisnikService.update(korisnik2).then(function (data) {
                         $window.alert("Promijenjeno");
-                        korisnikService.getAll().then(function (response) {
-                            $scope.korisnici = response.data;
-                        }, function () {
-                            $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
-                        });
+                        $state.go('potvrdaKorisnika');
                     }).catch(function (response) {
                         for (var key in response.data.ModelState)
                         {
@@ -91,7 +108,7 @@
         }
 
         if (rolaLower == "ucenik") {
-            predmetiService.getAll().then(function (response) {
+            predmetiService.getAllImePredmeta().then(function (response) {
 
                 predmeti = response.data;
 
@@ -105,7 +122,8 @@
                     predmetKorisnikService.add(objAddPr).then(function (data) {
 
                         $scope.response = data;
-                       
+                        $state.go('potvrdaKorisnika');
+
                     }).catch(function (response) {
                         for (var key in response.data.ModelState) {
                             alert(response.data.ModelState[key][0]);
@@ -131,7 +149,7 @@
                     $window.alert('Ucitelj se ostavlja kao obavezan u aplikaciji te mu kao takvom ne možete zabraniti pristup ili ga obrisati.');
                 } else {
                     var korisnik2 = {
-                        KorisnikId: korisnik.KorisnikId,
+                        Id: korisnik.Id,
                         Ime_korisnika: korisnik.Ime_korisnika,
                         Prezime_korisnika: korisnik.Prezime_korisnika,
                         Korisnicko_ime: korisnik.Korisnicko_ime,
@@ -141,11 +159,7 @@
                     };
                     korisnikService.update(korisnik2).then(function (data) {
                         $window.alert("Promijenjeno");
-                        korisnikService.getAll().then(function (response) {
-                            $scope.korisnici = response.data;
-                        }, function () {
-                            $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
-                        });
+                        $state.go('potvrdaKorisnika');
                     }).catch(function (response)
                     {
                         for (var key in response.data.ModelState)
@@ -166,12 +180,7 @@
 
             korisnikService.delete(KorisnikId).then(function (response) {
                 $window.alert("Korisnik uklonjen.");
-
-                korisnikService.getAll().then(function (response) {
-                    $scope.korisnici = response.data;
-                }, function () {
-                    $window.alert(KONSTANTE.DOHVACANJE_KORISNIKA_GRESKA);
-                });
+                $state.go('potvrdaKorisnika');
             }, function () {
 
                 $window.alert(KONSTANTE.UKLANJANJE_KOR_GRESKA);

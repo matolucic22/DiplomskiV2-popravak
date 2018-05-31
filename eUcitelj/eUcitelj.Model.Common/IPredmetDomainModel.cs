@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace eUcitelj.Model.Common
 {
-   public interface IPredmetiDomainModel
+   public interface IPredmetDomainModel
     {
-        Guid PredmetId { get; set; }
+        Guid Id { get; set; }
         String Ime_predmeta { get; set; }        
 
         ICollection<IOcjeneDomainModel> Ocjene { get; set; }//1 predmet moze imati vise ocijena

@@ -25,7 +25,7 @@
         for (i = 0; i < predmeti.length; i++) {
             if (predmeti[i].Ime_predmeta==imePredmeta) {
                 var obj = {
-                    PredmetId: predmeti[i].PredmetId,
+                    PredmetId: predmeti[i].Id,
                     Pitanje: $scope.Pitanje,
                     Odg1: $scope.Odg1,
                     Odg2: $scope.Odg2,

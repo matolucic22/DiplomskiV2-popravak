@@ -26,20 +26,6 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetAllKorisnikAsync()
-        {
-            try
-            {  
-                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetAll());
-                return Request.CreateResponse(HttpStatusCode.OK, response);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
-            }
-        }
-
-        [HttpGet]
         public async Task<HttpResponseMessage> GetKorisnikAsync(Guid Id)
         {
             try
@@ -82,7 +68,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                KorisnikViewModel toBeUpdated =Mapper.Map<KorisnikViewModel>(await KorisnikService.Get(updateK.KorisnikId));
+                KorisnikViewModel toBeUpdated =Mapper.Map<KorisnikViewModel>(await KorisnikService.Get(updateK.Id));
 
                 if (toBeUpdated == null)
                 {
@@ -136,7 +122,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
                     var token = new TokenFactory(tokenDuration).GenerateToken();
                     var tokenResponse = new TokenResponse()
                     {
-                        KorisnikId = userToLogin.KorisnikId,
+                        KorisnikId = userToLogin.Id,
                         Korisnicko_ime = userCredentials.Korisnicko_ime,
                         Token = token,
                         Uloga = userToLogin.Uloga,
@@ -155,7 +141,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        [Route("getKorisnickoIme")]
+        [Route("getkorisnickoime")]
         public async Task<HttpResponseMessage> GetAllKorisnicko_imeAsync()
         {
             try {
@@ -167,15 +153,60 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
             }
 
-        }
-
+        }      
+        
         [HttpGet]
-        [Route("getAllKorisnikId")]
-        public async Task<HttpResponseMessage> GetAllKorisnikIdAsync()
+        [Route("getallucenik")]
+        public async Task<HttpResponseMessage> GetAllUcenikAsync()
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetAllKorisnikIdAsync());
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetAllUcenikAsync());
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
+            }
+        }
+
+        [HttpGet]
+        [Route("getallnepotvrdeno")]
+        public async Task<HttpResponseMessage> GetNepotvrdenoAsync()
+        {
+            try
+            {
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetNepotvrdenoAsync());
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
+            }
+        }
+
+        [HttpGet]
+        [Route("getallpotvrdeno")]
+        public async Task<HttpResponseMessage> GetPotvrdenoAsync()
+        {
+            try
+            {
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetPotvrdenoAsync());
+                return Request.CreateResponse(HttpStatusCode.OK, response);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, e);
+            }
+        }
+
+        [HttpGet]
+        [Route("getallodbijeno")]
+        public async Task<HttpResponseMessage> GetOdbijenoAsync()
+        {
+            try
+            {
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetOdbijenoAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)

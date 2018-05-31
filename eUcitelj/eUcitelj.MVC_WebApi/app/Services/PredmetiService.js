@@ -10,10 +10,6 @@
         return $http.delete(httpReqPr+'?Id=' + Id);
     };
 
-    this.getAll = function () {
-        return $http.get(httpReqPr);
-    };
-
     this.get = function (Id) {
         return $http.get(httpReqPr+'?Id=' + Id);
     };
@@ -21,8 +17,16 @@
     this.update = function (update) {
         return $http.put(httpReqPr, update);
     };
+
+    this.getAllImePredmeta = function () {
+        return $http.get(httpReqPr+'/imepredmeta');
+    };
+
+    this.getAll = function () {
+        return $http.get(httpReqPr);
+    };
     
-    this.spf = function (redoslijed, trazeniPojam, brStr) {
+    this.findPredmet = function (redoslijed, trazeniPojam, brStr) {
         return $http.get(httpReqPr+'/spf?redoslijed=' + redoslijed + '&trazeniPojam=' + trazeniPojam + '&brStr=' + brStr);
     };
 

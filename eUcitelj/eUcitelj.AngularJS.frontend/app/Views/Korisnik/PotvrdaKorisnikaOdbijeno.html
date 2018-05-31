@@ -1,4 +1,4 @@
-﻿<div class="container" ng-controller="PotvrdaKorisnikaController" style="padding-top:20px">
+﻿<div class="container" ng-controller="PotvrdaKorisnikaController" style="padding-top:20px" ng-init="potvrdaOdbijeno()">
     <!--!!!!!*****ODBIJENO****!!!!-->
     <h1>Korisnici u sustavu</h1>
     <div padding-top:20px;">
@@ -19,14 +19,14 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="korisnik in korisnici" ng-if="korisnik.Potvrda=='Ne'">
-                <td style="text-align:center"><a ng-click="da(korisnik.KorisnikId)" style="cursor: pointer">Da</a></td>
+            <tr ng-repeat="korisnik in korisnici">
+                <td style="text-align:center"><a ng-click="da(korisnik.Id)" style="cursor: pointer">Da</a></td>
                 <td>{{korisnik.Ime_korisnika}}</td>
                 <td>{{korisnik.Prezime_korisnika}}</td>
                 <td>{{korisnik.Korisnicko_ime}}</td>
                 <td>{{korisnik.Uloga}}</td>
                 <td>{{korisnik.Potvrda}}</td>
-                <td><button type="button" class="delete" ng-click="deleteK(korisnik.KorisnikId)">OBRISI</button></td>
+                <td><button type="button" class="delete" ng-click="deleteK(korisnik.Id)">OBRISI</button></td>
             </tr>
         </tbody>
     </table>

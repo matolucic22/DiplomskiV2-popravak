@@ -6,7 +6,7 @@
 
             if ($scope.Ime_predmeta != null) {
                 var updated = {
-                    PredmetId: id,
+                    Id: id,
                     Ime_predmeta: $scope.Ime_predmeta
                 };
 
@@ -21,6 +21,5 @@
             else {
                 $window.alert("Došlo je do greške prilikom popunjavanja polja.");
             }
-         
     };
 });
