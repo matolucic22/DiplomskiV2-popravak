@@ -16,47 +16,47 @@ namespace eUcitelj.Reporsitory
 {
     public class PredmetiRepository : IPredmetiRepository
     {
-       protected IGenericRepository Reporsitory{ get; set;}
-       public PredmetiRepository(IGenericRepository reporsitory)
+        private UnitOfWork unitOfWork;
+        public PredmetiRepository(UnitOfWork unitOfWork)
         {
-            this.Reporsitory = reporsitory;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<int> AddAsync(IPredmetDomainModel addObj)
         {
-            return await Reporsitory.AddAsync(Mapper.Map<Predmet>(addObj));
+            return await unitOfWork.PredmetiRepository.AddAsync(Mapper.Map<Predmet>(addObj));
         }
 
         public async Task<int> AddToBridgeAsync(IPredmetKorisnikDomainModel addObj)
         {
-            return await Reporsitory.AddAsync(Mapper.Map<PredmetKorisnik>(addObj));
+            return await unitOfWork.PredmetiRepository.AddAsync(Mapper.Map<PredmetKorisnik>(addObj));
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await Reporsitory.DeleteAsync<Predmet>(Id);
+            return await unitOfWork.PredmetiRepository.DeleteAsync<Predmet>(id);
         }
 
-        public async Task<IPredmetDomainModel> GetAsync(Guid Id)
+        public async Task<IPredmetDomainModel> GetAsync(Guid id)
         {
-            return Mapper.Map<IPredmetDomainModel>(await Reporsitory.GetAsync<Predmet>(Id));
+            return Mapper.Map<IPredmetDomainModel>(await unitOfWork.PredmetiRepository.GetAsync<Predmet>(id));
         }
 
         public async Task<int> UpdateAsync(IPredmetDomainModel updated)
         {
-            return await Reporsitory.UpdateAsync(Mapper.Map<Predmet>(updated));
+            return await unitOfWork.PredmetiRepository.UpdateAsync(Mapper.Map<Predmet>(updated));
         }
 
-        public async Task<IPagedList<IPredmetDomainModel>> SortingPagingFilteringAsync(FilterModel filterModel)
+        public async Task<IPagedList<IPredmetDomainModel>> FindPredmetiAsync(FilterModel filterModel)
         {
             IEnumerable <IPredmetDomainModel> predmeti;
             if(String.IsNullOrWhiteSpace(filterModel.TrazeniPojam) || filterModel.TrazeniPojam == "undefined")
             {
-                predmeti = Mapper.Map<IEnumerable<IPredmetDomainModel>>(await Reporsitory.GetAllAsync<Predmet>());
+                predmeti = Mapper.Map<IEnumerable<IPredmetDomainModel>>(await unitOfWork.PredmetiRepository.GetAllAsync<Predmet>());
             }
             else
             {
-                predmeti=Mapper.Map<IEnumerable<IPredmetDomainModel>>(await Reporsitory.GetAllAsync<Predmet>()).Where(p => p.Ime_predmeta.Contains(filterModel.TrazeniPojam));
+                predmeti=Mapper.Map<IEnumerable<IPredmetDomainModel>>(await unitOfWork.PredmetiRepository.GetAllAsync<Predmet>()).Where(p => p.Ime_predmeta.Contains(filterModel.TrazeniPojam));
                 
             }
             switch (filterModel.Redoslijed)
@@ -68,14 +68,14 @@ namespace eUcitelj.Reporsitory
                     predmeti = predmeti.OrderBy(p => p.Ime_predmeta);
                     break;
             }
-            return predmeti.ToPagedList(filterModel.BrStr ?? 1, 4);//1. broj trenutne stranice (indeks podskupa); 2. velicina stranice(maksimalni broj elemenata na stranici-->maksimalna velicina podskupa)
+            return predmeti.ToPagedList(filterModel.BrStr ?? 1, filterModel.BrEl);//1. broj trenutne stranice (indeks podskupa); 2. velicina stranice(maksimalni broj elemenata na stranici-->maksimalna velicina podskupa)
             //brStr ?? 1 --> ako je brStr null, stavi da bude 1. int?-->omogucava da bude var null.
         }
         public async Task<IEnumerable<IPredmetDomainModel>> GetAllImePredmetaAsync()//Ova metoda dohvaca sve korisnike kojima je uloga (Rola) u sustavu "ucenik". Koristena je za dohvacanje i prikaz svih ucenika u sustavu.
         {
             try
             {
-                var response = await Reporsitory.GetQueryable<Predmet>().ToListAsync();
+                var response = await unitOfWork.PredmetiRepository.GetQueryable<Predmet>().ToListAsync();
                 var predmeti = response.Select(a => new Predmet { Ime_predmeta = a.Ime_predmeta}).ToList();
                 return Mapper.Map<IEnumerable<IPredmetDomainModel>>(predmeti);
             }
@@ -87,7 +87,7 @@ namespace eUcitelj.Reporsitory
 
         public async Task<IEnumerable<IPredmetDomainModel>> GetAllAsync() //funkciju nisam brisao zbog ostalih tablica (ocjene i kviz) - da ne idem u širinu nisam ništa mijenjao na njima.
         {
-            return Mapper.Map<IEnumerable<IPredmetDomainModel>>(await Reporsitory.GetAllAsync<Predmet>());
+            return Mapper.Map<IEnumerable<IPredmetDomainModel>>(await unitOfWork.PredmetiRepository.GetAllAsync<Predmet>());
         }
     }
 }

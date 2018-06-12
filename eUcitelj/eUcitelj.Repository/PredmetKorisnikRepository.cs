@@ -13,34 +13,34 @@ namespace eUcitelj.Reporsitory
 {
     public class PredmetKorisnikRepository:IPredmetKorisnikRepository
     {
-        protected IGenericRepository Reporsitory { get; set; }
-        public PredmetKorisnikRepository(IGenericRepository reporsitory)
+        private UnitOfWork unitOfWork;
+        public PredmetKorisnikRepository(UnitOfWork unitOfWork)
         {
-            this.Reporsitory = reporsitory;
+            this.unitOfWork = unitOfWork;
         }
         public async Task<int> AddAsync(IPredmetKorisnikDomainModel addObj)
         {
-            return await Reporsitory.AddAsync(Mapper.Map<PredmetKorisnik>(addObj));
+            return await unitOfWork.PredmetKorisnikRepository.AddAsync(Mapper.Map<PredmetKorisnik>(addObj));
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await Reporsitory.DeleteAsync<PredmetKorisnik>(Id);
+            return await unitOfWork.PredmetKorisnikRepository.DeleteAsync<PredmetKorisnik>(id);
         }
 
         public async Task<IEnumerable<IPredmetKorisnikDomainModel>> GetAllAsync()
         {
-            return Mapper.Map<IEnumerable<IPredmetKorisnikDomainModel>>(await Reporsitory.GetAllAsync<PredmetKorisnik>());
+            return Mapper.Map<IEnumerable<IPredmetKorisnikDomainModel>>(await unitOfWork.PredmetKorisnikRepository.GetAllAsync<PredmetKorisnik>());
         }
 
-        public async Task<IPredmetKorisnikDomainModel> GetAsync(Guid Id)
+        public async Task<IPredmetKorisnikDomainModel> GetAsync(Guid id)
         {
-            return Mapper.Map<IPredmetKorisnikDomainModel>(await Reporsitory.GetAsync<PredmetKorisnik>(Id));
+            return Mapper.Map<IPredmetKorisnikDomainModel>(await unitOfWork.PredmetKorisnikRepository.GetAsync<PredmetKorisnik>(id));
         }
 
         public async Task<int> UpdateAsync(IPredmetKorisnikDomainModel updated)
         {
-            return await Reporsitory.UpdateAsync(Mapper.Map<PredmetKorisnik>(updated));
+            return await unitOfWork.PredmetKorisnikRepository.UpdateAsync(Mapper.Map<PredmetKorisnik>(updated));
         }
     }
 }

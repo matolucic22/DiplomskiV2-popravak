@@ -10,9 +10,9 @@ namespace eUcitelj.Service.Common
     public interface IPredmetKorisnikService
     {
         Task<IEnumerable<IPredmetKorisnikDomainModel>> GetAllAsync();//vraća IEnimerable polje podataka
-        Task<IPredmetKorisnikDomainModel> GetAsync(Guid Id);
+        Task<IPredmetKorisnikDomainModel> GetAsync(Guid id);
         Task<int> AddAsync(IPredmetKorisnikDomainModel addObj);
         Task<int> UpdateAsync(IPredmetKorisnikDomainModel updated);
-        Task<int> DeleteAsync(Guid Id);
+        Task<int> DeleteAsync(Guid id);
     }
 }

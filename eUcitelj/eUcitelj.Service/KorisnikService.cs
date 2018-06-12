@@ -19,10 +19,10 @@ namespace eUcitelj.Service
         //         Generalno u ovoj aplikaciji unutar Service nije potrebno koristiti asinkrone metode zato što se samo proslijedi podatak iz KorisnikRepositorija u KorisnikController. 
         //         Asinkrone metode se koriste ako se mora čekati rezultat neke akcije(radnje) nad podatkom ili je važno neku funkciju obaviti prije neke druge što ovdje nije slučaj.
         //         Async sam obrisao sa Get i GetAll metoda kako ste rekli i aplikacija funkcionira normalno. 
-        protected IKorisnikRepository KorisnikGenericReporsitory { set; get; }
+        private IKorisnikRepository korisnikGenericReporsitory;
         public KorisnikService(IKorisnikRepository korisnikGenericReporsitory)
         {
-            this.KorisnikGenericReporsitory = korisnikGenericReporsitory;
+            this.korisnikGenericReporsitory = korisnikGenericReporsitory;
         }
 
         public async Task<int> AddAsync(IKorisnikDomainModel addObj)
@@ -30,7 +30,7 @@ namespace eUcitelj.Service
             try
             {
                 addObj.Id = Guid.NewGuid();
-                return await KorisnikGenericReporsitory.AddAsync(addObj);
+                return await korisnikGenericReporsitory.AddAsync(addObj);
             }
             catch (Exception ex)
             {
@@ -38,47 +38,47 @@ namespace eUcitelj.Service
             }
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await KorisnikGenericReporsitory.DeleteAsync(Id);
+            return await korisnikGenericReporsitory.DeleteAsync(id);
         }
 
-        public Task<IKorisnikDomainModel> Get(Guid Id)//nije async
+        public Task<IKorisnikDomainModel> Get(Guid id)//nije async
         {
-            return KorisnikGenericReporsitory.GetAsync(Id);
+            return korisnikGenericReporsitory.GetAsync(id);
         }
 
         public async Task<int> UpdateAsync(IKorisnikDomainModel updated)
         {
-            return await KorisnikGenericReporsitory.UpdateAsync(updated);
+            return await korisnikGenericReporsitory.UpdateAsync(updated);
         }
         
-        public async Task<IKorisnikDomainModel> FindByUserNameAsync(string korisnicko_ime)
+        public async Task<IKorisnikDomainModel> FindByUserNameAsync(string korisnickoIme)
         {
-            return await KorisnikGenericReporsitory.GetByUsernameAsync(korisnicko_ime);
+            return await korisnikGenericReporsitory.GetByUsernameAsync(korisnickoIme);
         }
 
         public async Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnicko_imeAsync()
         {
-            return await KorisnikGenericReporsitory.GetAllKorisnicko_imeAsync();
+            return await korisnikGenericReporsitory.GetAllKorisnicko_imeAsync();
         }
 
         public async Task<IEnumerable<IKorisnikDomainModel>> GetAllUcenikAsync()
         {
-            return await KorisnikGenericReporsitory.GetAllUcenikAsync();
+            return await korisnikGenericReporsitory.GetAllUcenikAsync();
         }
 
         public async Task<IEnumerable<IKorisnikDomainModel>> GetNepotvrdenoAsync()
         {
-            return await KorisnikGenericReporsitory.GetNepotvrdenoAsync();
+            return await korisnikGenericReporsitory.GetNepotvrdenoAsync();
         }
         public async Task<IEnumerable<IKorisnikDomainModel>> GetPotvrdenoAsync()
         {
-            return await KorisnikGenericReporsitory.GetPotvrdenoAsync();
+            return await korisnikGenericReporsitory.GetPotvrdenoAsync();
         }
         public async Task<IEnumerable<IKorisnikDomainModel>> GetOdbijenoAsync()
         {
-            return await KorisnikGenericReporsitory.GetOdbijenoAsync();
+            return await korisnikGenericReporsitory.GetOdbijenoAsync();
         }
 
     }

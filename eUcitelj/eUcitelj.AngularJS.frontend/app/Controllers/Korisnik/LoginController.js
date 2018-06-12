@@ -1,18 +1,18 @@
 ﻿app.controller('LoginController', function ($scope, $http, $stateParams, $window, $state, $location, AuthenticationService, md5) {//singin
     
-        initController();
+        InitController();
 
-        function initController() { 
+        function InitController() { 
             AuthenticationService.CheckIsStoraged();
         };
 
         $scope.doStuff = function () {
             var userToLogin = {
-                Korisnicko_ime: $scope.Korisnicko_ime,
+                Korisnicko_ime: $scope.korisnicko_ime,
                 Lozinka: undefined
             };
 
-            userToLogin.Lozinka = md5.createHash($scope.Lozinka || '');
+            userToLogin.Lozinka = md5.createHash($scope.lozinka || '');
            
             AuthenticationService.Login(userToLogin.Korisnicko_ime, userToLogin.Lozinka, function (result) {
                 if (result == true) {

@@ -11,12 +11,12 @@ namespace eUcitelj.Reporsitory.Common
 {
    public interface IPredmetiRepository
     {
-        Task<IPredmetDomainModel> GetAsync(Guid Id);
+        Task<IPredmetDomainModel> GetAsync(Guid id);
         Task<int> AddAsync(IPredmetDomainModel addObj);
         Task<int> AddToBridgeAsync(IPredmetKorisnikDomainModel addObj);
         Task<int> UpdateAsync(IPredmetDomainModel updated);//obavi i returna samo save
-        Task<int> DeleteAsync(Guid Id);
-        Task<IPagedList<IPredmetDomainModel>> SortingPagingFilteringAsync(FilterModel filterModel);
+        Task<int> DeleteAsync(Guid id);
+        Task<IPagedList<IPredmetDomainModel>> FindPredmetiAsync(FilterModel filterModel);
         Task<IEnumerable<IPredmetDomainModel>> GetAllImePredmetaAsync();
         Task<IEnumerable<IPredmetDomainModel>> GetAllAsync();
     }

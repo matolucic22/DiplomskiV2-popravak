@@ -10,10 +10,10 @@ namespace eUcitelj.Reporsitory.Common
    public interface IOcjeneRepository
     {
         Task<IEnumerable<IOcjeneDomainModel>> GetAllAsync();//vraća IEnimerable polje podataka
-        Task<IOcjeneDomainModel> GetAsync(Guid Id);
+        Task<IOcjeneDomainModel> GetAsync(Guid id);
         Task<int> AddAsync(IOcjeneDomainModel addObj);
         Task<int> UpdateAsync(IOcjeneDomainModel updated);//obavi i returna samo save
-        Task<int> DeleteAsync(Guid Id);
-        Task<IEnumerable<IOcjeneDomainModel>> GetByKorisnikIdAsync(Guid KorisnikId);
+        Task<int> DeleteAsync(Guid id);
+        Task<IEnumerable<IOcjeneDomainModel>> GetByKorisnikIdAsync(Guid korisnikId);
     }
 }

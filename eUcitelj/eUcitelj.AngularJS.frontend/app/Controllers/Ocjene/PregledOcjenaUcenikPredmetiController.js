@@ -1,6 +1,6 @@
 ﻿app.controller('PregledOcjenaUcenikPredmetiController', function ($scope, $stateParams, $http, $window, $location, predmetiService, korisnikService, KONSTANTE, IDKOR, ocjeneService) {//unos ocjena uceniku
     var id = $stateParams.UcPrId;
-    var idKorisnik = IDKOR.Id;
+    var idKorisnik = IDKOR.id;
     var oc = [];
     var ocjeneK = [];
     $scope.ocjene = [];

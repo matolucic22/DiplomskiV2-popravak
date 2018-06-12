@@ -15,10 +15,10 @@ namespace eUcitelj.MVC_WebApi.Controllers
     [RoutePrefix("api/kviz")]
     public class KvizController : ApiController
     {
-        protected IKvizService KvizService { get; set; }
+        private IKvizService kvizService;
         public KvizController(IKvizService kvizService)
         {
-            this.KvizService = kvizService;
+            this.kvizService = kvizService;
         }
 
         [HttpGet]
@@ -26,7 +26,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<KvizViewModel>>(await KvizService.GetAllAsync());
+                var response = Mapper.Map<IEnumerable<KvizViewModel>>(await kvizService.GetAllAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -36,11 +36,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetKvizAsync(Guid Id)
+        public async Task<HttpResponseMessage> GetKvizAsync(Guid id)
         {
             try
             {
-                var response = Mapper.Map<KvizViewModel>(await KvizService.GetAsync(Id));
+                var response = Mapper.Map<KvizViewModel>(await kvizService.GetAsync(id));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -55,7 +55,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = await KvizService.AddAsync(Mapper.Map<IKvizDomainModel>((addObj)));
+                var response = await kvizService.AddAsync(Mapper.Map<IKvizDomainModel>((addObj)));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -71,7 +71,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             try
             {
 
-                KvizViewModel toBeUpdated = Mapper.Map<KvizViewModel>(await KvizService.GetAsync(updateK.KvizId));
+                KvizViewModel toBeUpdated = Mapper.Map<KvizViewModel>(await kvizService.GetAsync(updateK.KvizId));
 
                 if (toBeUpdated == null)
                 {
@@ -85,7 +85,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
                     toBeUpdated.Pitanje = updateK.Pitanje;
                     toBeUpdated.Tocan_odgovor = updateK.Tocan_odgovor;
                 }
-                var response = await KvizService.UpdateAsync(Mapper.Map<IKvizDomainModel>(toBeUpdated));
+                var response = await kvizService.UpdateAsync(Mapper.Map<IKvizDomainModel>(toBeUpdated));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }
@@ -96,11 +96,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> DeleteKvizAsync(Guid Id)
+        public async Task<HttpResponseMessage> DeleteKvizAsync(Guid id)
         {
             try
             {
-                var response = await KvizService.DeleteAsync(Id);
+                var response = await kvizService.DeleteAsync(id);
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)

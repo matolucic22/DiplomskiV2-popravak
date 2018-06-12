@@ -6,24 +6,24 @@
         return $http.post(httpReqOc, obj);
     };
 
-    this.delete = function (Id) {
-        return $http.delete(httpReqOc + '?Id=' + Id);
+    this.delete = function (id) {
+        return $http.delete(httpReqOc + '?Id=' + id);
     };
 
     this.getAll = function () {
         return $http.get(httpReqOc);
     };
 
-    this.get = function (Id) {
-        return $http.get(httpReqOc+'?Id=' + Id);
+    this.get = function (id) {
+        return $http.get(httpReqOc+'?Id=' + id);
     };
 
     this.update = function (obj) {
         return $http.put(httpReqOc, obj);
     };
 
-    this.getByKorisnikIdAsync = function (Id) {
-        return $http.get(httpReqOc + '?KorisnikId=' + Id);
+    this.getByKorisnikIdAsync = function (id) {
+        return $http.get(httpReqOc + '?KorisnikId=' + id);
     };
 
 });

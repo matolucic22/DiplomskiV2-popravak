@@ -6,12 +6,12 @@
         return $http.post(httpReqPr, obj);
     };
 
-    this.delete = function (Id) {
-        return $http.delete(httpReqPr+'?Id=' + Id);
+    this.delete = function (id) {
+        return $http.delete(httpReqPr+'?Id=' + id);
     };
 
-    this.get = function (Id) {
-        return $http.get(httpReqPr+'?Id=' + Id);
+    this.get = function (id) {
+        return $http.get(httpReqPr+'?Id=' + id);
     };
 
     this.update = function (update) {

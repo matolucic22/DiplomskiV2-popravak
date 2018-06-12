@@ -6,16 +6,16 @@
         return $http.post(httpReqKor, obj);
     };
 
-    this.delete = function (Id) {
-        return $http.delete(httpReqKor + '?Id=' + Id);
+    this.delete = function (id) {
+        return $http.delete(httpReqKor + '?Id=' + id);
     };
 
-    this.get = function (Id) {
-        return $http.get(httpReqKor + '?Id=' + Id);
+    this.get = function (id) {
+        return $http.get(httpReqKor + '?Id=' + id);
     };
 
-    this.update = function (Update) {
-        return $http.put(httpReqKor, Update);
+    this.update = function (update) {
+        return $http.put(httpReqKor, update);
     };
 
     this.loginToken = function (userCredentials) {

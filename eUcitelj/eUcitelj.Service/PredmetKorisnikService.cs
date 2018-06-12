@@ -11,37 +11,37 @@ namespace eUcitelj.Service
 {
      public class PredmetKorisnikService:IPredmetKorisnikService
     {
-        protected IPredmetKorisnikRepository PredmetKorisnikRepository { get; set; }
+        private IPredmetKorisnikRepository predmetKorisnikRepository;
 
         public PredmetKorisnikService(IPredmetKorisnikRepository predmetKorisnikRepository)
         {
-            this.PredmetKorisnikRepository = predmetKorisnikRepository;
+            this.predmetKorisnikRepository = predmetKorisnikRepository;
         }
 
         public async Task<IEnumerable<IPredmetKorisnikDomainModel>> GetAllAsync()
         {
-            return await PredmetKorisnikRepository.GetAllAsync();
+            return await predmetKorisnikRepository.GetAllAsync();
         }
 
-        public async Task<IPredmetKorisnikDomainModel> GetAsync(Guid Id)
+        public async Task<IPredmetKorisnikDomainModel> GetAsync(Guid id)
         {
-            return await PredmetKorisnikRepository.GetAsync(Id);
+            return await predmetKorisnikRepository.GetAsync(id);
         }
 
         public async Task<int> AddAsync(IPredmetKorisnikDomainModel addObj)
         {
             addObj.PredmetKorisnikId = Guid.NewGuid();
-            return await PredmetKorisnikRepository.AddAsync(addObj);
+            return await predmetKorisnikRepository.AddAsync(addObj);
         }
 
         public async Task<int> UpdateAsync(IPredmetKorisnikDomainModel updated)
         {
-            return await PredmetKorisnikRepository.UpdateAsync(updated);
+            return await predmetKorisnikRepository.UpdateAsync(updated);
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await PredmetKorisnikRepository.DeleteAsync(Id);
+            return await predmetKorisnikRepository.DeleteAsync(id);
         }
     }
 }

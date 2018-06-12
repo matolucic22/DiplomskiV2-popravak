@@ -12,35 +12,35 @@ namespace eUcitelj.Reporsitory
 {
    public class UceniciRepository:IUceniciRepository
     {
-        protected IGenericRepository Reporsitory { get; set; }
-        public UceniciRepository(IGenericRepository reporsitory)
+        private UnitOfWork unitOfWork;
+        public UceniciRepository(UnitOfWork unitOfWork)
         {
-            this.Reporsitory = reporsitory;
+            this.unitOfWork = unitOfWork;
         }
 
         public async Task<int> AddAsync(IUceniciDomainModel addObj)
         { 
-            return await Reporsitory.AddAsync(Mapper.Map<Ucenik>(addObj));
+            return await unitOfWork.UceniciRepository.AddAsync(Mapper.Map<Ucenik>(addObj));
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await Reporsitory.DeleteAsync<Ucenik>(Id);
+            return await unitOfWork.UceniciRepository.DeleteAsync<Ucenik>(id);
         }
 
         public async Task<IEnumerable<IUceniciDomainModel>> GetAllAsync()
         {
-            return Mapper.Map<IEnumerable<IUceniciDomainModel>>(await Reporsitory.GetAllAsync<Ucenik>());
+            return Mapper.Map<IEnumerable<IUceniciDomainModel>>(await unitOfWork.UceniciRepository.GetAllAsync<Ucenik>());
         }
 
-        public async Task<IUceniciDomainModel> GetAsync(Guid Id)
+        public async Task<IUceniciDomainModel> GetAsync(Guid id)
         {
-            return Mapper.Map<IUceniciDomainModel>(await Reporsitory.GetAsync<Ucenik>(Id));
+            return Mapper.Map<IUceniciDomainModel>(await unitOfWork.UceniciRepository.GetAsync<Ucenik>(id));
         }
 
         public async Task<int> UpdateAsync(IUceniciDomainModel updated)
         {
-            return await Reporsitory.UpdateAsync(Mapper.Map<Ucenik>(updated));
+            return await unitOfWork.UceniciRepository.UpdateAsync(Mapper.Map<Ucenik>(updated));
         }
     }
 }

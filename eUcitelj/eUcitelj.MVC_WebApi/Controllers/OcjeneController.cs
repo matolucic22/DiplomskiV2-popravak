@@ -15,11 +15,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
     [RoutePrefix("api/ocjene")]
     public class OcjeneController : ApiController
     {
-        protected IOcjeneService OcjeneService { get; set; }
+        private IOcjeneService ocjeneService;
 
         public OcjeneController(IOcjeneService ocjeneService)
         {
-            this.OcjeneService = ocjeneService;
+            this.ocjeneService = ocjeneService;
         }
 
         [HttpGet]
@@ -27,7 +27,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<OcjenaViewModel>>(await OcjeneService.GetAllAsync());
+                var response = Mapper.Map<IEnumerable<OcjenaViewModel>>(await ocjeneService.GetAllAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -37,11 +37,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetOcjeneAsync(Guid Id)
+        public async Task<HttpResponseMessage> GetOcjeneAsync(Guid id)
         {
             try
             {
-                var response = Mapper.Map<OcjenaViewModel>(await OcjeneService.GetAsync(Id));
+                var response = Mapper.Map<OcjenaViewModel>(await ocjeneService.GetAsync(id));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -56,7 +56,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = await OcjeneService.AddAsync(Mapper.Map<IOcjeneDomainModel>((addObj)));
+                var response = await ocjeneService.AddAsync(Mapper.Map<IOcjeneDomainModel>((addObj)));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -72,7 +72,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             try
             {
 
-                OcjenaViewModel toBeUpdated = Mapper.Map<OcjenaViewModel>(await OcjeneService.GetAsync(updateO.OcjenaId));
+                OcjenaViewModel toBeUpdated = Mapper.Map<OcjenaViewModel>(await ocjeneService.GetAsync(updateO.OcjenaId));
 
                 if (toBeUpdated == null)
                 {
@@ -82,7 +82,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 {
                     toBeUpdated.Ocj = updateO.Ocj;
                 }
-                var response = await OcjeneService.UpdateAsync(Mapper.Map<IOcjeneDomainModel>(toBeUpdated));
+                var response = await ocjeneService.UpdateAsync(Mapper.Map<IOcjeneDomainModel>(toBeUpdated));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }
@@ -93,11 +93,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> DeleteOcjeneAsync(Guid Id)
+        public async Task<HttpResponseMessage> DeleteOcjeneAsync(Guid id)
         {
             try
             {
-                var response = await OcjeneService.DeleteAsync(Id);
+                var response = await ocjeneService.DeleteAsync(id);
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -108,11 +108,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
 
         [HttpGet]
         [Route("korisnikid")]
-        public async Task<HttpResponseMessage> GetByKorisnikIdAsync(Guid KorisnikId)
+        public async Task<HttpResponseMessage> GetByKorisnikIdAsync(Guid korisnikId)
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<OcjenaViewModel>>(await OcjeneService.GetByKorisnikIdAsync(KorisnikId));
+                var response = Mapper.Map<IEnumerable<OcjenaViewModel>>(await ocjeneService.GetByKorisnikIdAsync(korisnikId));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)

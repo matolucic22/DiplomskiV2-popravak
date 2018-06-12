@@ -17,11 +17,11 @@
     $scope.doStuff = function () {
         var counter = 0;
         var addObj = {
-            Ime_korisnika: $scope.Ime_korisnika,
-            Prezime_korisnika: $scope.Prezime_korisnika,
-            Korisnicko_ime: $scope.Korisnicko_ime,
-            Lozinka: $scope.Lozinka,
-            PotvrdaLozinke: $scope.PotvrdaLozinke,
+            Ime_korisnika: $scope.ime_korisnika,
+            Prezime_korisnika: $scope.prezime_korisnika,
+            Korisnicko_ime: $scope.korisnicko_ime,
+            Lozinka: $scope.lozinka,
+            PotvrdaLozinke: $scope.potvrdaLozinke,
             Potvrda: "???",
             Uloga: "???"
         };      

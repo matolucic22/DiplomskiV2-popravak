@@ -4,10 +4,10 @@
 
         var id = $stateParams.PrId;
 
-            if ($scope.Ime_predmeta != null) {
+            if ($scope.ime_predmeta != null) {
                 var updated = {
                     Id: id,
-                    Ime_predmeta: $scope.Ime_predmeta
+                    Ime_predmeta: $scope.ime_predmeta
                 };
 
                 predmetiService.update(updated).then(function (data) {

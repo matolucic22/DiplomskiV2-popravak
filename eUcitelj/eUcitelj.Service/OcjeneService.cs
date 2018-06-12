@@ -15,42 +15,42 @@ namespace eUcitelj.Service
          * public async Task<int> Add(IOcjeneDomainModel addObj) - ako je async metoda, sufix Async dodavati na svaku metodu(servisi)
          
            ODG.: Ja se ispričavam, ali nisam razumio što želite reći. Sve metode su u servisima asinkrone (osim onih što ste rekli da su nepotrebne u prijašnjim pitanjima). */
-        protected IOcjeneRepository OcjeneGenericReporsitory;
+        private IOcjeneRepository ocjeneGenericReporsitory;
         public OcjeneService(IOcjeneRepository ocjeneGenericReporsitory)
         {
-            this.OcjeneGenericReporsitory = ocjeneGenericReporsitory;
+            this.ocjeneGenericReporsitory = ocjeneGenericReporsitory;
         }
 
         public async Task<int> AddAsync(IOcjeneDomainModel addObj)
         {
             addObj.OcjenaId = Guid.NewGuid();
             addObj.DatumUpisa = DateTime.Now.Date;
-            return await OcjeneGenericReporsitory.AddAsync(addObj);
+            return await ocjeneGenericReporsitory.AddAsync(addObj);
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await OcjeneGenericReporsitory.DeleteAsync(Id);
+            return await ocjeneGenericReporsitory.DeleteAsync(id);
         }
 
-        public async Task<IOcjeneDomainModel> GetAsync(Guid Id)
+        public async Task<IOcjeneDomainModel> GetAsync(Guid id)
         {
-            return await OcjeneGenericReporsitory.GetAsync(Id);
+            return await ocjeneGenericReporsitory.GetAsync(id);
         }
 
         public async Task<IEnumerable<IOcjeneDomainModel>> GetAllAsync()
         {
-            return await OcjeneGenericReporsitory.GetAllAsync();
+            return await ocjeneGenericReporsitory.GetAllAsync();
         }
 
         public async Task<int> UpdateAsync(IOcjeneDomainModel updated)
         {
-            return await OcjeneGenericReporsitory.UpdateAsync(updated);
+            return await ocjeneGenericReporsitory.UpdateAsync(updated);
         }
 
-        public async Task<IEnumerable<IOcjeneDomainModel>> GetByKorisnikIdAsync(Guid KorisnikId)
+        public async Task<IEnumerable<IOcjeneDomainModel>> GetByKorisnikIdAsync(Guid korisnikId)
         {
-            return await OcjeneGenericReporsitory.GetByKorisnikIdAsync(KorisnikId);
+            return await ocjeneGenericReporsitory.GetByKorisnikIdAsync(korisnikId);
         }
     }
 }

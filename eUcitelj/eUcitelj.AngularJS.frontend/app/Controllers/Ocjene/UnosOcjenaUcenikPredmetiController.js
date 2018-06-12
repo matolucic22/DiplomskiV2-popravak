@@ -1,6 +1,6 @@
 ﻿app.controller('UnosOcjenaUcenikPredmetiController', function ($scope, $stateParams, $http, $window, $location, $state, predmetiService, korisnikService, ocjeneService, KONSTANTE, IDKOR) {//unos ocjena uceniku
     id = $stateParams.UcPrId;
-    idKorisnik = IDKOR.Id;
+    idKorisnik = IDKOR.id;
 
     //PRIKAZ IMENA KORISNIKA//-da se zna koji je korisnik u pitanju
 
@@ -15,9 +15,9 @@
     $scope.upisi = function () {
         if ($scope.Ocj > 0 && $scope.Ocj < 6) {
             var addO = {
-                Ocj: $scope.Ocj,
-                Opis: $scope.Opis,
-                DatumOcjene: $scope.DatumOcjene,
+                Ocj: $scope.ocj,
+                Opis: $scope.opis,
+                DatumOcjene: $scope.datumOcjene,
                 PredmetId: id,
                 KorisnikId: idKorisnik
             };

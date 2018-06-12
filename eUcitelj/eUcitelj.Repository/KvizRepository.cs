@@ -12,34 +12,34 @@ namespace eUcitelj.Reporsitory
 {
     public class KvizRepository : IKvizRepository
     {
-        protected IGenericRepository Reporsitory { get; set; }
-        public KvizRepository (IGenericRepository reporsitory)
+        private UnitOfWork unitOfWork;
+        public KvizRepository(UnitOfWork unitOfWork)
         {
-            this.Reporsitory = reporsitory;
+            this.unitOfWork = unitOfWork;
         }
         public async Task<int> AddAsync(IKvizDomainModel addObj)
         {
-            return await Reporsitory.AddAsync(Mapper.Map<Kviz>(addObj));
+            return await unitOfWork.KvizRepository.AddAsync(Mapper.Map<Kviz>(addObj));
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await Reporsitory.DeleteAsync<Kviz>(Id);
+            return await unitOfWork.KvizRepository.DeleteAsync<Kviz>(id);
         }
 
         public async Task<IEnumerable<IKvizDomainModel>> GetAllAsync()
         {
-            return Mapper.Map<IEnumerable<IKvizDomainModel>>(await Reporsitory.GetAllAsync<Kviz>());
+            return Mapper.Map<IEnumerable<IKvizDomainModel>>(await unitOfWork.KvizRepository.GetAllAsync<Kviz>());
         }
 
-        public async Task<IKvizDomainModel> GetAsync(Guid Id)
+        public async Task<IKvizDomainModel> GetAsync(Guid id)
         {
-            return Mapper.Map<IKvizDomainModel>(await Reporsitory.GetAsync<Kviz>(Id));            
+            return Mapper.Map<IKvizDomainModel>(await unitOfWork.KvizRepository.GetAsync<Kviz>(id));            
         }
 
         public async Task<int> UpdateAsync(IKvizDomainModel updated)
         {
-            return await Reporsitory.UpdateAsync<Kviz>(Mapper.Map<Kviz>(updated));
+            return await unitOfWork.KvizRepository.UpdateAsync<Kviz>(Mapper.Map<Kviz>(updated));
         }
     }
 }

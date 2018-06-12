@@ -13,43 +13,43 @@ namespace eUcitelj.Reporsitory
 {
     public class OcjeneRepository : IOcjeneRepository
     {
-        protected IGenericRepository Reporsitory { get; set; }
-        public OcjeneRepository(IGenericRepository reporsitory)
+        private UnitOfWork unitOfWork;
+        public OcjeneRepository(UnitOfWork unitOfWork)
         {
-            this.Reporsitory = reporsitory;
+            this.unitOfWork = unitOfWork;
         }
         public async Task<int> AddAsync(IOcjeneDomainModel addObj)
         {
-            return await Reporsitory.AddAsync(Mapper.Map<Ocjena>(addObj));
+            return await unitOfWork.OcjeneRepository.AddAsync(Mapper.Map<Ocjena>(addObj));
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await Reporsitory.DeleteAsync<Ocjena>(Id);
+            return await unitOfWork.OcjeneRepository.DeleteAsync<Ocjena>(id);
         }
 
         public async Task<IEnumerable<IOcjeneDomainModel>> GetAllAsync()
         {
-            return Mapper.Map<IEnumerable<IOcjeneDomainModel>>(await Reporsitory.GetAllAsync<Ocjena>());
+            return Mapper.Map<IEnumerable<IOcjeneDomainModel>>(await unitOfWork.OcjeneRepository.GetAllAsync<Ocjena>());
         }
 
-        public async Task<IOcjeneDomainModel> GetAsync(Guid Id)
+        public async Task<IOcjeneDomainModel> GetAsync(Guid id)
         {
-            return Mapper.Map<IOcjeneDomainModel>(await Reporsitory.GetAsync<Ocjena>(Id)); 
+            return Mapper.Map<IOcjeneDomainModel>(await unitOfWork.OcjeneRepository.GetAsync<Ocjena>(id)); 
         }
 
         public async Task<int> UpdateAsync(IOcjeneDomainModel updated)
         {
-            return await Reporsitory.UpdateAsync(Mapper.Map<Ocjena>(updated));
+            return await unitOfWork.OcjeneRepository.UpdateAsync(Mapper.Map<Ocjena>(updated));
         }
 
        
-        public async Task<IEnumerable<IOcjeneDomainModel>> GetByKorisnikIdAsync(Guid KorisnikId)
+        public async Task<IEnumerable<IOcjeneDomainModel>> GetByKorisnikIdAsync(Guid korisnikId)
         {
             try
             {
-                return Mapper.Map<IEnumerable<IOcjeneDomainModel>>(await Reporsitory.GetQueryable<Ocjena>().Where
-                    (i => i.KorisnikId == KorisnikId).ToListAsync());
+                return Mapper.Map<IEnumerable<IOcjeneDomainModel>>(await unitOfWork.OcjeneRepository.GetQueryable<Ocjena>().Where
+                    (i => i.KorisnikId == korisnikId).ToListAsync());
             }
             catch (Exception e)
             {

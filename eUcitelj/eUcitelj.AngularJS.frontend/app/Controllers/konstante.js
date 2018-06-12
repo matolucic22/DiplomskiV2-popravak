@@ -10,7 +10,6 @@
         OBJ_UKLONJEN: 'Uklonjeno iz baze.',
         BRISANJE_GRESKA: 'Greska prilikom uklanjanja iz baze',
         UNOS_POSTOJI: 'Unos već postoji u bazi.'
-        
     };
 
 })());

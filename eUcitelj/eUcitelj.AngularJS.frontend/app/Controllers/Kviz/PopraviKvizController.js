@@ -10,9 +10,7 @@
         });
 
     $scope.update = function () {
-        var id = $stateParams.KvizId;
-      // if ($scope.Pitanje != null && $scope.Odg1 != null && $scope.Odg2 != null && $scope.Odg3 != null && $scope.Tocan_odgovor != null) {
-                  
+        var id = $stateParams.KvizId;                  
         kvizService.getAll().then(function (response) {
                 kvizovi = response.data;
 
@@ -20,11 +18,11 @@
                     if (kvizovi[i].Pitanje == $scope.k.Pitanje) {
                         var kviz = {
                             KvizId: kvizovi[i].KvizId,
-                            Pitanje: $scope.Pitanje,
-                            Odg1: $scope.Odg1,
-                            Odg2: $scope.Odg2,
-                            Odg3: $scope.Odg3,
-                            Tocan_odgovor: $scope.Tocan_odgovor
+                            Pitanje: $scope.pitanje,
+                            Odg1: $scope.odg1,
+                            Odg2: $scope.odg2,
+                            Odg3: $scope.odg3,
+                            Tocan_odgovor: $scope.tocan_odgovor
                         };
                         kvizService.update(kviz).then(function (response) {
                             kvizPromjenjeno = response.data;

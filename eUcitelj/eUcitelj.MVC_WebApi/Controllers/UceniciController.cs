@@ -16,10 +16,10 @@ namespace eUcitelj.MVC_WebApi.Controllers
     [RoutePrefix("api/ucenici")]
     public class UceniciController:ApiController
     {
-        protected IUceniciService UceniciService { get; set; }
+        private IUceniciService uceniciService;
         public UceniciController(IUceniciService uceniciService)
         {
-            this.UceniciService = uceniciService;
+            this.uceniciService = uceniciService;
         }
 
         [HttpGet]
@@ -27,7 +27,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<UcenikViewModel>>(await UceniciService.GetAllAsync());
+                var response = Mapper.Map<IEnumerable<UcenikViewModel>>(await uceniciService.GetAllAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }
@@ -38,11 +38,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetUceniciAsync(Guid Id)
+        public async Task<HttpResponseMessage> GetUceniciAsync(Guid id)
         {
             try
             {
-                var response = Mapper.Map<UcenikViewModel>(await UceniciService.GetAsync(Id));
+                var response = Mapper.Map<UcenikViewModel>(await uceniciService.GetAsync(id));
 
                 if (response == null)
                 {
@@ -64,7 +64,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = await UceniciService.AddAsync(Mapper.Map<IUceniciDomainModel>(addObj));
+                var response = await uceniciService.AddAsync(Mapper.Map<IUceniciDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -74,11 +74,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> DeleteUceniciAsync(Guid Id)
+        public async Task<HttpResponseMessage> DeleteUceniciAsync(Guid id)
         {
             try
             {
-                var response = await UceniciService.DeleteAsync(Id);
+                var response = await uceniciService.DeleteAsync(id);
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)

@@ -15,37 +15,40 @@ namespace eUcitelj.Reporsitory
 {
     public class KorisnikRepository : IKorisnikRepository
     {
-        protected IGenericRepository Reporsitory { get; set; }
-        public KorisnikRepository(IGenericRepository reporsitory)
+
+        private UnitOfWork unitOfWork;
+        public KorisnikRepository(UnitOfWork unitOfWork)
         {
-            this.Reporsitory = reporsitory;
+            this.unitOfWork = unitOfWork;
         }
+
         public async Task<int> AddAsync(IKorisnikDomainModel addObj)
         {
-            return await Reporsitory.AddAsync(Mapper.Map<Korisnik>(addObj));           
+            await unitOfWork.KorisnikRepository.AddAsync(Mapper.Map<Korisnik>(addObj));
+            return await unitOfWork.Save();         
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await Reporsitory.DeleteAsync<Korisnik>(Id);
+            return await unitOfWork.KorisnikRepository.DeleteAsync<Korisnik>(id);
         }
 
-        public async Task<IKorisnikDomainModel> GetAsync(Guid Id)
+        public async Task<IKorisnikDomainModel> GetAsync(Guid id)
         {
-            return Mapper.Map<IKorisnikDomainModel>(await Reporsitory.GetAsync<Korisnik>(Id));
+            return Mapper.Map<IKorisnikDomainModel>(await unitOfWork.KorisnikRepository.GetAsync<Korisnik>(id));
         }
 
         public async Task<int> UpdateAsync(IKorisnikDomainModel updated)
         {
-            return await Reporsitory.UpdateAsync(Mapper.Map<Korisnik>(updated));
+            return await unitOfWork.KorisnikRepository.UpdateAsync(Mapper.Map<Korisnik>(updated));
         }
 
-        public async Task<IKorisnikDomainModel> GetByUsernameAsync(string korisnicko_ime)
+        public async Task<IKorisnikDomainModel> GetByUsernameAsync(string korisnickoIme)
         {
             try
             {
-                return Mapper.Map<IKorisnikDomainModel>(await Reporsitory.GetQueryable<Korisnik>().Where
-                    (i => i.Korisnicko_ime == korisnicko_ime).FirstOrDefaultAsync());
+                return Mapper.Map<IKorisnikDomainModel>(await unitOfWork.KorisnikRepository.GetQueryable<Korisnik>().Where
+                    (i => i.Korisnicko_ime == korisnickoIme).FirstOrDefaultAsync());
             }
             catch (Exception ex)
             {
@@ -57,15 +60,12 @@ namespace eUcitelj.Reporsitory
         {
             try
             {
-
-                var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
+                var response = await unitOfWork.KorisnikRepository.GetQueryable<Korisnik>().ToListAsync();
                 var names = response.Select(a => new Korisnik { Korisnicko_ime = a.Korisnicko_ime }).ToList();
                 return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(names);
-
             }
             catch (Exception ex)
             {
-
                 throw ex;
             }
         }
@@ -74,8 +74,8 @@ namespace eUcitelj.Reporsitory
         {
             try
             {
-                var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
-                var Ids =  response.Select(a => new Korisnik { Id = a.Id, Ime_korisnika = a.Ime_korisnika, Prezime_korisnika = a.Prezime_korisnika, Korisnicko_ime = a.Korisnicko_ime, Uloga = a.Uloga }).Where(a => a.Uloga == "ucenik").ToList();
+                var response = await unitOfWork.KorisnikRepository.GetQueryable<Korisnik>().ToListAsync();
+                var Ids = response.Select(a => new Korisnik { Id = a.Id, Ime_korisnika = a.Ime_korisnika, Prezime_korisnika = a.Prezime_korisnika, Korisnicko_ime = a.Korisnicko_ime, Uloga = a.Uloga }).Where(a => a.Uloga == "ucenik").ToList();
                 return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(Ids);
             }
             catch (Exception ex)
@@ -88,8 +88,8 @@ namespace eUcitelj.Reporsitory
         {
             try
             {
-                var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
-                var Ids = response.Select(a => new Korisnik { Id = a.Id, Ime_korisnika = a.Ime_korisnika, Prezime_korisnika = a.Prezime_korisnika, Korisnicko_ime = a.Korisnicko_ime, Uloga = a.Uloga, Potvrda=a.Potvrda }).Where(a => a.Potvrda == "???").ToList();
+                var response = await unitOfWork.KorisnikRepository.GetQueryable<Korisnik>().ToListAsync();
+                var Ids = response.Select(a => new Korisnik { Id = a.Id, Ime_korisnika = a.Ime_korisnika, Prezime_korisnika = a.Prezime_korisnika, Korisnicko_ime = a.Korisnicko_ime, Uloga = a.Uloga, Potvrda = a.Potvrda }).Where(a => a.Potvrda == "???").ToList();
                 return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(Ids);
             }
             catch (Exception ex)
@@ -102,7 +102,7 @@ namespace eUcitelj.Reporsitory
         {
             try
             {
-                var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
+                var response = await unitOfWork.KorisnikRepository.GetQueryable<Korisnik>().ToListAsync();
                 var Ids = response.Select(a => new Korisnik { Id = a.Id, Ime_korisnika = a.Ime_korisnika, Prezime_korisnika = a.Prezime_korisnika, Korisnicko_ime = a.Korisnicko_ime, Uloga = a.Uloga, Potvrda = a.Potvrda }).Where(a => a.Potvrda == "Da").ToList();
                 return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(Ids);
             }
@@ -116,7 +116,7 @@ namespace eUcitelj.Reporsitory
         {
             try
             {
-                var response = await Reporsitory.GetQueryable<Korisnik>().ToListAsync();
+                var response = await unitOfWork.KorisnikRepository.GetQueryable<Korisnik>().ToListAsync();
                 var Ids = response.Select(a => new Korisnik { Id = a.Id, Ime_korisnika = a.Ime_korisnika, Prezime_korisnika = a.Prezime_korisnika, Korisnicko_ime = a.Korisnicko_ime, Uloga = a.Uloga, Potvrda = a.Potvrda }).Where(a => a.Potvrda == "Ne").ToList();
                 return Mapper.Map<IEnumerable<IKorisnikDomainModel>>(Ids);
             }

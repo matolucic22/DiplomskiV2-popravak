@@ -16,10 +16,10 @@ namespace eUcitelj.MVC_WebApi.Controllers
     [RoutePrefix("api/predmetkorisnik")]
     public class PredmetKorisnikController:ApiController
     {
-        protected IPredmetKorisnikService PredmetKorisnikService { get; set; }
+        private IPredmetKorisnikService predmetKorisnikService;
         public PredmetKorisnikController(IPredmetKorisnikService predmetKorisnikService)
         {
-            this.PredmetKorisnikService = predmetKorisnikService;
+            this.predmetKorisnikService = predmetKorisnikService;
         }
 
         [HttpGet]
@@ -27,7 +27,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<PredmetKorisnikViewModel>>(await PredmetKorisnikService.GetAllAsync());
+                var response = Mapper.Map<IEnumerable<PredmetKorisnikViewModel>>(await predmetKorisnikService.GetAllAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -37,11 +37,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetPKAsync(Guid Id)
+        public async Task<HttpResponseMessage> GetPKAsync(Guid id)
         {
             try
             {
-                var response = Mapper.Map<KvizViewModel>(await PredmetKorisnikService.GetAsync(Id));
+                var response = Mapper.Map<KvizViewModel>(await predmetKorisnikService.GetAsync(id));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -55,7 +55,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = await PredmetKorisnikService.AddAsync(Mapper.Map<IPredmetKorisnikDomainModel>((addObj)));
+                var response = await predmetKorisnikService.AddAsync(Mapper.Map<IPredmetKorisnikDomainModel>((addObj)));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }

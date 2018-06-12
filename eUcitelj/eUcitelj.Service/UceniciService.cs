@@ -11,37 +11,37 @@ namespace eUcitelj.Service
 {
    public class UceniciService:IUceniciService
     {
-        protected IUceniciRepository PredmetiGenericReporsitory { get; set; }
+        private IUceniciRepository predmetiGenericReporsitory;
 
         public UceniciService(IUceniciRepository predmetiGenericReporsitory)
         {
-            this.PredmetiGenericReporsitory = predmetiGenericReporsitory;
+            this.predmetiGenericReporsitory = predmetiGenericReporsitory;
         }
 
         public async Task<int> AddAsync(IUceniciDomainModel addObj)
         {
             addObj.UcenikId = Guid.NewGuid();
-            return await PredmetiGenericReporsitory.AddAsync(addObj);
+            return await predmetiGenericReporsitory.AddAsync(addObj);
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await PredmetiGenericReporsitory.DeleteAsync(Id);
+            return await predmetiGenericReporsitory.DeleteAsync(id);
         }
 
-        public async Task<IUceniciDomainModel> GetAsync(Guid Id)
+        public async Task<IUceniciDomainModel> GetAsync(Guid id)
         {
-            return await PredmetiGenericReporsitory.GetAsync(Id);
+            return await predmetiGenericReporsitory.GetAsync(id);
         }
 
         public async Task<IEnumerable<IUceniciDomainModel>> GetAllAsync()
         {
-            return await PredmetiGenericReporsitory.GetAllAsync();
+            return await predmetiGenericReporsitory.GetAllAsync();
         }
 
         public async Task<int> UpdateAsync(IUceniciDomainModel updated)
         {
-            return await PredmetiGenericReporsitory.UpdateAsync(updated);
+            return await predmetiGenericReporsitory.UpdateAsync(updated);
         }
     }
 }

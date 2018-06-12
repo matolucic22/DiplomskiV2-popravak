@@ -26,11 +26,11 @@
             if (predmeti[i].Ime_predmeta==imePredmeta) {
                 var obj = {
                     PredmetId: predmeti[i].Id,
-                    Pitanje: $scope.Pitanje,
-                    Odg1: $scope.Odg1,
-                    Odg2: $scope.Odg2,
-                    Odg3: $scope.Odg3,
-                    Tocan_odgovor: $scope.Tocan_odgovor
+                    Pitanje: $scope.pitanje,
+                    Odg1: $scope.odg1,
+                    Odg2: $scope.odg2,
+                    Odg3: $scope.odg3,
+                    Tocan_odgovor: $scope.tocan_odgovor
                 };
 
                 kvizService.add(obj).then(function (response) {

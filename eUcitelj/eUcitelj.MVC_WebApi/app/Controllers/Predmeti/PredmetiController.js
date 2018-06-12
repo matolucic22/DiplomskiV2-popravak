@@ -8,9 +8,9 @@
        });
     };
 
-    $scope.del=function (PredmetId)
+    $scope.del=function (predmetId)
     {
-        predmetiService.delete(PredmetId).then(
+        predmetiService.delete(predmetId).then(
             function (data)
             {
                 $state.go('predmetiIndex');

@@ -9,11 +9,11 @@ namespace eUcitelj.Reporsitory.Common
 {
     public interface IKorisnikRepository
     {
-        Task<IKorisnikDomainModel> GetAsync(Guid Id);
+        Task<IKorisnikDomainModel> GetAsync(Guid id);
         Task<int> AddAsync(IKorisnikDomainModel addObj);
         Task<int> UpdateAsync(IKorisnikDomainModel updated);
-        Task<int> DeleteAsync(Guid Id);
-        Task<IKorisnikDomainModel> GetByUsernameAsync(string korisnicko_ime);
+        Task<int> DeleteAsync(Guid id);
+        Task<IKorisnikDomainModel> GetByUsernameAsync(string korisnickoIme);
         Task<IEnumerable<IKorisnikDomainModel>> GetAllKorisnicko_imeAsync();
         Task<IEnumerable<IKorisnikDomainModel>> GetAllUcenikAsync();
         Task<IEnumerable<IKorisnikDomainModel>> GetNepotvrdenoAsync();

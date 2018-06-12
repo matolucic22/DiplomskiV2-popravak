@@ -18,10 +18,10 @@ namespace eUcitelj.MVC_WebApi.Controllers
     [RoutePrefix("api/predmeti")]
     public class PredmetiController : ApiController
     {
-        protected IPredmetiService PredmetiService { get; set; }
+        private IPredmetiService predmetiService;
         public PredmetiController(IPredmetiService predmetiService)
         {
-            this.PredmetiService = predmetiService;
+            this.predmetiService = predmetiService;
         }
 
         [HttpGet]
@@ -30,7 +30,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.GetAllImePredmetaAsync());
+                var response = Mapper.Map<IEnumerable<PredmetViewModel>>(await predmetiService.GetAllImePredmetaAsync());
 
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
@@ -46,7 +46,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.GetAllAsync());
+                var response = Mapper.Map<IEnumerable<PredmetViewModel>>(await predmetiService.GetAllAsync());
 
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
@@ -58,11 +58,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetPredmetiAsync(Guid Id)
+        public async Task<HttpResponseMessage> GetPredmetiAsync(Guid id)
         {
             try
             {
-                var response = Mapper.Map<PredmetViewModel>(await PredmetiService.GetAsync(Id));
+                var response = Mapper.Map<PredmetViewModel>(await predmetiService.GetAsync(id));
 
                 if (response == null)
                 {
@@ -84,7 +84,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = await PredmetiService.AddAsync(Mapper.Map<IPredmetDomainModel>(addObj));
+                var response = await predmetiService.AddAsync(Mapper.Map<IPredmetDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             } catch (Exception e)
@@ -99,7 +99,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = await PredmetiService.AddToBridgeAsync(Mapper.Map<IPredmetKorisnikDomainModel>(addObj));
+                var response = await predmetiService.AddToBridgeAsync(Mapper.Map<IPredmetKorisnikDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }
@@ -117,7 +117,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             {
                 if (updateP != null)
                 { 
-                    PredmetViewModel toBeUpdated = Mapper.Map<PredmetViewModel>(await PredmetiService.GetAsync(updateP.Id));
+                    PredmetViewModel toBeUpdated = Mapper.Map<PredmetViewModel>(await predmetiService.GetAsync(updateP.Id));
 
                     if (toBeUpdated == null)
                     {
@@ -128,7 +128,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
                         toBeUpdated.Ime_predmeta = updateP.Ime_predmeta;
                     }
 
-                    var response = await PredmetiService.UpdateAsync(Mapper.Map<IPredmetDomainModel>(toBeUpdated));
+                    var response = await predmetiService.UpdateAsync(Mapper.Map<IPredmetDomainModel>(toBeUpdated));
                     return Request.CreateResponse(HttpStatusCode.OK, response);
                 }else
                 {
@@ -142,11 +142,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> DeletePredmetiAsync(Guid Id)
+        public async Task<HttpResponseMessage> DeletePredmetiAsync(Guid id)
         {
             try
             {
-                var response = await PredmetiService.DeleteAsync(Id);
+                var response = await predmetiService.DeleteAsync(id);
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -161,8 +161,9 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                FilterModel filterModel = new FilterModel(redoslijed, trazeniPojam, brStr);
-                var response =Mapper.Map<IEnumerable<PredmetViewModel>>(await PredmetiService.FindPredmetiAsync(filterModel));
+                int brEl = 4;
+                FilterModel filterModel = new FilterModel(redoslijed, trazeniPojam, brStr, brEl);
+                var response =Mapper.Map<IEnumerable<PredmetViewModel>>(await predmetiService.FindPredmetiAsync(filterModel));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
 
             }catch(Exception e)

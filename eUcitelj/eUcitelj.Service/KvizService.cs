@@ -11,37 +11,37 @@ namespace eUcitelj.Service
 {
     public class KvizService:IKvizService
     {
-        protected IKvizRepository KvizGenericReporsitory { get; set; }
+        private IKvizRepository kvizGenericReporsitory;
 
         public KvizService(IKvizRepository kvizGenericReporsitory)
         {
-            this.KvizGenericReporsitory = kvizGenericReporsitory;
+            this.kvizGenericReporsitory = kvizGenericReporsitory;
         }
 
         public async Task<IEnumerable<IKvizDomainModel>> GetAllAsync()
         {
-            return await KvizGenericReporsitory.GetAllAsync();
+            return await kvizGenericReporsitory.GetAllAsync();
         }
 
-        public async Task<IKvizDomainModel> GetAsync(Guid Id)
+        public async Task<IKvizDomainModel> GetAsync(Guid id)
         {
-            return await KvizGenericReporsitory.GetAsync(Id);
+            return await kvizGenericReporsitory.GetAsync(id);
         }
 
         public async Task<int> AddAsync(IKvizDomainModel addObj)
         {
             addObj.KvizId = Guid.NewGuid();
-            return await KvizGenericReporsitory.AddAsync(addObj);
+            return await kvizGenericReporsitory.AddAsync(addObj);
         }
 
         public async Task<int> UpdateAsync(IKvizDomainModel updated)
         {
-            return await KvizGenericReporsitory.UpdateAsync(updated);
+            return await kvizGenericReporsitory.UpdateAsync(updated);
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await KvizGenericReporsitory.DeleteAsync(Id);
+            return await kvizGenericReporsitory.DeleteAsync(id);
         }
     }
 }

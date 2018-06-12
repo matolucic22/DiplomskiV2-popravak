@@ -10,9 +10,9 @@ namespace eUcitelj.Service.Common
     public interface IUceniciService
     {
         Task<IEnumerable<IUceniciDomainModel>> GetAllAsync();//vraća IEnimerable polje podataka
-        Task<IUceniciDomainModel> GetAsync(Guid Id);
+        Task<IUceniciDomainModel> GetAsync(Guid id);
         Task<int> AddAsync(IUceniciDomainModel addObj);
         Task<int> UpdateAsync(IUceniciDomainModel updated);//obavi i returna samo save
-        Task<int> DeleteAsync(Guid Id);
+        Task<int> DeleteAsync(Guid id);
     }
 }

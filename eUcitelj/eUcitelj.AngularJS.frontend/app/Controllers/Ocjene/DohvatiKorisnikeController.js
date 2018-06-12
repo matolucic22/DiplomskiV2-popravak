@@ -14,5 +14,5 @@
 });
 
 app.factory('IDKOR', function () {
-        return { Id:id };
+        return { id:id };
     });

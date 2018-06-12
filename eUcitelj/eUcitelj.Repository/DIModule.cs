@@ -1,4 +1,5 @@
-﻿using eUcitelj.Reporsitory.Common;
+﻿using eUcitelj.Reporsitory;
+using eUcitelj.Reporsitory.Common;
 using Ninject.Modules;
 using System;
 using System.Collections.Generic;
@@ -12,14 +13,13 @@ namespace eUcitelj.Reporsitory
     {
         public override void Load()
         {
-            Bind<IGenericRepository>().To<GenericRepository>();
+            Bind(typeof(IGenericRepository<>)).To(typeof(GenericRepository<>));
             Bind<IKorisnikRepository>().To<KorisnikRepository>();
             Bind<IPredmetiRepository>().To<PredmetiRepository>();
             Bind<IOcjeneRepository>().To<OcjeneRepository>();
             Bind<IKvizRepository>().To<KvizRepository>();
             Bind<IUceniciRepository>().To<UceniciRepository>();
             Bind<IPredmetKorisnikRepository>().To<PredmetKorisnikRepository>();
-            Bind<IUnitOfWork>().To<UnitOfWork>();
         }
     }
 }

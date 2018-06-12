@@ -10,12 +10,12 @@
     
 
 
-    $scope.Snimi = function () {
+    $scope.snimi = function () {
         var check = document.getElementsByClassName('check');
         var ids = [];
         var obj = [];
         var a = 0;
-        var Ucenik = [];
+        var ucenik = [];
         for (var i = 0; i < check.length; i++) {
             if (check[i].checked) {
                 ids[a] = check[i].value;
@@ -26,11 +26,11 @@
         for (i = 0; i < ids.length; i++)
         {
             korisnikService.get(ids[i]).then(function (response) {
-                Ucenik = response.data;
+                ucenik = response.data;
 
                 obj[i] = {
                     KorisnikId: $rootScope.KorisnikId,
-                    IdKorisnikaU: Ucenik.Id
+                    IdKorisnikaU: ucenik.Id
                 };
 
                 $http.post('api/ucenici', obj[i]).then(function (response) {

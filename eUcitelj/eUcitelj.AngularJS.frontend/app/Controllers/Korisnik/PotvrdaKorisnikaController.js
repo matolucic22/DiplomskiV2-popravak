@@ -37,16 +37,16 @@
 
 
 
-    $scope.da = function (KorisnikId) {
+    $scope.da = function (korisnikId) {
 
-        $rootScope.KorisnikId = KorisnikId;
+        $rootScope.KorisnikId = korisnikId;
         var rola = prompt("Upišite ulogu potvrđenog korisnika (Ucitelj/Ucenik/Roditelj):", "");
         var rolaLower = rola.toString().toLowerCase();
 
         if (rolaLower == "ucitelj" || rolaLower == "ucenik" || rolaLower == "roditelj") {
             if (rolaLower == "roditelj") {
                 $state.go('dodajUcenikeRoditelju');
-                korisnikService.get(KorisnikId).then(function (response) {
+                korisnikService.get(korisnikId).then(function (response) {
                     var korisnik = response.data;
                     korisnik2 = {
                         Id: korisnik.Id,
@@ -75,7 +75,7 @@
                 });
 
             } else {
-                korisnikService.get(KorisnikId).then(function (response)
+                korisnikService.get(korisnikId).then(function (response)
                 {
                     var korisnik = response.data;
                     korisnik2 = {
@@ -115,7 +115,7 @@
                 for (i = 0; i < predmeti.length; i++)
                 {
                     var objAddPr = {
-                        KorisnikId: KorisnikId,
+                        KorisnikId: korisnikId,
                         PredmetId: predmeti[i].PredmetId
                     };
 
@@ -141,9 +141,9 @@
     }
 
 
-        $scope.ne = function (KorisnikId) {
+        $scope.ne = function (korisnikId) {
 
-            korisnikService.get(KorisnikId).then(function (response) {
+            korisnikService.get(korisnikId).then(function (response) {
                 var korisnik = response.data;
                 if (korisnik.Ime_korisnika == 'ucitelj') {
                     $window.alert('Ucitelj se ostavlja kao obavezan u aplikaciji te mu kao takvom ne možete zabraniti pristup ili ga obrisati.');
@@ -176,9 +176,9 @@
 
         };
 
-        $scope.deleteK = function (KorisnikId) {
+        $scope.deleteK = function (korisnikId) {
 
-            korisnikService.delete(KorisnikId).then(function (response) {
+            korisnikService.delete(korisnikId).then(function (response) {
                 $window.alert("Korisnik uklonjen.");
                 $state.go('potvrdaKorisnika');
             }, function () {

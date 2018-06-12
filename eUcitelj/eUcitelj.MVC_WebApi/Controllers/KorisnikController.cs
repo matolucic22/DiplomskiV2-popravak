@@ -18,19 +18,19 @@ namespace eUcitelj.MVC_WebApi.Controllers
     [RoutePrefix("api/korisnik")]
     public class KorisnikController : ApiController
     {
-        protected IKorisnikService KorisnikService { get; set; }
+        private IKorisnikService korisnikService;
 
         public KorisnikController(IKorisnikService korisnikService)
         {
-            this.KorisnikService = korisnikService;
+            this.korisnikService = korisnikService;
         }
 
         [HttpGet]
-        public async Task<HttpResponseMessage> GetKorisnikAsync(Guid Id)
+        public async Task<HttpResponseMessage> GetKorisnikAsync(Guid id)
         {
             try
             {
-                var response = Mapper.Map<KorisnikViewModel>(await KorisnikService.Get(Id));
+                var response = Mapper.Map<KorisnikViewModel>(await korisnikService.Get(id));
 
                 if (response == null)
                 {
@@ -53,7 +53,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
             
             try
             {
-                var response = await KorisnikService.AddAsync(Mapper.Map<IKorisnikDomainModel>(addObj));
+                var response = await korisnikService.AddAsync(Mapper.Map<IKorisnikDomainModel>(addObj));
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -68,7 +68,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                KorisnikViewModel toBeUpdated =Mapper.Map<KorisnikViewModel>(await KorisnikService.Get(updateK.Id));
+                KorisnikViewModel toBeUpdated =Mapper.Map<KorisnikViewModel>(await korisnikService.Get(updateK.Id));
 
                 if (toBeUpdated == null)
                 {
@@ -76,7 +76,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
                 }
                 else
                 {
-                    var response = await KorisnikService.UpdateAsync(Mapper.Map<IKorisnikDomainModel>(updateK));
+                    var response = await korisnikService.UpdateAsync(Mapper.Map<IKorisnikDomainModel>(updateK));
                     return Request.CreateResponse(HttpStatusCode.OK, response);//***Ovaj način sam sam smislio dok sam radio. Malo drugačije smo radili Lvl. 3 zd na praksi kod vas. Tek kasnije sam primjetio da nismo tako radili, ali nisam ništa htio mijenjat zato što je i ovako funkcioniralo, samo što ima više kooda i teze je razumjeti.***
                 }
                 
@@ -87,11 +87,11 @@ namespace eUcitelj.MVC_WebApi.Controllers
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> DeleteKorisnikAsync(Guid Id)
+        public async Task<HttpResponseMessage> DeleteKorisnikAsync(Guid id)
         {
             try
             {
-                var response = await KorisnikService.DeleteAsync(Id);
+                var response = await korisnikService.DeleteAsync(id);
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -106,7 +106,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var userToLogin = Mapper.Map<KorisnikViewModel>(await KorisnikService.FindByUserNameAsync(userCredentials.Korisnicko_ime));
+                var userToLogin = Mapper.Map<KorisnikViewModel>(await korisnikService.FindByUserNameAsync(userCredentials.Korisnicko_ime));
 
                 if (userToLogin == null)
                 {
@@ -145,7 +145,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         public async Task<HttpResponseMessage> GetAllKorisnicko_imeAsync()
         {
             try {
-                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetAllKorisnicko_imeAsync());
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await korisnikService.GetAllKorisnicko_imeAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
                 
             } catch(Exception e)
@@ -161,7 +161,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetAllUcenikAsync());
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await korisnikService.GetAllUcenikAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -176,7 +176,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetNepotvrdenoAsync());
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await korisnikService.GetNepotvrdenoAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -191,7 +191,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetPotvrdenoAsync());
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await korisnikService.GetPotvrdenoAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)
@@ -206,7 +206,7 @@ namespace eUcitelj.MVC_WebApi.Controllers
         {
             try
             {
-                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await KorisnikService.GetOdbijenoAsync());
+                var response = Mapper.Map<IEnumerable<KorisnikViewModel>>(await korisnikService.GetOdbijenoAsync());
                 return Request.CreateResponse(HttpStatusCode.OK, response);
             }
             catch (Exception e)

@@ -13,51 +13,51 @@ namespace eUcitelj.Service
 {
     public class PredmetiService:IPredmetiService
     {
-        protected IPredmetiRepository PredmetiGenericReporsitory { get; set; }
+        private IPredmetiRepository predmetiGenericReporsitory;
 
         public PredmetiService(IPredmetiRepository predmetiGenericReporsitory)//povezuje sa PredmetiGenericReporsitory
         {
-            this.PredmetiGenericReporsitory = predmetiGenericReporsitory;
+            this.predmetiGenericReporsitory = predmetiGenericReporsitory;
         }
 
 
         public async Task<int> AddAsync(IPredmetDomainModel addObj)
         {
             addObj.Id = Guid.NewGuid();
-            return await PredmetiGenericReporsitory.AddAsync(addObj);
+            return await predmetiGenericReporsitory.AddAsync(addObj);
         }
 
         public async Task<int> AddToBridgeAsync(IPredmetKorisnikDomainModel addObj)
         {
-            return await PredmetiGenericReporsitory.AddToBridgeAsync(addObj);
+            return await predmetiGenericReporsitory.AddToBridgeAsync(addObj);
         }
 
-        public async Task<int> DeleteAsync(Guid Id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return await PredmetiGenericReporsitory.DeleteAsync(Id);
+            return await predmetiGenericReporsitory.DeleteAsync(id);
         }
 
-        public async Task<IPredmetDomainModel> GetAsync(Guid Id)
+        public async Task<IPredmetDomainModel> GetAsync(Guid id)
         {
-            return await PredmetiGenericReporsitory.GetAsync(Id);
+            return await predmetiGenericReporsitory.GetAsync(id);
         }
 
         public async Task<int> UpdateAsync(IPredmetDomainModel updated) 
         {
-            return await PredmetiGenericReporsitory.UpdateAsync(updated);
+            return await predmetiGenericReporsitory.UpdateAsync(updated);
         }
 
         public async Task<IPagedList<IPredmetDomainModel>> FindPredmetiAsync(FilterModel filterModel)
         {
-            return await PredmetiGenericReporsitory.SortingPagingFilteringAsync(filterModel);
+            return await predmetiGenericReporsitory.FindPredmetiAsync(filterModel);
         }
         public async Task<IEnumerable<IPredmetDomainModel>> GetAllImePredmetaAsync()
         {
-            return await PredmetiGenericReporsitory.GetAllImePredmetaAsync();
+            return await predmetiGenericReporsitory.GetAllImePredmetaAsync();
         }
         public async Task<IEnumerable<IPredmetDomainModel>> GetAllAsync()
         {
-            return await PredmetiGenericReporsitory.GetAllAsync();
+            return await predmetiGenericReporsitory.GetAllAsync();
         }
     }
 }

@@ -29,8 +29,8 @@
     }); //dohvati ocjene po korisnickom IDu i prikazi
 
 
-    $scope.obrisi = function (OcjeneId) {//brisanje ocjene
-        ocjeneService.delete(OcjeneId).then(function (data) {
+    $scope.obrisi = function (ocjeneId) {//brisanje ocjene
+        ocjeneService.delete(ocjeneId).then(function (data) {
             $window.alert("Obrisano");
             predmetiService.get(id).then(function (response) {
                            $scope.predmet = response.data;

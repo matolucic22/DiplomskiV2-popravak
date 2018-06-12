@@ -10,9 +10,9 @@ namespace eUcitelj.Service.Common
     public interface IKvizService
     {
         Task<IEnumerable<IKvizDomainModel>> GetAllAsync();//vraća IEnimerable polje podataka
-        Task<IKvizDomainModel> GetAsync(Guid Id);
+        Task<IKvizDomainModel> GetAsync(Guid id);
         Task<int> AddAsync(IKvizDomainModel addObj);
         Task<int> UpdateAsync(IKvizDomainModel updated);
-        Task<int> DeleteAsync(Guid Id);
+        Task<int> DeleteAsync(Guid id);
     }
 }

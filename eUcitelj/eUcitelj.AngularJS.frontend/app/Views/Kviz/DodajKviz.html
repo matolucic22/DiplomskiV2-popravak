@@ -1,24 +1,24 @@
 ﻿<div class="container" ng-controller="DodajKvizController">
-    <h2>Kviz-upisivanje pitanja iz predmeta <b>{{predmet.Ime_predmeta}}</b></h2>
+    <h2>Kviz-upisivanje pitanja iz predmeta <b>{{predmet.ime_predmeta}}</b></h2>
     <br />
 
     <br />
     <h3>Unesite pitanje</h3>
-    <textarea name="Pitanje" cols="100" rows="5" id="id_Pitanje" placeholder="Unesite pitanje" ng-model="Pitanje"></textarea>
+    <textarea name="Pitanje" cols="100" rows="5" id="id_Pitanje" placeholder="Unesite pitanje" ng-model="pitanje"></textarea>
     
     <br />
     <br />
     <h4>Odgovor 1</h4>
-    <input type="text" id="id_Odg1" placeholder="Odg1" ng-model="Odg1" />
+    <input type="text" id="id_Odg1" placeholder="Odg1" ng-model="odg1" />
     <br />
     <h4>Odgovor 2</h4>
-    <input type="text" id="id_Odg2" placeholder="Odg2" ng-model="Odg2" />
+    <input type="text" id="id_Odg2" placeholder="Odg2" ng-model="odg2" />
     <br />
     <h4>Odgovor 3</h4>
-    <input type="text" id="id_Odg3" placeholder="Odg3" ng-model="Odg3" />
+    <input type="text" id="id_Odg3" placeholder="Odg3" ng-model="odg3" />
     <br />
     <h4>Točan odgovor</h4>
-    <input type="text" id="id_TocanOdg" placeholder="T" ng-model="Tocan_odgovor" />
+    <input type="text" id="id_TocanOdg" placeholder="T" ng-model="tocan_odgovor" />
     <br />
     <br />
     <input id="btnUnesi" class="btn btn-success" type="button" value="Unesi pitanje" ng-click="unesi()" ui-sref="dodajKviz" />

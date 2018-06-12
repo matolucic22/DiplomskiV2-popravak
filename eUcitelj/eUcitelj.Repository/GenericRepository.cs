@@ -6,26 +6,25 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace eUcitelj.Reporsitory
 {
-    public class GenericRepository : IGenericRepository
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
-        protected eUciteljContext Context { get; set; }
+        private eUciteljContext context;
 
         public GenericRepository(eUciteljContext context)//konstruktor da svakim pokretanjem stvori objekt od contexta
         {
-            this.Context = context;
+            this.context = context;
         }      
 
-        public async Task<int> AddAsync<T>(T addObj) where T : class
+        public Task<int> AddAsync<T>(T addObj) where T : class
         {
             try
             {
-                Context.Set<T>().Add(addObj);
-                return await Context.SaveChangesAsync();
+                context.Set<T>().Add(addObj);
+                return context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -34,26 +33,13 @@ namespace eUcitelj.Reporsitory
              
         }
 
-        public async Task<int> DeleteAsync<T>(Guid Id) where T : class
+        public async Task<int> DeleteAsync<T>(Guid id) where T : class
         {
             try
             {
-                T entity = await Context.Set<T>().FindAsync(Id);
-                Context.Set<T>().Remove(entity);
-                return await Context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            
-        }
-
-        public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class  
-        {
-            try
-            {
-                return await Context.Set<T>().ToListAsync<T>();
+                T entity = await context.Set<T>().FindAsync(id);
+                context.Set<T>().Remove(entity);
+                return await context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -62,45 +48,58 @@ namespace eUcitelj.Reporsitory
 
         }
 
-        public async Task<T> GetAsync<T>(Guid Id) where T : class
+        public async Task<IEnumerable<T>> GetAllAsync<T>() where T : class
         {
             try
             {
-                T entity = await Context.Set<T>().FindAsync(Id);
+                return await context.Set<T>().ToListAsync<T>();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public async Task<T> GetAsync<T>(Guid id) where T : class
+        {
+            try
+            {
+                T entity = await context.Set<T>().FindAsync(id);
                 return entity;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            
+
         }
 
         public async Task<int> UpdateAsync<T>(T updated) where T : class
         {
             try
             {
-                Context.Set<T>().AddOrUpdate(updated);
-                return await Context.SaveChangesAsync();
+                context.Set<T>().AddOrUpdate(updated);
+                return await context.SaveChangesAsync(); 
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            
+
         }
 
-        public IQueryable<T> GetQueryable<T>() where T:class
+        public IQueryable<T> GetQueryable<T>() where T : class
         {
             try
             {
-                return Context.Set<T>();
+                return context.Set<T>();
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            
+
         }
     }
 }
